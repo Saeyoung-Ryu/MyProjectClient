@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.0.123" />
+      <PackageReference Include="MatBlazor" Version="2.10.0" />
+      <PackageReference Include="MySqlConnector" Version="2.2.5" />
+      <PackageReference Include="RiotSharp" Version="4.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Pages\UserAdd.razor.css">
+        <DependentUpon>Counter.razor</DependentUpon>
+      </None>
+    </ItemGroup>
+
+</Project>
