@@ -21,7 +21,7 @@ namespace BlazorApp3.Common
             var parameters = new DynamicParameters();
             parameters.Add("_userName", nickName);
 
-            return await conn.QueryFirstOrDefaultAsync<UserInfo>("spGetUserInfo", parameters, trxn, commandType: CommandType.StoredProcedure);
+            return await conn.QuerySingleOrDefaultAsync<UserInfo>("spGetUserInfo", parameters, trxn, commandType: CommandType.StoredProcedure);
         }
     }
 }

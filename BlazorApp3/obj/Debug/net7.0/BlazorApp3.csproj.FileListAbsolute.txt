@@ -37,3 +37,4 @@
 /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/bin/Debug/net7.0/Newtonsoft.Json.dll
 /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/bin/Debug/net7.0/RiotSharp.dll
 /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/UserAdd.razor.rz.scp.css
+/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/DivideTeam.razor.rz.scp.css

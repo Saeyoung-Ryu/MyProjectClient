@@ -19,4 +19,10 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="Pages\DivideTeam.razor.css">
+        <DependentUpon>Index.razor</DependentUpon>
+      </Content>
+    </ItemGroup>
+
 </Project>

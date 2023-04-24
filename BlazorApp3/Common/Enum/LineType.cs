@@ -7,8 +7,7 @@ namespace BlazorApp3.Common.Enum
         Adc = 2,
         Mid = 3,
         Jungle = 4,
-        Top = 5,
-        End
+        Top = 5
     }
 }
 

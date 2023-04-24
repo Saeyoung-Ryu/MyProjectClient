@@ -1,0 +1,275 @@
+﻿@page "/"
+@using BlazorApp3.Common.Type
+@using BlazorApp3.Common.Enum
+@using BlazorApp3.Common.Manager
+
+<PageTitle>팀나누기</PageTitle>
+
+<table id="Border-Solid" class="table table-border table-hover w-auto">
+    <thead>
+    <tr class="table-primary">
+        <th>닉네임</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="text" size="20" @bind="@NickName"> <button type="submit" class="btn btn-info" @onclick="@InsertBtnAsync">추가</button></td>
+    </tr>
+    </tbody>
+</table>
+
+@if (userTeamDivideInfos.Count > 0)
+{
+    <br/>
+    <MatAccordion>
+        <MatExpansionPanel @bind-Expanded="@panelOpenState" Style="width: 500px">
+            <MatExpansionPanelSummary>
+                <MatExpansionPanelHeader>유저 목록 (@userTeamDivideInfos.Count 명)</MatExpansionPanelHeader>
+            </MatExpansionPanelSummary>
+            <MatExpansionPanelDetails>
+                <button class="btn btn-danger" @onclick="ResetUserListBtn">Reset</button>
+                <br><br>
+                <table id="Border-Solid" class="table table-border table-hover w-auto">
+                    <thead>
+                    <tr class="table-primary">
+                        <th>닉네임</th>
+                        <th>라인</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var userinfo in userTeamDivideInfos)
+                    {
+                        <tr>
+                            <td>
+                                <p>@userinfo.UserInfo.UserName</p></td>
+                            <td>
+                                <p>
+                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) Enum.Parse(typeof(LineType), e.Value.ToString())">
+                                        @foreach (var lineTypeString in Enum.GetValues(typeof(LineType)))
+                                        {
+                                            <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.LineType.ToString())">@lineTypeString.ToString()</option>
+                                        }
+                                    </select>
+                                </p>
+                            </td>
+                            <td><button class="btn btn-warning" @onclick="@(e => DeleteUserInListBtnAsync(@userinfo))">Remove</button></td>
+                        </tr>
+                    }
+                    
+                    @if (userTeamDivideInfos.Count == 10)
+                    {
+                        <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
+                        <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
+                    }
+                    </tbody>
+                </table>
+            </MatExpansionPanelDetails>
+        </MatExpansionPanel>
+
+    </MatAccordion>
+    
+    <br><br>
+    
+    @if (supUsers.Count > 0)
+    {
+        <table id="Border-Solid" class="table table-border table-hover w-auto">
+            <thead>
+            <tr class="table-primary">
+                <th>라인</th>
+                <th>1팀</th>
+                <th>2팀</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>탑</th>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.topUser = (e.Value.ToString())">
+                        @foreach (var user in topUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.topUser = (e.Value.ToString())">
+                        @foreach (var user in topUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>정글</th>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.jgUser = (e.Value.ToString())">
+                        @foreach (var user in jgUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.jgUser = (e.Value.ToString())">
+                        @foreach (var user in jgUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>미드</th>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.midUser = (e.Value.ToString())">
+                        @foreach (var user in midUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.midUser = (e.Value.ToString())">
+                        @foreach (var user in midUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>원딜</th>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.adcUser = (e.Value.ToString())">
+                        @foreach (var user in adcUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.adcUser = (e.Value.ToString())">
+                        @foreach (var user in adcUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>서폿</th>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.supUser = (e.Value.ToString())">
+                        @foreach (var user in supUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.supUser = (e.Value.ToString())">
+                        @foreach (var user in supUsers)
+                        {
+                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    }
+}
+
+@code
+{
+    public class TeamInfo
+    {
+        public string topUser;
+        public string jgUser;
+        public string midUser;
+        public string adcUser;
+        public string supUser;
+    }
+}
+@code
+{
+    bool panelOpenState = true;
+    string NickName = "";
+    List<UserTeamDivideInfo> userTeamDivideInfos = new List<UserTeamDivideInfo>();
+
+    List<UserTeamDivideInfo> topUsers = new List<UserTeamDivideInfo>();
+    List<UserTeamDivideInfo> jgUsers = new List<UserTeamDivideInfo>();
+    List<UserTeamDivideInfo> midUsers = new List<UserTeamDivideInfo>();
+    List<UserTeamDivideInfo> adcUsers = new List<UserTeamDivideInfo>();
+    List<UserTeamDivideInfo> supUsers = new List<UserTeamDivideInfo>();
+
+    public TeamInfo team1Info = new TeamInfo();
+    public TeamInfo team2Info = new TeamInfo();
+
+    private void ResetLists()
+    {
+        topUsers.Clear();
+        jgUsers.Clear();
+        midUsers.Clear();
+        adcUsers.Clear();
+        supUsers.Clear();
+    }
+    
+    private async Task InsertBtnAsync()
+    {
+        if(userTeamDivideInfos.Count >= 10)
+            return;
+        
+        var user = await AccountDB.GetUserInfoAsync(NickName);
+        
+        if(user == null)
+            return;
+
+        UserTeamDivideInfo utd = new UserTeamDivideInfo();
+        utd.UserInfo = user;
+        
+        userTeamDivideInfos.Add(utd);
+
+        NickName = String.Empty;
+    }
+
+    private void ResetUserListBtn()
+    {
+        userTeamDivideInfos.Clear();
+        ResetLists();
+    }
+
+    private void SetAllPositionNoneBtn()
+    {
+        foreach (var teamDivideInfo in userTeamDivideInfos)
+        {
+            teamDivideInfo.LineType = LineType.None;
+        }
+        
+        ResetLists();
+    }
+    
+    private void DeleteUserInListBtnAsync(UserTeamDivideInfo user)
+    {
+        for (int i = 0; i < userTeamDivideInfos.Count; i++)
+        {
+            if(user.UserInfo.UserName == userTeamDivideInfos[i].UserInfo.UserName)
+                userTeamDivideInfos.RemoveAt(i);
+        }
+    }
+
+    private void DivideTeamBtn()
+    {
+        var list = DivideTeamManager.DivideTeam(userTeamDivideInfos);
+        list = list.OrderBy(e => e.LineType).ToList();
+        userTeamDivideInfos = list;
+
+        topUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Top).ToList();
+        jgUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Jungle).ToList();
+        midUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Mid).ToList();
+        adcUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Adc).ToList();
+        supUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Support).ToList();
+    }
+}
