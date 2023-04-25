@@ -1,0 +1,66 @@
+﻿@page "/Ranking"
+@using BlazorApp3.Common.Type
+@using BlazorApp3.Common.Enum
+@using BlazorApp3.Common.Manager
+
+<PageTitle>랭킹</PageTitle>
+
+
+
+@code
+{
+    List<RankInfo> totalRankList = new List<RankInfo>();
+    List<UserWinRateHistory> adcRankList = new List<UserWinRateHistory>();
+    List<UserWinRateHistory> supRankList = new List<UserWinRateHistory>();
+    List<UserWinRateHistory> midRankList = new List<UserWinRateHistory>();
+    List<UserWinRateHistory> jgRankList = new List<UserWinRateHistory>();
+    List<UserWinRateHistory> topRankList = new List<UserWinRateHistory>();
+
+    class RankInfo
+    {
+        public int Rank { get; set; }
+        public int Seq { get; set; }
+        public int WinCount { get; set; }
+        public int LoseCount { get; set; }
+        public int WinRate { get; set; }
+        public int OverallScore { get; set; }
+    }
+
+    private async Task SetOverallRankInfoListAsync()
+    {
+        var infos = await AccountDB.GetAllUserWinRateHistory();
+
+        List<List<UserWinRateHistory>> groupedInfo = infos
+            .GroupBy(info => info.UserSeq)
+            .Select(group => group.ToList())
+            .ToList();
+
+        foreach (var grouped in groupedInfo)
+        {
+            RankInfo rankInfo = new RankInfo();
+            
+            foreach (var item in grouped)
+            {
+                rankInfo.Seq = item.UserSeq;
+                rankInfo.WinCount += item.WinCount;
+                rankInfo.LoseCount += item.LoseCount;
+            }
+
+            rankInfo.WinRate = rankInfo.WinCount / (rankInfo.WinCount + rankInfo.LoseCount);
+            rankInfo.OverallScore = rankInfo.WinCount * 12 - rankInfo.LoseCount * 10;
+            
+            totalRankList.Add(rankInfo);
+        }
+
+        totalRankList = totalRankList.OrderByDescending(e => e.OverallScore).ToList();
+    }
+
+    private async Task SetOtherLaneRanks()
+    {
+        supRankList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Support)).OrderByDescending(e => e.GetOverAllScore()).ToList();
+        adcRankList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Adc)).OrderByDescending(e => e.GetOverAllScore()).ToList();
+        midRankList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Mid)).OrderByDescending(e => e.GetOverAllScore()).ToList();
+        jgRankList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Jungle)).OrderByDescending(e => e.GetOverAllScore()).ToList();
+        topRankList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Top)).OrderByDescending(e => e.GetOverAllScore()).ToList();
+    }
+}

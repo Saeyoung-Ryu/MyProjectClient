@@ -23,6 +23,14 @@ namespace BlazorApp3.Common
 
             return await conn.QuerySingleOrDefaultAsync<UserInfo>("spGetUserInfo", parameters, trxn, commandType: CommandType.StoredProcedure);
         }
+
+        public static async Task<UserInfo> GetUserInfoWithIdAsync(int seq)
+        {
+            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            {
+                return await conn.QuerySingleOrDefaultAsync<UserInfo>($"select * from tblUserInfo where seq = {seq}");
+            }
+        }
     }
 }
 

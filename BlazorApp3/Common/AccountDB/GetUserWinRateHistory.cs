@@ -1,5 +1,6 @@
 using System.Data;
 using BlazorApp3.Common;
+using BlazorApp3.Common.Enum;
 using BlazorApp3.Common.Type;
 using Dapper;
 using MySqlConnector;
@@ -22,6 +23,22 @@ namespace BlazorApp3.Common
             parameters.Add("_userSeq", seq);
 
             return (await conn.QueryAsync<UserWinRateHistory>("spGetUserWinRateHistory", parameters, trxn, commandType: CommandType.StoredProcedure)).ToList();
+        }
+
+        public static async Task<List<UserWinRateHistory>> GetAllUserWinRateHistoryByLine(LineType lineType)
+        {
+            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            {
+                return (await conn.QueryAsync<UserWinRateHistory>($"select * from tblUserWinnrateHistory where lineType = {(int) lineType}")).ToList();
+            }
+        }
+        
+        public static async Task<List<UserWinRateHistory>> GetAllUserWinRateHistory()
+        {
+            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            {
+                return (await conn.QueryAsync<UserWinRateHistory>($"select * from tblUserWinnrateHistory")).ToList();
+            }
         }
     }
 }
