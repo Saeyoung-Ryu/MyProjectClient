@@ -12,18 +12,18 @@ namespace BlazorApp3.Common
         {
             await using (var conn = new MySqlConnection(Config.ConnectionString))
             {
-                await SpSetLogMatchHistoryAsync(conn, null, matchHistory);
+                await SetLogMatchHistoryAsync(conn, null, matchHistory);
             }
         }
 
-        private static async Task SpSetLogMatchHistoryAsync(MySqlConnection conn, MySqlTransaction trxn, LogMatchHistory matchHistory)
+        private static async Task SetLogMatchHistoryAsync(MySqlConnection conn, MySqlTransaction trxn, LogMatchHistory matchHistory)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("_team1Data", matchHistory.Team1Data);
-            parameters.Add("_team2Data", matchHistory.Team2Data);
-            parameters.Add("_resulted", matchHistory.Resulted);
+            parameters.Add("_time", matchHistory.Time);
+            parameters.Add("_team1Win", matchHistory.Team1Win);
+            parameters.Add("_team2Win", matchHistory.Team2Win);
 
-            await conn.ExecuteAsync("spInsertLogMatchHistory", parameters, trxn, commandType: CommandType.StoredProcedure);
+            await conn.ExecuteAsync("spSetLogMatchHistory", parameters, trxn, commandType: CommandType.StoredProcedure);
         }
     }
 }

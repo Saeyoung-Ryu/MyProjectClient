@@ -2,6 +2,22 @@
 #Border-Dotted[b-jir8jx81lu]{border: 2px dotted}
 #Border-Solid[b-jir8jx81lu]{border: 1px solid}
 #Border-Solid3px[b-jir8jx81lu]{border: 3px solid #1a1e21}
+/* _content/BlazorApp3/Pages/MatchHistory.razor.rz.scp.css */
+#Border-Dotted[b-0j2mhglwtz]{border: 2px dotted}
+#Border-Solid[b-0j2mhglwtz]{border: 1px solid}
+#Border-Solid3px[b-0j2mhglwtz]{border: 3px solid #1a1e21}
+#Text1Style[b-0j2mhglwtz]{font-size: 23px;color : #41464b}
+#Text2Style[b-0j2mhglwtz]{font-size: 40px;color : #41464b}
+#Text3Style[b-0j2mhglwtz]{font-size: 14px;color : #1b6ec2}
+#Text4Style[b-0j2mhglwtz]{font-size: 20px;color : #157347}
+#Text5Style[b-0j2mhglwtz]{font-size: 12px;color : #6f42c1}
+#Text6Style[b-0j2mhglwtz]{font-size: 15px;color : #1c1f23}
+#Text7Style[b-0j2mhglwtz]{font-size: 15px;color : #0f5132}
+#table1[b-0j2mhglwtz], th[b-0j2mhglwtz], td[b-0j2mhglwtz]{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
 /* _content/BlazorApp3/Pages/UserAdd.razor.rz.scp.css */
 #Border-Dotted[b-80splod9sh]{border: 2px dotted}
 #Border-Solid[b-80splod9sh]{border: 1px solid}

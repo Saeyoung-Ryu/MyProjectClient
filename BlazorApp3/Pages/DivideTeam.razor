@@ -325,10 +325,11 @@
         {
             Team1Data = $"{team1Info.topUser}, {team1Info.jgUser}, {team1Info.midUser}, {team1Info.adcUser}, {team1Info.supUser}",
             Team2Data = $"{team2Info.topUser}, {team2Info.jgUser}, {team2Info.midUser}, {team2Info.adcUser}, {team2Info.supUser}",
-            Resulted = false
+            Team1Win = -1,
+            Team2Win = -1
         };
 
-        await LogDB.SetLogMatchHistoryAsync(logMatchHistory);
+        await LogDB.InsertLogMatchHistoryAsync(logMatchHistory);
     }
 
     // Team1 = 1팀, 2팀 랜덤선택된 그 팀

@@ -1,7 +1,72 @@
 @page "/MatchHistory"
+@using BlazorApp3.Common.Type
+@using BlazorApp3.Common.Enum
+@using BlazorApp3.Common.Manager
 
-<h3>MatchHistory</h3>
+<PageTitle>내전 전적</PageTitle>
 
-@code {
+<table id="Border-Solid" class="table table-border table-hover w-auto">
+    <thead>
+    <tr class="table-primary">
+        <th>날짜</th>
+        <th>팀원</th>
+        <th>팀원</th>
+        <th>승리팀</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var logMatchHistory in logMatchHistoryList)
+    {
+        <tr>
+            <td>@logMatchHistory.Time.ToString("yyyy-MM-dd")</td>
+            <td>@logMatchHistory.Team1Data</td>
+            <td>@logMatchHistory.Team2Data</td>
+
+            @if (logMatchHistory.Team1Win > 0)
+            {
+                <td>1</td>
+            }
+            else if (logMatchHistory.Team2Win > 0)
+            {
+                <td>2</td>
+            }
+            else
+            {
+                <td><button type="submit" class="btn btn-success" @onclick="@(e => Team1WinBtnAsync(logMatchHistory))">1팀 승</button><button type="submit" class="btn btn-info" @onclick="@(e => Team2WinBtnAsync(logMatchHistory))">2팀 승</button></td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code
+{
+    List<LogMatchHistory> logMatchHistoryList = new List<LogMatchHistory>();
     
+    protected override async Task OnInitializedAsync()
+    {
+        logMatchHistoryList = await LogDB.GetLogMatchHistoryAsync();
+        logMatchHistoryList = logMatchHistoryList.OrderByDescending(e => e.Time).ToList();
+    // return base.OnInitializedAsync();
+    }
+    
+    private async Task Team1WinBtnAsync(LogMatchHistory logMatchHistory)
+    {
+        // Console.WriteLine("1팀 승리");
+        logMatchHistory.Team1Win = 1;
+        await LogDB.SetLogMatchHistoryAsync(logMatchHistory);
+        
+        await RankManager.SetUserWinAsync(logMatchHistory.Team1Data);
+        await RankManager.SetUserLoseAsync(logMatchHistory.Team2Data);
+    }
+
+    private async Task Team2WinBtnAsync(LogMatchHistory logMatchHistory)
+    {
+        // Console.WriteLine("2팀 승리");
+        logMatchHistory.Team2Win = 1;
+        await LogDB.SetLogMatchHistoryAsync(logMatchHistory);
+        
+        await RankManager.SetUserWinAsync(logMatchHistory.Team2Data);
+        await RankManager.SetUserLoseAsync(logMatchHistory.Team1Data);
+    }
 }
