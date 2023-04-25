@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorApp3.Data;
 using BlazorApp3.Common;
+using MatBlazor;
 
 var builder = WebApplication.CreateBuilder(args);
 

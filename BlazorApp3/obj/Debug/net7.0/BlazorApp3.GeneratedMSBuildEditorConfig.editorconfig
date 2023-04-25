@@ -24,6 +24,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/MatchHistory.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWF0Y2hIaXN0b3J5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
