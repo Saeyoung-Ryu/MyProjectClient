@@ -85,24 +85,10 @@
                 else
                 {
                     <th>
-                        @if (team1Info.teamSide == 1)
-                        {
-                            <button class="btn btn-dark" @onclick="Team1WinBtnAsync">@team1Info.teamSide 팀 승리</button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-dark" @onclick="Team2WinBtnAsync">@team1Info.teamSide 팀 승리</button>
-                        }
+                        @(team1Info.teamSide + " 팀")
                         </th>
                     <th>  
-                        @if (team2Info.teamSide == 1)
-                        {
-                            <button class="btn btn-dark" @onclick="Team1WinBtnAsync">@team2Info.teamSide 팀 승리</button>
-                        }
-                        else
-                        {
-                            <button class="btn btn-dark" @onclick="Team2WinBtnAsync">@team2Info.teamSide 팀 승리</button>
-                        }
+                        @(team2Info.teamSide + " 팀")
                         </th>
                 }
             </tr>
@@ -321,7 +307,7 @@
         supUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Support).ToList();
     }
 
-    private void SetTeamBtn()
+    private async Task SetTeamBtn()
     {
         Random rand = new Random();
         int randomNumber = rand.Next(1, 3); // Generates a random number between 1 and 2 inclusive
@@ -334,6 +320,15 @@
 
         team1Info.teamSide = randomNumber;
         team2Info.teamSide = otherNumber;
+
+        LogMatchHistory logMatchHistory = new LogMatchHistory()
+        {
+            Team1Data = $"{team1Info.topUser}, {team1Info.jgUser}, {team1Info.midUser}, {team1Info.adcUser}, {team1Info.supUser}",
+            Team2Data = $"{team2Info.topUser}, {team2Info.jgUser}, {team2Info.midUser}, {team2Info.adcUser}, {team2Info.supUser}",
+            Resulted = false
+        };
+
+        await LogDB.SetLogMatchHistoryAsync(logMatchHistory);
     }
 
     // Team1 = 1팀, 2팀 랜덤선택된 그 팀
