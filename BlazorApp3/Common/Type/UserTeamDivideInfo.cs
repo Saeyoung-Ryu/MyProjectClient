@@ -5,5 +5,5 @@ namespace BlazorApp3.Common.Type;
 public class UserTeamDivideInfo
 {
     public UserInfo UserInfo { get; set; }
-    public LineType LineType { get; set; } = LineType.None;
+    public LineType LineType { get; set; } = LineType.Random;
 }

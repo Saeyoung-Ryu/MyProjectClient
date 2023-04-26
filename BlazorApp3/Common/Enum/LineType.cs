@@ -2,7 +2,7 @@ namespace BlazorApp3.Common.Enum
 {
     public enum LineType
     {
-        None = 0,
+        Random = 0,
         Support = 1,
         Adc = 2,
         Mid = 3,

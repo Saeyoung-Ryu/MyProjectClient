@@ -14,7 +14,7 @@ namespace BlazorApp3.Common.Manager
 
             foreach (LineType lineType in System.Enum.GetValues(typeof(LineType)))
             {
-                if(lineType == LineType.None)
+                if(lineType == LineType.Random)
                     continue;
                 
                 UserWinRateHistory userWinRateHistory = new UserWinRateHistory()

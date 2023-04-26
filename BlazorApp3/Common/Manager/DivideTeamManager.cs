@@ -12,13 +12,13 @@ namespace BlazorApp3.Common.Manager
 
             List<LineType> lineTypes = new List<LineType>(System.Enum.GetValues(typeof(LineType)).Cast<LineType>());
             lineTypes.AddRange(lineTypes);
-            lineTypes.RemoveAll(e => e == LineType.None);
+            lineTypes.RemoveAll(e => e == LineType.Random);
             
             if (isRandomLine)
             {
                 for (int i = 0; i < userInfos.Count; i++)
                 {
-                    if (userInfos[i].LineType != LineType.None)
+                    if (userInfos[i].LineType != LineType.Random)
                     {
                         lineTypes.Remove(userInfos[i].LineType);
                         // userInfos.Remove(userInfos[i]);
