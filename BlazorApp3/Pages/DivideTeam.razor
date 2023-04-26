@@ -5,6 +5,32 @@
 
 <PageTitle>팀나누기</PageTitle>
 
+<MatButton OnClick="@OpenDialog" Raised="true">유저 추가 ⊕</MatButton>            
+<MatDialog @bind-IsOpen="@dialogIsOpen">
+    <MatDialogContent>
+            
+        <table id="Border-Solid" class="table table-border table-hover w-auto">
+            <thead>
+            <tr class="table-primary">
+                <th>닉네임</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="text" name="" size="24" @bind="@nickNameToAdd"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </MatDialogContent>
+    <MatDialogActions>
+        <MatButton OnClick="@(e => { dialogIsOpen = false; })">닫기</MatButton>
+        <MatButton OnClick="@InsertAsyncBtn">추가</MatButton>
+    </MatDialogActions>
+</MatDialog>
+
+<br><br>
+
 <table id="Border-Solid" class="table table-border table-hover w-auto">
     <thead>
     <tr class="table-primary">
@@ -346,5 +372,29 @@
 
 @code
 {
+    bool dialogIsOpen = false;
+    string nickNameToAdd = String.Empty;
     
+    void OpenDialog()
+    {
+        dialogIsOpen = true;
+    }
+ 
+    void CloseDialog()
+    {
+        dialogIsOpen = false;
+    }
+    
+    public async Task InsertAsyncBtn()
+    {
+        var userInfo = await AccountDB.GetUserInfoAsync(NickName);
+
+        if (userInfo != null)
+        {
+            return;
+        }
+
+        await UserAddManager.SetNewUserAsync(NickName);
+        NickName = String.Empty;
+    }
 }
