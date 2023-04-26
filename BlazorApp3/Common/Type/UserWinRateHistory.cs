@@ -7,12 +7,14 @@ public class UserWinRateHistory
     public int WinCount { get; set; }
     public int LoseCount { get; set; }
 
-    public int GetWinRate()
+    public double GetWinRate()
     {
         if (WinCount + LoseCount == 0)
             return -1;
         
-        return WinCount / (WinCount + LoseCount) * 100;
+        double value = (double) WinCount / (WinCount + LoseCount) * 100;
+        value = Math.Round(value, 1);
+        return value;
     }
 
     public int GetOverAllScore()

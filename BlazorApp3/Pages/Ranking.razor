@@ -35,7 +35,7 @@ else
                         <td>@totalRankList[i].NickName</td>
                         <td>@totalRankList[i].WinCount</td>
                         <td>@totalRankList[i].LoseCount</td>
-                        <td>@totalRankList[i].WinRate</td>
+                        <td>@totalRankList[i].WinRate%</td>
                     </tr>
                 }
                 </tbody>
@@ -62,7 +62,7 @@ else
                         <td>@item.NickName</td>
                         <td>@item.WinCount</td>
                         <td>@item.LoseCount</td>
-                        <td>@item.WinRate</td>
+                        <td>@item.WinRate%</td>
                     </tr>
                 }
                 </tbody>
@@ -89,7 +89,7 @@ else
                         <td>@item.NickName</td>
                         <td>@item.WinCount</td>
                         <td>@item.LoseCount</td>
-                        <td>@item.WinRate</td>
+                        <td>@item.WinRate%</td>
                     </tr>
                 }
                 </tbody>
@@ -116,7 +116,7 @@ else
                         <td>@item.NickName</td>
                         <td>@item.WinCount</td>
                         <td>@item.LoseCount</td>
-                        <td>@item.WinRate</td>
+                        <td>@item.WinRate%</td>
                     </tr>
                 }
                 </tbody>
@@ -143,7 +143,7 @@ else
                         <td>@item.NickName</td>
                         <td>@item.WinCount</td>
                         <td>@item.LoseCount</td>
-                        <td>@item.WinRate</td>
+                        <td>@item.WinRate%</td>
                     </tr>
                 }
                 </tbody>
@@ -170,7 +170,7 @@ else
                         <td>@item.NickName</td>
                         <td>@item.WinCount</td>
                         <td>@item.LoseCount</td>
-                        <td>@item.WinRate</td>
+                        <td>@item.WinRate%</td>
                     </tr>
                 }
                 </tbody>
@@ -198,7 +198,7 @@ else
         public int Seq { get; set; }
         public int WinCount { get; set; }
         public int LoseCount { get; set; }
-        public int WinRate { get; set; }
+        public double WinRate { get; set; }
         public int OverallScore { get; set; }
     }
 
@@ -247,7 +247,8 @@ else
 
             if (rankInfo.WinCount + rankInfo.LoseCount != 0)
             {
-                rankInfo.WinRate = rankInfo.WinCount / (rankInfo.WinCount + rankInfo.LoseCount) * 100;
+                double value = (double) rankInfo.WinCount / (rankInfo.WinCount + rankInfo.LoseCount) * 100;
+                rankInfo.WinRate  = Math.Round(value, 1);
                 rankInfo.OverallScore = rankInfo.WinCount * 12 - rankInfo.LoseCount * 10;
                 totalRankList.Add(rankInfo);
             }
