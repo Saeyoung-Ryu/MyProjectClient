@@ -17,7 +17,7 @@
             </thead>
             <tbody>
             <tr>
-                <td><input type="text" name="" size="24" @bind="@nickNameToAdd"></td>
+                <td><input type="text" name="" size="24" @bind="@newNickName"></td>
             </tr>
             </tbody>
         </table>
@@ -25,7 +25,7 @@
     </MatDialogContent>
     <MatDialogActions>
         <MatButton OnClick="@(e => { dialogIsOpen = false; })">닫기</MatButton>
-        <MatButton OnClick="@InsertAsyncBtn">추가</MatButton>
+        <MatButton OnClick="@AddNewUserAsyncBtn">추가</MatButton>
     </MatDialogActions>
 </MatDialog>
 
@@ -384,17 +384,22 @@
     {
         dialogIsOpen = false;
     }
+
+    string newNickName = "";
     
-    public async Task InsertAsyncBtn()
+    public async Task AddNewUserAsyncBtn()
     {
-        var userInfo = await AccountDB.GetUserInfoAsync(NickName);
+        var userInfo = await AccountDB.GetUserInfoAsync(newNickName);
 
         if (userInfo != null)
         {
+            dialogIsOpen = false;
             return;
         }
 
-        await UserAddManager.SetNewUserAsync(NickName);
-        NickName = String.Empty;
+        await UserAddManager.SetNewUserAsync(newNickName);
+        newNickName = String.Empty;
+
+        dialogIsOpen = false;
     }
 }
