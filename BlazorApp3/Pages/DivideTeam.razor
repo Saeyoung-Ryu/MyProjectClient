@@ -2,6 +2,7 @@
 @using BlazorApp3.Common.Type
 @using BlazorApp3.Common.Enum
 @using BlazorApp3.Common.Manager
+@using System.Runtime.CompilerServices
 
 <PageTitle>팀나누기</PageTitle>
 
@@ -112,10 +113,10 @@
                 {
                     <th>
                         @(team1Info.teamSide + " 팀")
-                        </th>
+                    </th>
                     <th>  
                         @(team2Info.teamSide + " 팀")
-                        </th>
+                    </th>
                 }
             </tr>
             </thead>
@@ -124,7 +125,7 @@
                 <th>탑</th>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.topUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in topUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -133,7 +134,7 @@
                 </td>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.topUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in topUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -145,7 +146,7 @@
                 <th>정글</th>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.jgUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in jgUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -154,7 +155,7 @@
                 </td>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.jgUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in jgUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -166,7 +167,7 @@
                 <th>미드</th>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.midUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in midUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -175,7 +176,7 @@
                 </td>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.midUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in midUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -187,7 +188,7 @@
                 <th>원딜</th>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.adcUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in adcUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -196,7 +197,7 @@
                 </td>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.adcUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in adcUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -208,7 +209,7 @@
                 <th>서폿</th>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.supUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in supUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -217,7 +218,7 @@
                 </td>
                 <td>
                     <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.supUser = (e.Value.ToString())">
-                        <option value=""> -- -- </option>
+                        <option value=@String.Empty> -- -- </option>
                         @foreach (var user in supUsers)
                         {
                             <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
@@ -227,7 +228,8 @@
             </tr>
             </tbody>
         </table>
-        @if (team1Info.teamSide == 0 || team2Info.teamSide == 0)
+        
+        @if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
         {
             <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
         }
@@ -240,11 +242,19 @@
     {
         public int teamSide;
         
-        public string topUser;
-        public string jgUser;
-        public string midUser;
-        public string adcUser;
-        public string supUser;
+        public string topUser = String.Empty;
+        public string jgUser = string.Empty;
+        public string midUser = string.Empty;
+        public string adcUser = string.Empty;
+        public string supUser = string.Empty;
+
+        public bool IsAllFilled()
+        {
+            if (topUser != String.Empty && jgUser != String.Empty && midUser != String.Empty && adcUser != String.Empty & supUser != String.Empty)
+                return true;
+
+            return false;
+        }
     }
 }
 @code
@@ -347,10 +357,15 @@
         team1Info.teamSide = randomNumber;
         team2Info.teamSide = otherNumber;
 
+        List<TeamInfo> teams = new List<TeamInfo>() {team1Info, team2Info};
+
+        var team1SetInfo = teams.First(e => e.teamSide == 1);
+        var team2SetInfo = teams.First(e => e.teamSide == 2);
+
         LogMatchHistory logMatchHistory = new LogMatchHistory()
         {
-            Team1Data = $"{team1Info.topUser}, {team1Info.jgUser}, {team1Info.midUser}, {team1Info.adcUser}, {team1Info.supUser}",
-            Team2Data = $"{team2Info.topUser}, {team2Info.jgUser}, {team2Info.midUser}, {team2Info.adcUser}, {team2Info.supUser}",
+            Team1Data = $"{team1SetInfo.topUser}, {team1SetInfo.jgUser}, {team1SetInfo.midUser}, {team1SetInfo.adcUser}, {team1SetInfo.supUser}",
+            Team2Data = $"{team2SetInfo.topUser}, {team2SetInfo.jgUser}, {team2SetInfo.midUser}, {team2SetInfo.adcUser}, {team2SetInfo.supUser}",
             Team1Win = -1,
             Team2Win = -1
         };
