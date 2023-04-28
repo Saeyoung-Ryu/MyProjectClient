@@ -242,7 +242,7 @@
     {
         public int teamSide;
         
-        public string topUser = String.Empty;
+        public string topUser = string.Empty;
         public string jgUser = string.Empty;
         public string midUser = string.Empty;
         public string adcUser = string.Empty;
@@ -299,6 +299,9 @@
 
         UserTeamDivideInfo utd = new UserTeamDivideInfo();
         utd.UserInfo = user;
+
+        if (userTeamDivideInfos.Select(e => e.UserInfo.UserName).Contains(user.UserName)) 
+            return;
         
         userTeamDivideInfos.Add(utd);
 
@@ -309,6 +312,7 @@
     {
         userTeamDivideInfos.Clear();
         ResetLists();
+        ResetObjects();
     }
 
     private void SetAllPositionNoneBtn()
@@ -418,3 +422,22 @@
         dialogIsOpen = false;
     }
 }
+
+@*@code
+{
+    private void OnInput(ChangeEventArgs e)
+    {
+        NickName = e.Value.ToString();
+    }
+    
+    private async Task OnKeyDownAsync(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            if(NickName == String.Empty)
+                return;
+            
+            await InsertBtnAsync();
+        }
+    }
+}*@

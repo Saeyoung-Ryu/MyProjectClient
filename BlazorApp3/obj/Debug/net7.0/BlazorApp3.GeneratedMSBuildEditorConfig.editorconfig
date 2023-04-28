@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGl2aWRlVGVhbS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-jir8jx81lu
 
+[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/EditUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRWRpdFVzZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-bq4t509pdd
+
 [/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/MatchHistory.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWF0Y2hIaXN0b3J5LnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-0j2mhglwtz
@@ -39,10 +43,6 @@ build_metadata.AdditionalFiles.CssScope = b-0j2mhglwtz
 [/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/Ranking.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmFua2luZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-sg91u77mc6
-
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/UserAdd.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlckFkZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-80splod9sh
 
 [/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=

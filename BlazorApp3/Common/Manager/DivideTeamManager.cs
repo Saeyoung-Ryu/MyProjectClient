@@ -13,27 +13,26 @@ namespace BlazorApp3.Common.Manager
             List<LineType> lineTypes = new List<LineType>(System.Enum.GetValues(typeof(LineType)).Cast<LineType>());
             lineTypes.AddRange(lineTypes);
             lineTypes.RemoveAll(e => e == LineType.Random);
+
+            var fixedLaneUserInfos = userInfos.Where(e => e.LineType != LineType.Random).ToList();
+            var randomLaneUserInfos = userInfos.Where(e => e.LineType == LineType.Random).ToList();
             
             if (isRandomLine)
             {
-                for (int i = 0; i < userInfos.Count; i++)
+                for (int i = 0; i < fixedLaneUserInfos.Count; i++)
                 {
-                    if (userInfos[i].LineType != LineType.Random)
-                    {
-                        lineTypes.Remove(userInfos[i].LineType);
-                        // userInfos.Remove(userInfos[i]);
-                        userTeamDivideInfos.Add(userInfos[i]);
-                    }
-                    else
-                    {
-                        Random random = new Random();
-                        int randomNumber = random.Next(lineTypes.Count);
-                        userInfos[i].LineType = lineTypes[randomNumber];
+                    lineTypes.Remove(fixedLaneUserInfos[i].LineType);
+                    userTeamDivideInfos.Add(fixedLaneUserInfos[i]);
+                }
+
+                for (int i = 0; i < randomLaneUserInfos.Count; i++)
+                {
+                    Random random = new Random();
+                    int randomNumber = random.Next(lineTypes.Count);
+                    randomLaneUserInfos[i].LineType = lineTypes[randomNumber];
                     
-                        lineTypes.Remove(userInfos[i].LineType);
-                        // userInfos.Remove(userInfos[i]);
-                        userTeamDivideInfos.Add(userInfos[i]);
-                    }
+                    lineTypes.Remove(randomLaneUserInfos[i].LineType);
+                    userTeamDivideInfos.Add(randomLaneUserInfos[i]);
                 }
             }
 

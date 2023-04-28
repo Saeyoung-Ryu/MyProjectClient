@@ -2,6 +2,10 @@
 #Border-Dotted[b-jir8jx81lu]{border: 2px dotted}
 #Border-Solid[b-jir8jx81lu]{border: 1px solid}
 #Border-Solid3px[b-jir8jx81lu]{border: 3px solid #1a1e21}
+/* _content/BlazorApp3/Pages/EditUser.razor.rz.scp.css */
+#Border-Dotted[b-bq4t509pdd]{border: 2px dotted}
+#Border-Solid[b-bq4t509pdd]{border: 1px solid}
+#Border-Solid3px[b-bq4t509pdd]{border: 3px solid #1a1e21}
 /* _content/BlazorApp3/Pages/MatchHistory.razor.rz.scp.css */
 #Border-Dotted[b-0j2mhglwtz]{border: 2px dotted}
 #Border-Solid[b-0j2mhglwtz]{border: 1px solid}
@@ -53,10 +57,6 @@
     transform: translate(-50%, -50%);
 }
 
-/* _content/BlazorApp3/Pages/UserAdd.razor.rz.scp.css */
-#Border-Dotted[b-80splod9sh]{border: 2px dotted}
-#Border-Solid[b-80splod9sh]{border: 1px solid}
-#Border-Solid3px[b-80splod9sh]{border: 3px solid #1a1e21}
 /* _content/BlazorApp3/Shared/MainLayout.razor.rz.scp.css */
 #Border-Dotted[b-uah1rvq9fm]{border: 2px dotted}
 #Border-Solid[b-uah1rvq9fm]{border: 1px solid}

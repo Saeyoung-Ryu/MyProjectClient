@@ -1,0 +1,109 @@
+﻿@page "/EditUser"
+@using BlazorApp3.Common.Type
+@using BlazorApp3.Common.Manager
+@using BlazorApp3.Common.Enum
+
+<PageTitle>유저 정보 수정</PageTitle>
+
+<table id="Border-Solid" class="table table-border table-hover w-auto">
+    <thead>
+    <tr class="table-primary">
+        <th>수정할 닉네임</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="text" size="20" @bind="@NickName"> <button type="submit" class="btn btn-info" @onclick="@SearchUserAsyncBtn">검색</button></td>
+    </tr>
+    </tbody>
+</table>
+
+<br><br>
+
+@if (searchedUser != null)
+{
+    <table id="Border-Solid" class="table table-border table-hover w-auto">
+        <tbody>
+        <tr>
+            <th>닉네임</th>
+            <td><input type="text" size="20" @bind="@searchedUser.UserName"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table id="Border-Solid" class="table table-border table-hover w-auto">
+        <thead>
+        <tr class="table-primary">
+            <th>포지션</th>
+            <th>승리</th>
+            <th>패배</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var userWinRateHistory in UserWinRateHistories)
+        {
+            <tr>
+                <td>@(((LineType) userWinRateHistory.LineType).ToString())</td>
+                <td><input type="text" size="7" @bind="@userWinRateHistory.WinCount"></td>
+                <td><input type="text" size="7" @bind="@userWinRateHistory.LoseCount"></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-warning" @onclick="@EditAllAsyncBtn">수정</button>
+}
+
+
+@code
+{
+    public string NickName = String.Empty;
+    public UserInfo searchedUser;
+    public List<UserWinRateHistory> UserWinRateHistories = new List<UserWinRateHistory>();
+
+    private void Reset()
+    {
+        NickName = String.Empty;
+        searchedUser = null;
+        UserWinRateHistories = new List<UserWinRateHistory>();
+    }
+    
+    private async Task SearchUserAsyncBtn()
+    {
+        var userInfo = await AccountDB.GetUserInfoAsync(NickName);
+
+        if (userInfo == null)
+        {
+            return;
+        }
+
+        searchedUser = userInfo;
+        UserWinRateHistories = await AccountDB.GetUserWinRateHistoryAsync(searchedUser.Seq);
+        NickName = String.Empty;
+    }
+
+    private async Task EditAllAsyncBtn()
+    {
+        await EditUserNickNameAsync();
+        await EditUserWinRateAsync();
+        Reset();
+    }
+
+    private async Task EditUserNickNameAsync()
+    {
+        await AccountDB.UpdateUserInfoAsync(searchedUser.UserName, searchedUser.Seq);
+    }
+
+    private async Task EditUserWinRateAsync()
+    {
+        foreach (var item in UserWinRateHistories)
+        {
+            await AccountDB.SetUserWinRateHistoryAsync(item);
+        }
+    }
+}
+@*@code
+{
+    async Task OpenAlertFromService()
+    {
+        await MatDialogService.AlertAsync("이미 존재하는 닉네임입니다!");
+    }
+}*@

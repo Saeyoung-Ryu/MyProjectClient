@@ -9,6 +9,6 @@ public class Config
     public static void Refresh()
     {
         // ConnectionString 가지고오기
-        ConnectionString = "";
+        ConnectionString = "server=10.0.3.31;Port=3306;Uid=ysy9514;Pwd=saeYoung;Database=Test";
     }
 }
