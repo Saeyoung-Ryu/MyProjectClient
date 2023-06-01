@@ -9,10 +9,10 @@
 <PageTitle>팀나누기</PageTitle>
 
 <MatButton OnClick="@OpenDialog" Raised="true">유저 추가 ⊕</MatButton>
-@if (userTeamDivideInfos.Count == 0)
+@*@if (userTeamDivideInfos.Count == 0)
 {
     <button class="btn btn-outline-primary" @onclick="SetAsLastTeamBtnAsync">마지막 팀으로 세팅</button>
-}
+}*@
 <MatDialog @bind-IsOpen="@dialogIsOpen">
     <MatDialogContent>
             

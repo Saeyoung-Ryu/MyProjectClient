@@ -1,14 +1,5 @@
-DROP PROCEDURE IF EXISTS spUpdateUserInfo;
-CREATE DEFINER=`root`@`%` PROCEDURE `spUpdateUserInfo`(_userName VARCHAR(255), _userSeq int)
+DROP PROCEDURE IF EXISTS spGetLogMatchHistoryList;
+CREATE DEFINER=`ysy9514`@`%` PROCEDURE `spGetLogMatchHistoryList`()
 BEGIN
-    UPDATE `tblUserInfo` SET userName = _userName WHERE `seq` = _userSeq;
-END
-
-DROP PROCEDURE IF EXISTS spGetUserInfo;
-CREATE DEFINER=`root`@`%` PROCEDURE `spGetUserInfo`(_userName VARCHAR(255))
-BEGIN
-    SELECT * FROM tblUserInfo 
-    WHERE userName LIKE CONCAT(_userName, '%') 
-    ORDER BY LENGTH(userName), userName
-    LIMIT 1;
+    SELECT * FROM tblLogMatchHistory ORDER BY seq DESC LIMIT 100;
 END
