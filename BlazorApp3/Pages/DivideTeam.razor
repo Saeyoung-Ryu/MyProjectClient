@@ -3,10 +3,16 @@
 @using BlazorApp3.Common.Enum
 @using BlazorApp3.Common.Manager
 @using System.Runtime.CompilerServices
+@using System.Text.RegularExpressions
+@using Microsoft.Data.Sqlite
 
 <PageTitle>팀나누기</PageTitle>
 
-<MatButton OnClick="@OpenDialog" Raised="true">유저 추가 ⊕</MatButton>            
+<MatButton OnClick="@OpenDialog" Raised="true">유저 추가 ⊕</MatButton>
+@if (userTeamDivideInfos.Count == 0)
+{
+    <button class="btn btn-outline-primary" @onclick="SetAsLastTeamBtnAsync">마지막 팀으로 세팅</button>
+}
 <MatDialog @bind-IsOpen="@dialogIsOpen">
     <MatDialogContent>
             
@@ -61,6 +67,7 @@
                     <tr class="table-primary">
                         <th>닉네임</th>
                         <th>라인</th>
+                        <th>제외</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -73,9 +80,25 @@
                             <td>
                                 <p>
                                     <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) Enum.Parse(typeof(LineType), e.Value.ToString())">
-                                        @foreach (var lineTypeString in Enum.GetValues(typeof(LineType)))
+                                        @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
                                         {
+                                            if(lineTypeString.ToString() == "None")
+                                                continue;
+                                            
                                             <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.LineType.ToString())">@lineTypeString.ToString()</option>
+                                        }
+                                    </select>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.ExceptionLine = (LineType) Enum.Parse(typeof(LineType), e.Value.ToString())">
+                                        @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
+                                        {
+                                            if(lineTypeString.ToString() == "Random")
+                                                continue;
+                                            
+                                            <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.ExceptionLine.ToString())">@lineTypeString.ToString()</option>
                                         }
                                     </select>
                                 </p>
@@ -83,14 +106,13 @@
                             <td><button class="btn btn-warning" @onclick="@(e => DeleteUserInListBtnAsync(@userinfo))">Remove</button></td>
                         </tr>
                     }
-                    
-                    @if (userTeamDivideInfos.Count == 10)
-                    {
-                        <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
-                        <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
-                    }
                     </tbody>
                 </table>
+                @if (userTeamDivideInfos.Count == 10)
+                {
+                    <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
+                    <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
+                }
             </MatExpansionPanelDetails>
         </MatExpansionPanel>
 
@@ -233,11 +255,18 @@
         {
             <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
         }
+        else if(team1Info.IsAllFilled() && team2Info.IsAllFilled() && (team1Info.teamSide != 0 || team2Info.teamSide != 0))
+        {
+            <button class="btn btn-warning" @onclick="SwapTeamBtn">팀 스왑</button>
+        }
     }
 }
 
+
 @code
 {
+    bool isLoading = false;
+    
     public class TeamInfo
     {
         public int teamSide;
@@ -320,9 +349,13 @@
         foreach (var teamDivideInfo in userTeamDivideInfos)
         {
             teamDivideInfo.LineType = LineType.Random;
+            teamDivideInfo.ExceptionLine = LineType.None;
         }
         
         ResetLists();
+        
+        team1Info = new TeamInfo();
+        team2Info = new TeamInfo();
     }
     
     private void DeleteUserInListBtnAsync(UserTeamDivideInfo user)
@@ -336,6 +369,7 @@
 
     private void DivideTeamBtn()
     {
+        isLoading = true;
         var list = DivideTeamManager.DivideTeam(userTeamDivideInfos);
         list = list.OrderBy(e => e.LineType).ToList();
         userTeamDivideInfos = list;
@@ -345,6 +379,7 @@
         midUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Mid).ToList();
         adcUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Adc).ToList();
         supUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Support).ToList();
+        isLoading = false;
     }
 
     private async Task SetTeamBtn()
@@ -361,6 +396,26 @@
         team1Info.teamSide = randomNumber;
         team2Info.teamSide = otherNumber;
 
+        List<TeamInfo> teams = new List<TeamInfo>() {team1Info, team2Info};
+
+        var team1SetInfo = teams.First(e => e.teamSide == 1);
+        var team2SetInfo = teams.First(e => e.teamSide == 2);
+
+        LogMatchHistory logMatchHistory = new LogMatchHistory()
+        {
+            Team1Data = $"{team1SetInfo.topUser}, {team1SetInfo.jgUser}, {team1SetInfo.midUser}, {team1SetInfo.adcUser}, {team1SetInfo.supUser}",
+            Team2Data = $"{team2SetInfo.topUser}, {team2SetInfo.jgUser}, {team2SetInfo.midUser}, {team2SetInfo.adcUser}, {team2SetInfo.supUser}",
+            Team1Win = -1,
+            Team2Win = -1
+        };
+
+        await LogDB.InsertLogMatchHistoryAsync(logMatchHistory);
+    }
+    
+    private async Task SwapTeamBtn()
+    {
+        (team1Info.teamSide, team2Info.teamSide) = (team2Info.teamSide, team1Info.teamSide);
+        
         List<TeamInfo> teams = new List<TeamInfo>() {team1Info, team2Info};
 
         var team1SetInfo = teams.First(e => e.teamSide == 1);
@@ -420,6 +475,31 @@
         newNickName = String.Empty;
 
         dialogIsOpen = false;
+    }
+
+    public async Task SetAsLastTeamBtnAsync()
+    {
+        var lastMatchUpInfo = (await LogDB.GetLogMatchHistoryAsync()).Last();
+
+        var team1Member = lastMatchUpInfo.Team1Data;
+        var team2Member = lastMatchUpInfo.Team2Data;
+
+        Console.WriteLine(team1Member);
+        Console.WriteLine(team2Member);
+
+        team1Member = Regex.Replace(team1Member, @",\s+", ",");
+        string[] nickNameArray1 = team1Member.Split(new char[] {','});
+        
+        team2Member = Regex.Replace(team2Member, @",\s+", ",");
+        string[] nickNameArray2 = team2Member.Split(new char[] {','});
+
+        var result = nickNameArray1.Zip(nickNameArray2, (a, b) => a + b).ToList();
+
+        foreach (var nickName in result)
+        {
+            NickName = nickName;
+            await InsertBtnAsync();
+        }
     }
 }
 
