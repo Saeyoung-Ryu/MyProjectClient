@@ -8,7 +8,7 @@ public class Config
 
     public static void Refresh()
     {
-        // ConnectionString 가지고오기
+        // ConnectionString 가지고오기!!
         ConnectionString = "";
     }
 }
