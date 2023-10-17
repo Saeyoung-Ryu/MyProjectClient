@@ -10,7 +10,7 @@ namespace BlazorApp3.Common
     {
         public static async Task SetUserWinRateHistoryAsync(UserWinRateHistory userWinRateHistory)
         {
-            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            await using (var conn = new MySqlConnection(MyProjectInfoConfig.Instance.ConnectionString))
             {
                 await SpSetUserWinRateHistoryAsync(conn, null, userWinRateHistory);
             }

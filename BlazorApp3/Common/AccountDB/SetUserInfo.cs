@@ -9,7 +9,7 @@ namespace BlazorApp3.Common
     {
         public static async Task SetUserInfoAsync(string nickName)
         {
-            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            await using (var conn = new MySqlConnection(MyProjectInfoConfig.Instance.ConnectionString))
             {
                 await SpSetUserInfoAsync(conn, null, nickName);
             }

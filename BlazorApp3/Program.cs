@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using BlazorApp3.Data;
 using BlazorApp3.Common;
 using MatBlazor;
 
@@ -9,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();
 
@@ -31,6 +29,9 @@ app.UseRouting();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-Config.Refresh(); // connectionString 가지고오는 함수
+MyProjectInfoConfig.Refresh(); // connectionString 가지고오는 함수
+
+Console.WriteLine(MyProjectInfoConfig.Instance.ConnectionString);
+Console.WriteLine(MyProjectInfoConfig.Instance.APIKey);
 
 app.Run();

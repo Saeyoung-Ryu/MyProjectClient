@@ -67,3 +67,4 @@
 /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/bin/Debug/net7.0/runtimes/win-arm64/native/e_sqlite3.dll
 /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/bin/Debug/net7.0/runtimes/win-x64/native/e_sqlite3.dll
 /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/bin/Debug/net7.0/runtimes/win-x86/native/e_sqlite3.dll
+/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/SearchUser.razor.rz.scp.css

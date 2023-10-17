@@ -10,7 +10,7 @@ namespace BlazorApp3.Common
     {
         public static async Task InsertLogMatchHistoryAsync(LogMatchHistory matchHistory)
         {
-            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            await using (var conn = new MySqlConnection(MyProjectInfoConfig.Instance.ConnectionString))
             {
                 await SpInsertLogMatchHistoryAsync(conn, null, matchHistory);
             }

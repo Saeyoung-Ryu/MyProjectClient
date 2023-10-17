@@ -10,7 +10,7 @@ namespace BlazorApp3.Common
     {
         public static async Task<List<LogMatchHistory>> GetLogMatchHistoryAsync()
         {
-            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            await using (var conn = new MySqlConnection(MyProjectInfoConfig.Instance.ConnectionString))
             {
                 return await SpGetLogMatchHistoryAsync(conn, null);
             }

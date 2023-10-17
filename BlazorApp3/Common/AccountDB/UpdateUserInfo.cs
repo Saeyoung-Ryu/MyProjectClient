@@ -9,7 +9,7 @@ namespace BlazorApp3.Common
     {
         public static async Task UpdateUserInfoAsync(string nickName, int seq)
         {
-            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            await using (var conn = new MySqlConnection(MyProjectInfoConfig.Instance.ConnectionString))
             {
                 await SpUpdateUserInfoAsync(conn, null, nickName, seq);
             }

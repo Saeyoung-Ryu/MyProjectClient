@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope = b-0j2mhglwtz
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmFua2luZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-sg91u77mc6
 
+[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/SearchUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2VhcmNoVXNlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-kbah6jr5e8
+
 [/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-uah1rvq9fm

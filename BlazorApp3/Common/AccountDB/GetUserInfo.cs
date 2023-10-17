@@ -10,7 +10,7 @@ namespace BlazorApp3.Common
     {
         public static async Task<UserInfo> GetUserInfoAsync(string nickName)
         {
-            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            await using (var conn = new MySqlConnection(MyProjectInfoConfig.Instance.ConnectionString))
             {
                 return await SpGetUserInfoAsync(conn, null, nickName);
             }
@@ -26,7 +26,7 @@ namespace BlazorApp3.Common
 
         public static async Task<UserInfo> GetUserInfoWithIdAsync(int seq)
         {
-            await using (var conn = new MySqlConnection(Config.ConnectionString))
+            await using (var conn = new MySqlConnection(MyProjectInfoConfig.Instance.ConnectionString))
             {
                 return await conn.QuerySingleOrDefaultAsync<UserInfo>($"select * from tblUserInfo where seq = {seq}");
             }

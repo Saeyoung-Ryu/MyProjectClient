@@ -1,4 +1,4 @@
-namespace BlazorApp3.Common.Enum
+namespace Enum
 {
     public enum LineType
     {

@@ -1,4 +1,4 @@
-using BlazorApp3.Common.Enum;
+using Enum;
 
 namespace BlazorApp3.Common.Type;
 
