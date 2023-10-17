@@ -9,57 +9,57 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BlazorApp3
 build_property.RootNamespace = BlazorApp3
-build_property.ProjectDir = /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/
+build_property.ProjectDir = /Users/saeyoungryu/Project/MyProject/BlazorApp3/
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3
+build_property.MSBuildProjectDirectory = /Users/saeyoungryu/Project/MyProject/BlazorApp3
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/App.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Shared/SurveyPrompt.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/_Imports.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/DivideTeam.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Pages/DivideTeam.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGl2aWRlVGVhbS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-jir8jx81lu
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/EditUser.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Pages/EditUser.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRWRpdFVzZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-bq4t509pdd
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/MatchHistory.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Pages/MatchHistory.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWF0Y2hIaXN0b3J5LnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-0j2mhglwtz
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/Ranking.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Pages/Ranking.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmFua2luZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-sg91u77mc6
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/SearchUser.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Pages/SearchUser.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2VhcmNoVXNlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-kbah6jr5e8
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Shared/MainLayout.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-uah1rvq9fm
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Shared/NavMenu.razor]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-z3lckddl0i
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/Error.cshtml]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/Pages/_Host.cshtml]
+[/Users/saeyoungryu/Project/MyProject/BlazorApp3/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

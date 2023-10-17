@@ -6330,11 +6330,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/BlazorApp3.csproj",
+      "projectUniqueName": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/BlazorApp3.csproj",
       "projectName": "BlazorApp3",
-      "projectPath": "/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/BlazorApp3.csproj",
+      "projectPath": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/BlazorApp3.csproj",
       "packagesPath": "/Users/saeyoungryu/.nuget/packages/",
-      "outputPath": "/Users/saeyoungryu/Project/MyTest/BlazorApp3/BlazorApp3/obj/",
+      "outputPath": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/saeyoungryu/.nuget/NuGet/NuGet.Config"
