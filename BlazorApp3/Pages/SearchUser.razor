@@ -2,112 +2,132 @@
 @using BlazorApp3.Common.Type
 @using BlazorApp3.Common.Manager
 @using Enum
+@using RiotSharp
+@using RiotSharp.Misc
+@using System.Text
 
-<PageTitle>유저 정보 수정</PageTitle>
+<PageTitle>유저 자랭 정보 검색</PageTitle>
 
-<h1>유저 정보 수정</h1>
+<h1>유저 자랭 정보 검색</h1>
 <hr />
 <br>
 
-<table id="Border-Solid" class="table table-border table-hover w-auto">
-    <thead>
-    <tr class="table-primary">
-        <th>닉네임</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><input type="text" size="20" @bind="@NickName"> <button type="submit" class="btn btn-info" @onclick="@SearchUserAsyncBtn">검색</button></td>
-    </tr>
-    </tbody>
-</table>
-
-<br><br>
-
-@if (searchedUser != null)
+@if (isLoading)
 {
-    <table id="Border-Solid" class="table table-border table-hover w-auto">
-        <tbody>
-        <tr>
-            <th>닉네임</th>
-            <td><input type="text" size="20" @bind="@searchedUser.UserName"></td>
-        </tr>
-        </tbody>
-    </table>
+    <MatProgressCircle Indeterminate="true" Size="MatProgressCircleSize.Large" />
+}
+else
+{
     <table id="Border-Solid" class="table table-border table-hover w-auto">
         <thead>
         <tr class="table-primary">
-            <th>포지션</th>
-            <th>승리</th>
-            <th>패배</th>
+            <th>닉네임</th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var userWinRateHistory in UserWinRateHistories)
-        {
-            <tr>
-                <td>@(((LineType) userWinRateHistory.LineType).ToString())</td>
-                <td><input type="text" size="7" @bind="@userWinRateHistory.WinCount"></td>
-                <td><input type="text" size="7" @bind="@userWinRateHistory.LoseCount"></td>
-            </tr>
-        }
+        <tr>
+            <td><input type="text" size="20" @bind="@searchNickName"> <button type="submit" class="btn btn-info" @onclick="@SearchUserAsyncBtn">검색</button></td>
+        </tr>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-warning" @onclick="@EditAllAsyncBtn">수정</button>
-}
+    
+    <br>
+    <br>
+    
+    @if (puuid != String.Empty)
+    {
+        <MatAccordion Multi="true">
+            @foreach (var summonerName in eachTeamMateChampWRDic.Keys)
+            {
+                <MatExpansionPanel Style="width: 500px">
+                    <MatExpansionPanelSummary>
+                        <MatExpansionPanelHeader> <p3>@summonerName</p3> @(GetWinnRate(summonerName))%</MatExpansionPanelHeader>
+                    </MatExpansionPanelSummary>
+                    <MatExpansionPanelDetails>
+                        @foreach (var stringValue in GetWinnRateStringListComparedByChamp(eachTeamMateChampWRDic[summonerName]))
+                        {
+                            <tr>
+                                <td>@stringValue</td>
+                            </tr>
+                        }
+                    </MatExpansionPanelDetails>
+                </MatExpansionPanel>
+            }
+        </MatAccordion>
+    }
 
+}
 
 @code
 {
-    public string NickName = String.Empty;
-    public UserInfo searchedUser;
-    public List<UserWinRateHistory> UserWinRateHistories = new List<UserWinRateHistory>();
-
-    private void Reset()
-    {
-        NickName = String.Empty;
-        searchedUser = null;
-        UserWinRateHistories = new List<UserWinRateHistory>();
-    }
+    public Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<WinLoseType, int>>>> eachTeamMateChampWRDic = new Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<WinLoseType, int>>>>();
+    public Dictionary<string, Dictionary<WinLoseType, int>> eachTeamMateWRDic = new Dictionary<string, Dictionary<WinLoseType, int>>();
     
+    bool isLoading = false;
+    
+    RiotApi riotInstance = RiotApi.GetDevelopmentInstance(MyProjectInfoConfig.Instance.APIKey);
+    
+    string searchNickName = string.Empty;
+    string puuid = string.Empty;
+}
+
+@code
+{
     private async Task SearchUserAsyncBtn()
     {
-        var userInfo = await AccountDB.GetUserInfoAsync(NickName);
+        isLoading = true;
+        
+        var summoner = await riotInstance.Summoner.GetSummonerByNameAsync(Region.Kr, searchNickName);
 
-        if (userInfo == null)
-        {
+        if (summoner != null)
+            puuid = summoner.Puuid;
+        else
             return;
-        }
 
-        searchedUser = userInfo;
-        UserWinRateHistories = await AccountDB.GetUserWinRateHistoryAsync(searchedUser.Seq);
-        NickName = String.Empty;
-    }
+        var dic = await UIManager.GetWinRateEachTeamMateChampionAsync(MyProjectInfoConfig.Instance.APIKey, puuid, 20);
 
-    private async Task EditAllAsyncBtn()
-    {
-        await EditUserNickNameAsync();
-        await EditUserWinRateAsync();
-        Reset();
-    }
-
-    private async Task EditUserNickNameAsync()
-    {
-        await AccountDB.UpdateUserInfoAsync(searchedUser.UserName, searchedUser.Seq);
-    }
-
-    private async Task EditUserWinRateAsync()
-    {
-        foreach (var item in UserWinRateHistories)
-        {
-            await AccountDB.SetUserWinRateHistoryAsync(item);
-        }
+        eachTeamMateChampWRDic = dic.EachTeamMateChampWRDic;
+        eachTeamMateWRDic = dic.EachTeamMateWRDic;
+        
+        isLoading = false;
     }
 }
-@*@code
+
+@code
 {
-    async Task OpenAlertFromService()
+    public string GetWinnRate(string summonerName)
     {
-        await MatDialogService.AlertAsync("이미 존재하는 닉네임입니다!");
+        int totalGame = eachTeamMateWRDic[summonerName][WinLoseType.Lose] + eachTeamMateWRDic[summonerName][WinLoseType.Win];
+        int winGame = eachTeamMateWRDic[summonerName][WinLoseType.Win];
+
+        Console.WriteLine($"totalGame : {totalGame}");
+        Console.WriteLine($"winGame : {winGame}");
+        if(winGame == 0)
+            return "0.0";
+        
+        double winRate = (double)winGame / totalGame * 100;
+        string wrStringFormat = winRate.ToString("0.0");
+
+        Console.WriteLine($"wrStringFormat : {wrStringFormat}");
+        
+        return wrStringFormat;
     }
-}*@
+
+    public List<string> GetWinnRateStringListComparedByChamp(Dictionary<string, Dictionary<string, Dictionary<WinLoseType, int>>> dictionary)
+    {
+        List<string> list = new List<string>();
+
+        foreach (var myChampName in dictionary.Keys)
+        {
+            foreach (var otherChampName in dictionary[myChampName].Keys)
+            {
+                int totalWinGame = dictionary[myChampName][otherChampName][WinLoseType.Win];
+                int totalLoseGame = dictionary[myChampName][otherChampName][WinLoseType.Lose];
+                
+                list.Add($"{myChampName} {otherChampName} : {totalWinGame}승 {totalLoseGame}패");
+            }
+        }
+
+        return list;
+    }
+}

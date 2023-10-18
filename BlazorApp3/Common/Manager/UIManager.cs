@@ -94,6 +94,7 @@ public class UIManager
                     dic.Add(WinLoseType.Win, 0);
                     dic.Add(WinLoseType.Lose, 0);
                     winRateInfoDic2.Add(mtpd.SummonerName, dic);
+                    winRateInfoDic2[mtpd.SummonerName][winLoseType]++;
                 }
                 
             }
