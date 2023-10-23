@@ -3,12 +3,30 @@
 @using BlazorApp3.Common.Manager
 @using Enum
 
+@inject IMatToaster Toaster
+
 <PageTitle>유저 정보 수정</PageTitle>
 
 <h1>유저 정보 수정</h1>
 <hr />
 <br>
 
+@if (dialogIsOpen)
+{
+    <MatAccordion>
+        <MatButton OnClick="@OpenDialog" Raised="true">메일 지급하기 ⊕</MatButton>
+        <MatDialog @bind-IsOpen="@dialogIsOpen">
+            <MatDialogContent>
+                <p3>Enter Password</p3>
+                <input type="text" size="10" @bind="@Password">
+                <button type="submit" class="btn btn-warning" @onclick="@EditAllAsyncBtn">확인</button>
+            </MatDialogContent>
+            <MatDialogActions>
+                <MatButton OnClick="@CloseDialog">닫기</MatButton>
+            </MatDialogActions>
+        </MatDialog>
+    </MatAccordion>
+}
 <table id="Border-Solid" class="table table-border table-hover w-auto">
     <thead>
     <tr class="table-primary">
@@ -53,12 +71,13 @@
         }
         </tbody>
     </table>
-    <button type="submit" class="btn btn-warning" @onclick="@EditAllAsyncBtn">수정</button>
+    <button type="submit" class="btn btn-warning" @onclick="@OpenEnterPasswordPanel">수정</button>
 }
 
 
 @code
 {
+    public string Password = String.Empty;
     public string NickName = String.Empty;
     public UserInfo searchedUser;
     public List<UserWinRateHistory> UserWinRateHistories = new List<UserWinRateHistory>();
@@ -86,9 +105,21 @@
 
     private async Task EditAllAsyncBtn()
     {
+        @if (Password != "1234")
+        {
+            Show(MatToastType.Warning);
+            return;
+        }
+
         await EditUserNickNameAsync();
         await EditUserWinRateAsync();
-        Reset();
+        Show(MatToastType.Success);
+        CloseDialog();
+    }
+
+    private void OpenEnterPasswordPanel()
+    {
+        dialogIsOpen = true;
     }
 
     private async Task EditUserNickNameAsync()
@@ -104,10 +135,73 @@
         }
     }
 }
-@*@code
+@code
 {
-    async Task OpenAlertFromService()
+    bool dialogIsOpen = false;
+    bool panelOpenState = false;
+
+    void OpenDialog()
     {
-        await MatDialogService.AlertAsync("이미 존재하는 닉네임입니다!");
+        dialogIsOpen = true;
     }
-}*@
+    
+    void CloseDialog()
+    {
+        dialogIsOpen = false;
+    }
+}
+
+@code {
+    private string title = "";
+    private string message = "";
+    private bool showProgressBar;
+    private bool showCloseButton;
+    private bool actionOnClick;
+    private string maximumOpacity;
+
+    private string showTransitionDuration;
+    private string visibleStateDuration;
+    private string hideTransitionDuration;
+
+    private bool requireInteraction;
+
+    protected override void OnInitialized()
+    {
+        showProgressBar = Toaster.Configuration.ShowProgressBar;
+        showCloseButton = Toaster.Configuration.ShowCloseButton;
+        maximumOpacity = Toaster.Configuration.MaximumOpacity.ToString();
+
+        showTransitionDuration = Toaster.Configuration.ShowTransitionDuration.ToString();
+        visibleStateDuration = Toaster.Configuration.VisibleStateDuration.ToString();
+        hideTransitionDuration = Toaster.Configuration.HideTransitionDuration.ToString();
+
+        requireInteraction = Toaster.Configuration.RequireInteraction;
+    }
+
+    public void Show(MatToastType type, string icon = "")
+    {
+        if (type == MatToastType.Warning)
+        {
+            message = "Wrong Password!";
+            icon = "error";
+        }
+        else
+        {
+            message = "Mail Added Success!";
+            icon = "check_circle";
+        }
+
+        Toaster.Add(message, type, title, icon, config =>
+        {
+            config.ShowCloseButton = showCloseButton;
+            config.ShowProgressBar = showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(hideTransitionDuration);
+
+            config.RequireInteraction = requireInteraction;
+        });
+    }
+}
