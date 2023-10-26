@@ -22,6 +22,7 @@ namespace BlazorApp3.Common
             parameters.Add("_time", matchHistory.Time);
             parameters.Add("_team1Win", matchHistory.Team1Win);
             parameters.Add("_team2Win", matchHistory.Team2Win);
+            parameters.Add("_seq", matchHistory.Seq);
 
             await conn.ExecuteAsync("spSetLogMatchHistory", parameters, trxn, commandType: CommandType.StoredProcedure);
         }

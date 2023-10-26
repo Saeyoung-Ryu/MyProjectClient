@@ -419,6 +419,8 @@
     private async Task SwapTeamBtn()
     {
         (team1Info.teamSide, team2Info.teamSide) = (team2Info.teamSide, team1Info.teamSide);
+
+        Console.WriteLine($"Team1Info Adc = {team1Info.adcUser} Team1Info sid = {team1Info.teamSide}");
         
         List<TeamInfo> teams = new List<TeamInfo>() {team1Info, team2Info};
 
