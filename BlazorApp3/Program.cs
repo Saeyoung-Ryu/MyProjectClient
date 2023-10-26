@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorApp3.Common;
+using BlazorApp3.Common.Manager;
 using MatBlazor;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,9 +39,10 @@ app.UseRouting();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-MyProjectInfoConfig.Refresh(); // connectionString 가지고오는 함수
-
-Console.WriteLine(MyProjectInfoConfig.Instance.ConnectionString);
-Console.WriteLine(MyProjectInfoConfig.Instance.APIKey);
+{ // DB Setting
+    MyProjectInfoConfig.Refresh(); // connectionString 가지고오는 함수
+    await RankManager.SetOverallRankInfoListAsync();
+    await RankManager.SetOtherLaneRanks();
+}
 
 app.Run();

@@ -11,7 +11,13 @@
 <hr />
 <br>
 
-@if (dialogIsOpen)
+@if (isLoading)
+{
+    <MatProgressBar Indeterminate="true"></MatProgressBar>
+}
+else
+{
+    @if (dialogIsOpen)
 {
     <MatAccordion>
         <MatButton OnClick="@OpenDialog" Raised="true">메일 지급하기 ⊕</MatButton>
@@ -73,10 +79,13 @@
     </table>
     <button type="submit" class="btn btn-warning" @onclick="@OpenEnterPasswordPanel">수정</button>
 }
+}
 
 
 @code
 {
+    bool isLoading = false;
+    
     public string Password = String.Empty;
     public string NickName = String.Empty;
     public UserInfo searchedUser;
@@ -111,8 +120,24 @@
             return;
         }
 
+        isLoading = true;
         await EditUserNickNameAsync();
         await EditUserWinRateAsync();
+        
+        {
+            // Memory Update
+            RankManager.totalRankList = new List<RankInfo>();
+            RankManager.topRankList = new List<RankInfo>();
+            RankManager.jgRankList = new List<RankInfo>();
+            RankManager.midRankList = new List<RankInfo>();
+            RankManager.adcRankList = new List<RankInfo>();
+            RankManager.supRankList = new List<RankInfo>();
+            
+            await RankManager.SetOverallRankInfoListAsync();
+            await RankManager.SetOtherLaneRanks();
+        }
+
+        isLoading = false;
         Show(MatToastType.Success);
         CloseDialog();
     }

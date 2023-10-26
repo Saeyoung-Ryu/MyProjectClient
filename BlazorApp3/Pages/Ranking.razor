@@ -32,14 +32,14 @@ else
                 </tr>
                 </thead>
                 <tbody>
-                @for (int i = 0; i < totalRankList.Count; i++)
+                @for (int i = 0; i < RankManager.totalRankList.Count; i++)
                 {
                     <tr>
                         <td>@(i + 1)</td>
-                        <td>@totalRankList[i].NickName</td>
-                        <td>@totalRankList[i].WinCount</td>
-                        <td>@totalRankList[i].LoseCount</td>
-                        <td>@totalRankList[i].WinRate%</td>
+                        <td>@RankManager.totalRankList[i].NickName</td>
+                        <td>@RankManager.totalRankList[i].WinCount</td>
+                        <td>@RankManager.totalRankList[i].LoseCount</td>
+                        <td>@RankManager.totalRankList[i].WinRate%</td>
                     </tr>
                 }
                 </tbody>
@@ -59,7 +59,7 @@ else
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(var item in topRankList)
+                @foreach(var item in RankManager.topRankList)
                 {
                     <tr>
                         <td>@item.Rank</td>
@@ -86,7 +86,7 @@ else
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(var item in jgRankList)
+                @foreach(var item in RankManager.jgRankList)
                 {
                     <tr>
                         <td>@item.Rank</td>
@@ -113,7 +113,7 @@ else
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(var item in midRankList)
+                @foreach(var item in RankManager.midRankList)
                 {
                     <tr>
                         <td>@item.Rank</td>
@@ -140,7 +140,7 @@ else
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(var item in adcRankList)
+                @foreach(var item in RankManager.adcRankList)
                 {
                     <tr>
                         <td>@item.Rank</td>
@@ -167,7 +167,7 @@ else
                 </tr>
                 </thead>
                 <tbody>
-                @foreach(var item in supRankList)
+                @foreach(var item in RankManager.supRankList)
                 {
                     <tr>
                         <td>@item.Rank</td>
@@ -187,124 +187,6 @@ else
 @code
 {
     private bool isLoading = false;
-    
-    List<RankInfo> totalRankList = new List<RankInfo>();
-    List<RankInfo> adcRankList = new List<RankInfo>();
-    List<RankInfo> supRankList = new List<RankInfo>();
-    List<RankInfo> midRankList = new List<RankInfo>();
-    List<RankInfo> jgRankList = new List<RankInfo>();
-    List<RankInfo> topRankList = new List<RankInfo>();
-
-    class RankInfo
-    {
-        public int Rank { get; set; }
-        public string NickName { get; set; }
-        public int Seq { get; set; }
-        public int WinCount { get; set; }
-        public int LoseCount { get; set; }
-        public double WinRate { get; set; }
-        public int OverallScore { get; set; }
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        isLoading = true;
-        await SetOverallRankInfoListAsync();
-        await SetOtherLaneRanks();
-        isLoading = false;
-    }
-
-    private async Task SetOverallRankInfoListAsync()
-    {
-        var infos = await AccountDB.GetAllUserWinRateHistory();
-
-        List<List<UserWinRateHistory>> groupedInfo = infos
-            .GroupBy(info => info.UserSeq)
-            .Select(group => group.ToList())
-            .ToList();
-
-        int rankOrder = 1;
-        
-        foreach (var grouped in groupedInfo)
-        {
-            RankInfo rankInfo = new RankInfo();
-            rankInfo.NickName = String.Empty;
-            rankInfo.Rank = rankOrder;
-
-            foreach (var item in grouped)
-            {
-                if (rankInfo.NickName == String.Empty)
-                {
-                    rankInfo.NickName = await item.GetNickNameAsync();
-                    if (rankInfo.NickName == String.Empty)
-                        break;
-                }
-                
-                rankInfo.Seq = item.UserSeq;
-                rankInfo.WinCount += item.WinCount;
-                rankInfo.LoseCount += item.LoseCount;
-                rankOrder++;
-            }
-
-            if(rankInfo.NickName == String.Empty)
-                continue;
-
-            if (rankInfo.WinCount + rankInfo.LoseCount != 0)
-            {
-                double value = (double) rankInfo.WinCount / (rankInfo.WinCount + rankInfo.LoseCount) * 100;
-                rankInfo.WinRate  = Math.Round(value, 1);
-                rankInfo.OverallScore = rankInfo.WinCount * 12 - rankInfo.LoseCount * 10;
-                totalRankList.Add(rankInfo);
-            }
-        }
-
-        totalRankList = totalRankList.OrderByDescending(e => e.OverallScore).ToList();
-    }
-
-    private async Task SetOtherLaneRanks()
-    {
-        var supList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Support)).OrderByDescending(e => e.GetOverAllScore()).ToList();
-        var adcList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Adc)).OrderByDescending(e => e.GetOverAllScore()).ToList();
-        var midList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Mid)).OrderByDescending(e => e.GetOverAllScore()).ToList();
-        var jgList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Jungle)).OrderByDescending(e => e.GetOverAllScore()).ToList();
-        var topList = (await AccountDB.GetAllUserWinRateHistoryByLine(LineType.Top)).OrderByDescending(e => e.GetOverAllScore()).ToList();
-
-        supRankList = await SetListAsync(supList);
-        adcRankList = await SetListAsync(adcList);
-        midRankList = await SetListAsync(midList);
-        jgRankList = await SetListAsync(jgList);
-        topRankList = await SetListAsync(topList);
-    }
-
-    private async Task<List<RankInfo>> SetListAsync(List<UserWinRateHistory> userWinRateList)
-    {
-        List<RankInfo> list = new List<RankInfo>();
-
-        int rankOrder = 1;
-        
-        foreach (var sup in userWinRateList)
-        {
-            RankInfo rankInfo = new RankInfo();
-
-            rankInfo.NickName = await sup.GetNickNameAsync();
-            if(rankInfo.NickName == String.Empty)
-                continue;
-
-            rankInfo.Rank = rankOrder;
-            rankInfo.WinCount = sup.WinCount;
-            rankInfo.LoseCount = sup.LoseCount;
-            rankInfo.OverallScore = sup.GetOverAllScore();
-            rankInfo.WinRate = sup.GetWinRate();
-            
-            if(rankInfo.WinRate < 0)
-                continue;
-            
-            list.Add(rankInfo);
-            rankOrder++;
-        }
-
-        return list;
-    }
 }
 
 @code
