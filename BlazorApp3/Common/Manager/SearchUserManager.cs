@@ -5,7 +5,7 @@ using RitoApiExample;
 
 namespace BlazorApp3.Common.Manager;
 
-public class UIManager
+public class SearchUserManager
 {
     public static async Task<Dictionary<string, Dictionary<WinLoseType, int>>> GetWinRateEachTeamMateAsync(string apiKey, string puuid)
     {
@@ -102,4 +102,12 @@ public class UIManager
 
         return (winRateInfoDic, winRateInfoDic2);
     }
+    
+    /*public static async Task<Dictionary<string, double>> GetWinnRateFor5vs5Async(string nickName, int gameCount)
+    {
+        var dictionary = new Dictionary<string, double>();
+        
+        
+        
+    }*/
 }

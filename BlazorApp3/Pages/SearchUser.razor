@@ -84,7 +84,7 @@ else
         else
             return;
 
-        var dic = await UIManager.GetWinRateEachTeamMateChampionAsync(MyProjectInfoConfig.Instance.APIKey, puuid, 20);
+        var dic = await SearchUserManager.GetWinRateEachTeamMateChampionAsync(MyProjectInfoConfig.Instance.APIKey, puuid, 20);
 
         eachTeamMateChampWRDic = dic.EachTeamMateChampWRDic;
         eachTeamMateWRDic = dic.EachTeamMateWRDic;
@@ -124,7 +124,7 @@ else
                 int totalWinGame = dictionary[myChampName][otherChampName][WinLoseType.Win];
                 int totalLoseGame = dictionary[myChampName][otherChampName][WinLoseType.Lose];
                 
-                list.Add($"{myChampName} {otherChampName} : {totalWinGame}승 {totalLoseGame}패");
+                list.Add($"{myChampName} & {otherChampName} : {totalWinGame}승 {totalLoseGame}패");
             }
         }
 
