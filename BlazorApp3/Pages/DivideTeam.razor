@@ -83,7 +83,7 @@
                                 <p>@userinfo.UserInfo.UserName</p></td>
                             <td>
                                 <p>
-                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) Enum.Parse(typeof(LineType), e.Value.ToString())">
+                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) (Enum.Parse(typeof(LineType), e.Value.ToString()))">
                                         @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
                                         {
                                             if(lineTypeString.ToString() == "None")
@@ -96,7 +96,7 @@
                             </td>
                             <td>
                                 <p>
-                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.ExceptionLine = (LineType) Enum.Parse(typeof(LineType), e.Value.ToString())">
+                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.ExceptionLine = (LineType)(Enum.Parse(typeof(LineType), e.Value.ToString()))">
                                         @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
                                         {
                                             if(lineTypeString.ToString() == "Random")
@@ -371,7 +371,7 @@
         }
     }
 
-    private void DivideTeamBtn()
+    private async Task DivideTeamBtn()
     {
         isLoading = true;
         var list = DivideTeamManager.DivideTeam(userTeamDivideInfos);

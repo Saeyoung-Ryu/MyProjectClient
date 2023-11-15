@@ -12,6 +12,8 @@
       <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
       <PackageReference Include="MySqlConnector" Version="2.2.5" />
       <PackageReference Include="RiotSharp" Version="4.0.0" />
+      <PackageReference Include="Syncfusion.Blazor.Buttons" Version="23.1.44" />
+      <PackageReference Include="Syncfusion.Blazor.Core" Version="23.1.44" />
     </ItemGroup>
 
     <ItemGroup>

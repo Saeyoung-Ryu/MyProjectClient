@@ -1,3 +1,4 @@
+using BlazorApp3.Common.Type;
 using RiotSharp;
 using RiotSharp.Misc;
 using Enum;
@@ -11,14 +12,14 @@ public class SearchUserManager
     {
         int count = 0;
         
-        var matchList = await MatchManager.GetMatchListAsync(apiKey, puuid, 100, QueueType.Flex);
+        var matchList = await MatchManager.GetMatchIdListAsync(apiKey, puuid, 100, QueueType.Flex);
         
         var winRateInfoDic = new Dictionary<string, Dictionary<WinLoseType, int>>(); // key : SummonerName, Key : WinLoseType, Value : Count
         
         foreach (var matchId in matchList)
         {
             var matchInfo = await MatchManager.GetMatchAsync(apiKey, matchId);
-            await Task.Delay(1000);
+            // await Task.Delay(1000);
             Console.WriteLine($"{++count} / {matchList.Count}");
 
             var myTeamParticipantDtos = matchInfo.Info.GetMyTeamParticipantDtos(puuid);
@@ -50,7 +51,7 @@ public class SearchUserManager
     {
         int count = 0;
         
-        var matchList = await MatchManager.GetMatchListAsync(apiKey, puuid, gameCount, QueueType.Flex);
+        var matchList = await MatchManager.GetMatchIdListAsync(apiKey, puuid, gameCount, QueueType.Flex);
         
         var winRateInfoDic = new Dictionary<string, Dictionary<string, Dictionary<string, Dictionary<WinLoseType, int>>>>(); // key : SummonerName, Key : ChampName, Key : WinLoseType, Value : Count
         var winRateInfoDic2 = new Dictionary<string, Dictionary<WinLoseType, int>>(); // key : SummonerName, Key : WinLoseType, Value : Count
@@ -58,7 +59,7 @@ public class SearchUserManager
         foreach (var matchId in matchList)
         {
             var matchInfo = await MatchManager.GetMatchAsync(apiKey, matchId);
-            await Task.Delay(1000);
+            // await Task.Delay(1000);
             Console.WriteLine($"{++count} / {matchList.Count}");
 
             var myTeamParticipantDtos = matchInfo.Info.GetMyTeamParticipantDtos(puuid);
@@ -102,7 +103,48 @@ public class SearchUserManager
 
         return (winRateInfoDic, winRateInfoDic2);
     }
-    
+
+    public static async Task<(string NickName, Dictionary<WinLoseType, int> WinLoseDictionary)> GetSoloRankBattleWinRateAsync(string apiKey, string puuid, int listGameCount, DateTime battleStartTime) // battleStartTime 은 시작버튼을 누른 시간! 데이터베이스에 따로 저장해두기
+    {
+        var matchIdList = await MatchManager.GetMatchIdListAsync(apiKey, puuid, 20, QueueType.Solo); // 100개 최대로 고정시키기
+        
+        Queue<MatchDto> matchDtoQueue = new Queue<MatchDto>();
+        string nickName = String.Empty;
+
+        foreach (var matchId in matchIdList)
+        {
+            var matchInfo = await MatchManager.GetMatchAsync(apiKey, matchId);
+
+            if (matchInfo.Info.StartTime >= battleStartTime)
+            {
+                matchDtoQueue.Enqueue(matchInfo);
+
+                if (matchDtoQueue.Count > listGameCount)
+                    matchDtoQueue.Dequeue();
+            }
+        }
+
+        Dictionary<WinLoseType, int> dictionary = new Dictionary<WinLoseType, int>();
+        
+        foreach (var matchDto in matchDtoQueue)
+        {
+            var myParticipantDto = matchDto.Info.GetMyParticipantDto(puuid);
+            nickName = myParticipantDto.SummonerName;
+
+            if (dictionary.Keys.Count == 0)
+            {
+                dictionary.Add(WinLoseType.Win, 0);
+                dictionary.Add(WinLoseType.Lose, 0);
+            }
+            
+            if (myParticipantDto.Win)
+                dictionary[WinLoseType.Win]++;
+            else
+                dictionary[WinLoseType.Lose]++;
+        }
+
+        return (nickName, dictionary);
+    }
     /*public static async Task<Dictionary<string, double>> GetWinnRateFor5vs5Async(string nickName, int gameCount)
     {
         var dictionary = new Dictionary<string, double>();

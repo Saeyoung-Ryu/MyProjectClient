@@ -5,6 +5,7 @@
 @using RiotSharp
 @using RiotSharp.Misc
 @using System.Text
+@using RiotSharp.Endpoints.TournamentEndpoint.Enums
 
 <PageTitle>유저 자랭 정보 검색</PageTitle>
 
@@ -99,17 +100,13 @@ else
     {
         int totalGame = eachTeamMateWRDic[summonerName][WinLoseType.Lose] + eachTeamMateWRDic[summonerName][WinLoseType.Win];
         int winGame = eachTeamMateWRDic[summonerName][WinLoseType.Win];
-
-        Console.WriteLine($"totalGame : {totalGame}");
-        Console.WriteLine($"winGame : {winGame}");
+        
         if(winGame == 0)
             return "0.0";
         
         double winRate = (double)winGame / totalGame * 100;
         string wrStringFormat = winRate.ToString("0.0");
 
-        Console.WriteLine($"wrStringFormat : {wrStringFormat}");
-        
         return wrStringFormat;
     }
 

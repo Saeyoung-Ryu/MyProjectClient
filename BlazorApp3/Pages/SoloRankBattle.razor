@@ -1,0 +1,86 @@
+﻿@page "/SoloRankBattle"
+@using BlazorApp3.Common.Type
+@using BlazorApp3.Common.Manager
+@using Enum
+@using RiotSharp.Endpoints.SummonerEndpoint
+@using RiotSharp.Misc
+
+@inject IMatToaster Toaster
+
+<PageTitle>솔로 랭크 내기</PageTitle>
+
+<h1>솔로 랭크 내기</h1>
+<hr />
+<br>
+
+@if (isLoading)
+{
+    <MatProgressBar Indeterminate="true"></MatProgressBar>
+}
+else
+{
+    <table id="Border-Solid" class="table table-border table-hover w-auto">
+        <thead>
+        <tr class="table-primary">
+            <th>닉네임</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" size="20" @bind="@searchNickName"> <button type="submit" class="btn btn-info" @onclick="@AddSummonerBtnAsync">추가</button></td>
+        </tr>
+        </tbody>
+    </table>
+}
+
+@code
+{
+    RiotApi riotInstance = RiotApi.GetDevelopmentInstance(MyProjectInfoConfig.Instance.APIKey);
+    
+    bool isLoading = false;
+    int minPlayerCount = 2;
+    int maxPlayerCount = 10;
+    string searchNickName = String.Empty;
+    List<string> teamDivideWayList = new List<string>() {"Melee"};
+
+    List<Summoner> summonerList = new List<Summoner>();
+}
+
+@code
+{
+    public async Task AddSummonerBtnAsync()
+    {
+        var summoner = await riotInstance.Summoner.GetSummonerByNameAsync(Region.Kr, searchNickName);
+
+        if (summoner != null && summonerList.Count < maxPlayerCount)
+        {
+            summonerList.Add(summoner);
+        }
+        
+        searchNickName = String.Empty;
+    }
+    
+    public async Task RemoveSummonerBtnAsync(Summoner summoner)
+    {
+        summonerList.Remove(summoner);
+    }
+
+    public void GetTeamInfoList()
+    {
+        int count = 1;
+        var list = new List<string>();
+
+        for (int i = 0; i < summonerList.Count - 1; i++)
+        {
+            string teamDivideStringForm = $"{count} vs {summonerList.Count - count}";
+            list.Add(teamDivideStringForm);
+        }
+        
+        var listCount = Math.Ceiling((double) list.Count / 2);
+
+        for (int i = 0; i < listCount; i++)
+        {
+            list.Add(teamDivideWayList[i]);
+        }
+    }
+}

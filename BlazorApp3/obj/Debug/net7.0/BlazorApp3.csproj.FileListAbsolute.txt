@@ -138,3 +138,7 @@
 /Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/BlazorApp3.pdb
 /Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/BlazorApp3.genruntimeconfig.cache
 /Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/ref/BlazorApp3.dll
+/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/SoloRankBattle.razor.rz.scp.css
+/Users/saeyoungryu/Project/MyProject/BlazorApp3/bin/Debug/net7.0/Syncfusion.Blazor.Buttons.dll
+/Users/saeyoungryu/Project/MyProject/BlazorApp3/bin/Debug/net7.0/Syncfusion.Blazor.Core.dll
+/Users/saeyoungryu/Project/MyProject/BlazorApp3/bin/Debug/net7.0/Syncfusion.Licensing.dll

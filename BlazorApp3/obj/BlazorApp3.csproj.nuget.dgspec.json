@@ -58,6 +58,14 @@
             "RiotSharp": {
               "target": "Package",
               "version": "[4.0.0, )"
+            },
+            "Syncfusion.Blazor.Buttons": {
+              "target": "Package",
+              "version": "[23.1.44, )"
+            },
+            "Syncfusion.Blazor.Core": {
+              "target": "Package",
+              "version": "[23.1.44, )"
             }
           },
           "imports": [

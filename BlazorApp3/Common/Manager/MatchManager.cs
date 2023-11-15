@@ -8,7 +8,7 @@ namespace RitoApiExample;
 
 public class MatchManager
 {
-    public static async Task<List<string>> GetMatchListAsync(string api, string puuid, int count = 20, QueueType queueType = QueueType.None)
+    public static async Task<List<string>> GetMatchIdListAsync(string api, string puuid, int count = 20, QueueType queueType = QueueType.None)
     {
         using (HttpClient httpClient = new HttpClient())
         {

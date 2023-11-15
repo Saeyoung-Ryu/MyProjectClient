@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components.Web;
 using BlazorApp3.Common;
 using BlazorApp3.Common.Manager;
 using MatBlazor;
+using RiotSharp.Misc;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +47,9 @@ app.MapFallbackToPage("/_Host");
     await RankManager.SetOverallRankInfoListAsync();
     await RankManager.SetOtherLaneRanks();
 }
-
+int a = 5;
+double b = ((double) a / 2);
+Console.WriteLine(Math.Ceiling(b));
 {
     // 랭크 리셋 기능
     // 자랭전적 쪽에 55 전적추가

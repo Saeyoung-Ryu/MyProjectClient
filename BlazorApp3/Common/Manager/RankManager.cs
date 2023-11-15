@@ -16,7 +16,7 @@ namespace BlazorApp3.Common.Manager
         public static List<RankInfo> topRankList = new List<RankInfo>();
 
         public static async Task SetOverallRankInfoListAsync()
-    {
+        {
         var infos = await AccountDB.GetAllUserWinRateHistory();
 
         List<List<UserWinRateHistory>> groupedInfo = infos
