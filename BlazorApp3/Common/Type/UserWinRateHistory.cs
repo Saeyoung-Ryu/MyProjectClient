@@ -21,14 +21,4 @@ public class UserWinRateHistory
     {
         return WinCount * 12 - LoseCount * 10;
     }
-
-    public async Task<string> GetNickNameAsync()
-    {
-        var userInfo = await AccountDB.GetUserInfoWithIdAsync(UserSeq);
-        
-        if(userInfo == null)
-            return String.Empty;
-        
-        return userInfo.UserName;
-    }
 }

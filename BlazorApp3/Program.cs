@@ -44,15 +44,6 @@ app.MapFallbackToPage("/_Host");
 {
     // DB Setting
     MyProjectInfoConfig.Refresh(); // connectionString 가지고오는 함수
-    await RankManager.SetOverallRankInfoListAsync();
-    await RankManager.SetOtherLaneRanks();
-}
-int a = 5;
-double b = ((double) a / 2);
-Console.WriteLine(Math.Ceiling(b));
-{
-    // 랭크 리셋 기능
-    // 자랭전적 쪽에 55 전적추가
 }
 
 app.Run();

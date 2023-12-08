@@ -1,6 +1,7 @@
 ﻿@page "/EditUser"
 @using BlazorApp3.Common.Type
 @using BlazorApp3.Common.Manager
+@using BlazorApp3.Protocol
 @using Enum
 
 @inject IMatToaster Toaster
@@ -100,7 +101,7 @@ else
     
     private async Task SearchUserAsyncBtn()
     {
-        var userInfo = await AccountDB.GetUserInfoAsync(NickName);
+        var userInfo = await UserManager.GetUserAsync(NickName);
 
         if (userInfo == null)
         {
@@ -108,7 +109,26 @@ else
         }
 
         searchedUser = userInfo;
-        UserWinRateHistories = await AccountDB.GetUserWinRateHistoryAsync(searchedUser.Seq);
+        // UserWinRateHistories = await AccountDB.GetUserWinRateHistoryAsync(searchedUser.Seq);
+        
+        isLoading = true;
+        using (var client = new HttpClient())
+        {
+            GetUserWinRateHistoryReq getUserWinRateHistoryReq = new GetUserWinRateHistoryReq()
+            {
+                Seq = searchedUser.Seq
+            };
+            
+            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+            var response = await client.PostAsJsonAsync("/api/GetUserWinRateHistory", getUserWinRateHistoryReq);
+            Console.WriteLine("Protocol : GetUserWinRateHistory");
+            var getUserWinRateHistoryRes = await response.Content.ReadFromJsonAsync<GetUserWinRateHistoryRes>();
+
+            if( getUserWinRateHistoryRes != null)
+                UserWinRateHistories = getUserWinRateHistoryRes.UserWinRateHistory;
+        }
+        isLoading = false;
+        
         NickName = String.Empty;
     }
 
@@ -124,7 +144,7 @@ else
         await EditUserNickNameAsync();
         await EditUserWinRateAsync();
         
-        {
+        /*{
             // Memory Update
             RankManager.totalRankList = new List<RankInfo>();
             RankManager.topRankList = new List<RankInfo>();
@@ -135,7 +155,7 @@ else
             
             await RankManager.SetOverallRankInfoListAsync();
             await RankManager.SetOtherLaneRanks();
-        }
+        }*/
 
         isLoading = false;
         Show(MatToastType.Success);
@@ -149,15 +169,39 @@ else
 
     private async Task EditUserNickNameAsync()
     {
-        await AccountDB.UpdateUserInfoAsync(searchedUser.UserName, searchedUser.Seq);
+        isLoading = true;
+        using (var client = new HttpClient())
+        {
+            SetUserNickNameReq setUserNickNameReq = new SetUserNickNameReq()
+            {
+                NickName = searchedUser.UserName,
+                Seq = searchedUser.Seq
+            };
+            
+            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+            await client.PostAsJsonAsync("/api/SetUserNickName", setUserNickNameReq);
+            Console.WriteLine("Protocol : SetUserNickName");
+        }
+        isLoading = false;
     }
 
     private async Task EditUserWinRateAsync()
     {
-        foreach (var item in UserWinRateHistories)
+        isLoading = true;
+        using (var client = new HttpClient())
         {
-            await AccountDB.SetUserWinRateHistoryAsync(item);
+            SetUserWinRateHistoryReq setUserWinRateHistoryReq = new SetUserWinRateHistoryReq()
+            {
+                UserWinRateHistory = UserWinRateHistories,
+                Seq = searchedUser.Seq,
+                NickName = searchedUser.UserName
+            };
+            
+            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+            await client.PostAsJsonAsync("/api/SetUserWinRateHistory", setUserWinRateHistoryReq);
+            Console.WriteLine("Protocol : SetUserWinRateHistory");
         }
+        isLoading = false;
     }
 }
 @code

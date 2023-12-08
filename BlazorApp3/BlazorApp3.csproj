@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="Pages\DivideTeam.razor.css">
+      <Content Update="Pages\DivideTeamPage.razor.css">
         <DependentUpon>Index.razor</DependentUpon>
       </Content>
     </ItemGroup>

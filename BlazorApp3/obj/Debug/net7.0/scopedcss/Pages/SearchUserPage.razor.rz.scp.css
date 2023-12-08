@@ -1,0 +1,79 @@
+.TextStyle2[b-i5ov1uz8as] {
+    color: #ffffff;
+    text-shadow: 2px 2px 0px #bdbdbd;
+}
+
+.TextStyle3[b-i5ov1uz8as] { font-family: fantasy; }
+
+body[b-i5ov1uz8as] {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header[b-i5ov1uz8as] {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+nav[b-i5ov1uz8as] {
+    background-color: #444;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+nav ul[b-i5ov1uz8as] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li[b-i5ov1uz8as] {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a[b-i5ov1uz8as] {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+main[b-i5ov1uz8as] {
+    padding: 20px;
+}
+
+.featured[b-i5ov1uz8as] {
+    background-color: #f8f8f8;
+    padding: 20px;
+}
+
+.content[b-i5ov1uz8as] {
+    margin-top: 20px;
+}
+
+
+
+footer[b-i5ov1uz8as] {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 7px;
+    position: fixed;
+    bottom: 0;
+    width: 97%;
+}
+.content[b-i5ov1uz8as] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.search-container[b-i5ov1uz8as] {
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+

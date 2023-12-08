@@ -1,0 +1,22 @@
+﻿@page "/SearchUser"
+
+<DisplayPage/>
+
+<main>
+  <section class="content">
+      <div class="search-container" style="display: flex; align-items: center;">
+          <MatTextField @bind-Value="@searchedNickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
+          <button type="button" class="btn btn-light" style="line-height: 2.8; height: 2.8em;">Search</button>
+      </div>
+  </section>
+</main>
+
+@code
+{
+  public string searchedNickName { get; set; }
+  
+  void SearchUser()
+  {
+    
+  }
+}

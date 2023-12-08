@@ -8,7 +8,7 @@ public class MyProjectInfoConfig
     public static MyProjectInfoConfig Instance { get; set; }
     
     public string APIKey { get; set; }
-    public string ConnectionString { get; set; }
+    public string ServerAddress { get; set; }
 
     public static void Refresh()
     {

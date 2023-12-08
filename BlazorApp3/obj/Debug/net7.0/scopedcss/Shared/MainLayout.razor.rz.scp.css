@@ -18,6 +18,13 @@ main[b-uah1rvq9fm] {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
+.topBar[b-uah1rvq9fm] {
+    background-color: #333; /* Example background color */
+    color: white; /* Example text color */
+    padding: 10px;
+    text-align: center;
+}
+
 .top-row[b-uah1rvq9fm] {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;

@@ -1,0 +1,260 @@
+﻿@page "/Ranking"
+@using BlazorApp3.Protocol
+
+
+<PageTitle>랭킹</PageTitle>
+<DisplayPage/>
+
+<br><br><br>
+@if (isLoading)
+{
+    <MatProgressBar Indeterminate="true"></MatProgressBar>
+}
+else
+{
+    @if (RankingInfo == null)
+    {
+        <p3>No Rank Data</p3>
+    }
+    else
+    {
+        @if (RankingInfo.TotalRankList.Count > 0)
+        {
+            <button type="submit" class="btn btn-warning" @onclick="@ResetRankingBtnAsync">랭크 초기화</button>
+        }
+    
+        <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 900px; color: #198754">
+            @if (RankingInfo?.TotalRankList.Count > 0)
+            {
+                <MatTab Label="전체">
+                    <br><br>
+                    <table id="Border-Solid" class="table table-border table-hover w-auto">
+                        <thead>
+                        <tr class="table-primary">
+                            <th>랭킹</th>
+                            <th>닉네임</th>
+                            <th>승리</th>
+                            <th>패배</th>
+                            <th>승률</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @for (int i = 0; i < RankingInfo.TotalRankList.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@RankingInfo.TotalRankList[i].NickName</td>
+                                <td>@RankingInfo.TotalRankList[i].WinCount</td>
+                                <td>@RankingInfo.TotalRankList[i].LoseCount</td>
+                                <td>@RankingInfo.TotalRankList[i].WinRate%</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </MatTab>
+
+                <MatTab Label="탑">
+                    <br><br>
+                    <table id="Border-Solid" class="table table-border table-hover w-auto">
+                        <thead>
+                        <tr class="table-primary">
+                            <th>랭킹</th>
+                            <th>닉네임</th>
+                            <th>승리</th>
+                            <th>패배</th>
+                            <th>승률</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(var item in RankingInfo.TopRankList)
+                        {
+                            <tr>
+                                <td>@item.Rank</td>
+                                <td>@item.NickName</td>
+                                <td>@item.WinCount</td>
+                                <td>@item.LoseCount</td>
+                                <td>@item.WinRate%</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </MatTab>
+
+                <MatTab Label="정글">
+                    <br><br>
+                    <table id="Border-Solid" class="table table-border table-hover w-auto">
+                        <thead>
+                        <tr class="table-primary">
+                            <th>랭킹</th>
+                            <th>닉네임</th>
+                            <th>승리</th>
+                            <th>패배</th>
+                            <th>승률</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(var item in RankingInfo.JgRankList)
+                        {
+                            <tr>
+                                <td>@item.Rank</td>
+                                <td>@item.NickName</td>
+                                <td>@item.WinCount</td>
+                                <td>@item.LoseCount</td>
+                                <td>@item.WinRate%</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </MatTab>
+        
+                <MatTab Label="미드">
+                    <br><br>
+                    <table id="Border-Solid" class="table table-border table-hover w-auto">
+                        <thead>
+                        <tr class="table-primary">
+                            <th>랭킹</th>
+                            <th>닉네임</th>
+                            <th>승리</th>
+                            <th>패배</th>
+                            <th>승률</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(var item in RankingInfo.MidRankList)
+                        {
+                            <tr>
+                                <td>@item.Rank</td>
+                                <td>@item.NickName</td>
+                                <td>@item.WinCount</td>
+                                <td>@item.LoseCount</td>
+                                <td>@item.WinRate%</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </MatTab>
+        
+                <MatTab Label="원딜">
+                    <br><br>
+                    <table id="Border-Solid" class="table table-border table-hover w-auto">
+                        <thead>
+                        <tr class="table-primary">
+                            <th>랭킹</th>
+                            <th>닉네임</th>
+                            <th>승리</th>
+                            <th>패배</th>
+                            <th>승률</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(var item in RankingInfo.AdcRankList)
+                        {
+                            <tr>
+                                <td>@item.Rank</td>
+                                <td>@item.NickName</td>
+                                <td>@item.WinCount</td>
+                                <td>@item.LoseCount</td>
+                                <td>@item.WinRate%</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </MatTab>
+        
+                <MatTab Label="서폿">
+                    <br><br>
+                    <table id="Border-Solid" class="table table-border table-hover w-auto">
+                        <thead>
+                        <tr class="table-primary">
+                            <th>랭킹</th>
+                            <th>닉네임</th>
+                            <th>승리</th>
+                            <th>패배</th>
+                            <th>승률</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(var item in RankingInfo.SupRankList)
+                        {
+                            <tr>
+                                <td>@item.Rank</td>
+                                <td>@item.NickName</td>
+                                <td>@item.WinCount</td>
+                                <td>@item.LoseCount</td>
+                                <td>@item.WinRate%</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </MatTab>
+            }
+            else
+            {
+                <p3>No Rank Data</p3>
+            }
+
+        </MatTabGroup>
+    }
+}
+
+@code
+{
+    private GetRankingRes RankingInfo { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        using (var client = new HttpClient())
+        {
+            GetRankingReq getRankingReq = new GetRankingReq();
+            
+            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+            var response = await client.PostAsJsonAsync("/api/Ranking/GetRanking", getRankingReq);
+            Console.WriteLine("Protocol : Ranking/GetRanking");
+            RankingInfo = await response.Content.ReadFromJsonAsync<GetRankingRes>();
+        }
+        isLoading = false;
+    }
+}
+
+@code
+{
+    private bool isLoading = false;
+}
+
+@code
+{
+    private int tabIndex = 0;
+}
+
+@code
+{
+    private async Task ResetRankingBtnAsync()
+    {
+        isLoading = true;
+        
+        using (var client = new HttpClient())
+        {
+            ResetRankingReq? getRankingReq = new ResetRankingReq();
+       
+            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+            var response = await client.PostAsJsonAsync("/api/Ranking/ResetRanking", getRankingReq);
+            Console.WriteLine("Protocol : Ranking/ResetRanking");
+            var rankInfo = await response.Content.ReadFromJsonAsync<ResetRankingRes>();
+
+            if (rankInfo == null)
+            {
+                return;
+            }
+            
+            RankingInfo.TotalRankList = rankInfo.TotalRankList;
+            RankingInfo.TopRankList = rankInfo.TopRankList;
+            RankingInfo.JgRankList = rankInfo.JgRankList;
+            RankingInfo.MidRankList = rankInfo.MidRankList;
+            RankingInfo.AdcRankList = rankInfo.AdcRankList;
+            RankingInfo.SupRankList = rankInfo.SupRankList;
+        }
+
+        isLoading = false;
+    }
+}

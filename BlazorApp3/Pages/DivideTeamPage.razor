@@ -4,129 +4,96 @@
 @using BlazorApp3.Common.Manager
 @using System.Runtime.CompilerServices
 @using System.Text.RegularExpressions
+@using BlazorApp3.Protocol
 @using Microsoft.Data.Sqlite
 
+<DisplayPage/>
 <PageTitle>팀나누기</PageTitle>
 
-<h1>팀 나누기</h1>
-<hr />
-<br>
-
-<MatButton OnClick="@OpenDialog" Raised="true">유저 추가 ⊕</MatButton>
-@*@if (userTeamDivideInfos.Count == 0)
-{
-    <button class="btn btn-outline-primary" @onclick="SetAsLastTeamBtnAsync">마지막 팀으로 세팅</button>
-}*@
-<MatDialog @bind-IsOpen="@dialogIsOpen">
-    <MatDialogContent>
-            
-        <table id="Border-Solid" class="table table-border table-hover w-auto">
-            <thead>
-            <tr class="table-primary">
-                <th>닉네임</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><input type="text" name="" size="24" @bind="@newNickName"></td>
-            </tr>
-            </tbody>
-        </table>
-
-    </MatDialogContent>
-    <MatDialogActions>
-        <MatButton OnClick="@(e => { dialogIsOpen = false; })">닫기</MatButton>
-        <MatButton OnClick="@AddNewUserAsyncBtn">추가</MatButton>
-    </MatDialogActions>
-</MatDialog>
-
-<br><br>
-
-<table id="Border-Solid" class="table table-border table-hover w-auto">
-    <thead>
-    <tr class="table-primary">
-        <th>닉네임</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><input type="text" size="20" @bind="@NickName"> <button type="submit" class="btn btn-info" @onclick="@InsertBtnAsync">추가</button></td>
-    </tr>
-    </tbody>
-</table>
+<main>
+  <section class="content">
+      <div class="search-container" style="display: flex; align-items: center;">
+          <MatTextField @bind-Value="@NickName" Label="Enter NickName" Icon="face" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
+          <button type="button" class="btn btn-light" @onclick="@InsertBtnAsync" style="line-height: 2.8; height: 2.8em;">추가하기</button>
+      </div>
+  </section>
+</main>
 
 @if (userTeamDivideInfos.Count > 0)
 {
-    <br/>
-    <MatAccordion>
-        <MatExpansionPanel @bind-Expanded="@panelOpenState" Style="width: 600px">
-            <MatExpansionPanelSummary>
-                <MatExpansionPanelHeader>유저 목록 (@userTeamDivideInfos.Count 명)</MatExpansionPanelHeader>
-            </MatExpansionPanelSummary>
-            <MatExpansionPanelDetails>
-                <button class="btn btn-danger" @onclick="ResetUserListBtn">Reset</button>
-                <br><br>
-                <table id="Border-Solid" class="table table-border table-hover w-auto">
-                    <thead>
-                    <tr class="table-primary">
-                        <th>닉네임</th>
-                        <th>라인</th>
-                        <th>제외</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var userinfo in userTeamDivideInfos)
-                    {
-                        <tr>
-                            <td>
-                                <p>@userinfo.UserInfo.UserName</p></td>
-                            <td>
-                                <p>
-                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) (Enum.Parse(typeof(LineType), e.Value.ToString()))">
-                                        @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
-                                        {
-                                            if(lineTypeString.ToString() == "None")
-                                                continue;
-                                            
-                                            <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.LineType.ToString())">@lineTypeString.ToString()</option>
-                                        }
-                                    </select>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.ExceptionLine = (LineType)(Enum.Parse(typeof(LineType), e.Value.ToString()))">
-                                        @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
-                                        {
-                                            if(lineTypeString.ToString() == "Random")
-                                                continue;
-                                            
-                                            <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.ExceptionLine.ToString())">@lineTypeString.ToString()</option>
-                                        }
-                                    </select>
-                                </p>
-                            </td>
-                            <td><button class="btn btn-warning" @onclick="@(e => DeleteUserInListBtnAsync(@userinfo))">Remove</button></td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-                @if (userTeamDivideInfos.Count == 10)
-                {
-                    <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
-                    <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
-                }
-            </MatExpansionPanelDetails>
-        </MatExpansionPanel>
-
-    </MatAccordion>
     
-    <br><br>
+    
+    <div style="text-align: center;">
+    <br/>
+        <button class="btn btn-danger" @onclick="ResetUserListBtn">Reset</button>
+        @if (userTeamDivideInfos.Count == 10)
+        {
+            <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
+            <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
+        }
+    @if (supUsers.Count > 0)
+    {
+        @if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
+        {
+            <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
+        }
+        else if(team1Info.IsAllFilled() && team2Info.IsAllFilled() && (team1Info.teamSide != 0 || team2Info.teamSide != 0))
+        {
+            <button class="btn btn-warning" @onclick="SwapTeamBtnAsync">팀 스왑</button>
+        }
+    }
+        <br><br>
+        <div style="display: inline-block; text-align: left;">
+    <table id="Border-Solid" style="display: inline-block; margin-right: 20px;" class="table table-border table-hover w-auto">
+        <thead>
+        <tr class="table-primary">
+            <th>닉네임</th>
+            <th>라인</th>
+            <th>제외</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var userinfo in userTeamDivideInfos)
+        {
+            <tr>
+                <td>
+                    <p>@userinfo.UserInfo.UserName</p></td>
+                <td>
+                    <p>
+                        <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) (Enum.Parse(typeof(LineType), e.Value.ToString()))">
+                            @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
+                            {
+                                if(lineTypeString.ToString() == "None")
+                                    continue;
+
+                                <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.LineType.ToString())">@lineTypeString.ToString()</option>
+                            }
+                        </select>
+                    </p>
+                </td>
+                <td>
+                    <p>
+                        <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.ExceptionLine = (LineType)(Enum.Parse(typeof(LineType), e.Value.ToString()))">
+                            @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
+                            {
+                                if(lineTypeString.ToString() == "Random")
+                                    continue;
+                                            
+                                <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.ExceptionLine.ToString())">@lineTypeString.ToString()</option>
+                            }
+                        </select>
+                    </p>
+                </td>
+                <td><button class="btn btn-warning" @onclick="@(e => DeleteUserInListBtnAsync(@userinfo))">Remove</button></td>
+            </tr>
+        }
+        </tbody>
+    </table>
     
     @if (supUsers.Count > 0)
     {
-        <table id="Border-Solid" class="table table-border table-hover w-auto">
+        <table id="Border-Solid" style="display: inline-block;" class="table table-border table-hover w-auto">
             <thead>
             <tr class="table-primary">
                 <th>라인</th>
@@ -255,15 +222,19 @@
             </tbody>
         </table>
         
-        @if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
+        @*@if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
         {
             <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
         }
         else if(team1Info.IsAllFilled() && team2Info.IsAllFilled() && (team1Info.teamSide != 0 || team2Info.teamSide != 0))
         {
-            <button class="btn btn-warning" @onclick="SwapTeamBtn">팀 스왑</button>
-        }
+            <button class="btn btn-warning" @onclick="SwapTeamBtnAsync">팀 스왑</button>
+        }*@
     }
+    </div>
+    </div>
+    <div style="clear: both;"></div>
+    <br><br><br><br><br><br><br><br>
 }
 
 
@@ -325,15 +296,12 @@
         if(userTeamDivideInfos.Count >= 10)
             return;
         
-        var user = await AccountDB.GetUserInfoAsync(NickName);
-        
-        if(user == null)
-            return;
-
+        // var user = await AccountDB.GetUserInfoAsync(NickName);
         UserTeamDivideInfo utd = new UserTeamDivideInfo();
-        utd.UserInfo = user;
-
-        if (userTeamDivideInfos.Select(e => e.UserInfo.UserName).Contains(user.UserName)) 
+        
+        utd.UserInfo = await UserManager.GetUserApproximateAsync(NickName);
+        
+        if (userTeamDivideInfos.Select(e => e.UserInfo.UserName).Contains(utd.UserInfo.UserName)) 
             return;
         
         userTeamDivideInfos.Add(utd);
@@ -413,10 +381,22 @@
             Team2Win = -1
         };
 
-        await LogDB.InsertLogMatchHistoryAsync(logMatchHistory);
+        // await LogDB.InsertLogMatchHistoryAsync(logMatchHistory); 서버 이전
+        using (var client = new HttpClient())
+        {
+            SetTeamReq setTeamReq = new SetTeamReq()
+            {
+                LogMatchHistory = logMatchHistory
+            };
+            
+            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+            var response = await client.PostAsJsonAsync("/api/MatchHistory/SetTeam", setTeamReq);
+            Console.WriteLine("Protocol : MatchHistory/SetTeam");
+        }
+        
     }
     
-    private async Task SwapTeamBtn()
+    private async Task SwapTeamBtnAsync()
     {
         (team1Info.teamSide, team2Info.teamSide) = (team2Info.teamSide, team1Info.teamSide);
 
@@ -435,7 +415,19 @@
             Team2Win = -1
         };
 
-        await LogDB.InsertLogMatchHistoryAsync(logMatchHistory);
+        // await LogDB.InsertLogMatchHistoryAsync(logMatchHistory); 서버이전
+        
+        using (var client = new HttpClient())
+        {
+            SetTeamReq setTeamReq = new SetTeamReq()
+            {
+                LogMatchHistory = logMatchHistory
+            };
+            
+            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+            var response = await client.PostAsJsonAsync("/api/MatchHistory/SetTeam", setTeamReq);
+            Console.WriteLine("Protocol : MatchHistory/SetTeam");
+        }
     }
 
     // Team1 = 1팀, 2팀 랜덤선택된 그 팀
@@ -469,61 +461,25 @@
     
     public async Task AddNewUserAsyncBtn()
     {
-        var userInfo = await AccountDB.GetUserInfoAsync(newNickName);
+        var userInfo = await UserManager.GetUserAsync(NickName);
 
         if (userInfo != null)
         {
+            Console.WriteLine("Here1");
             dialogIsOpen = false;
             return;
         }
 
-        await UserAddManager.SetNewUserAsync(newNickName);
+        var isSuccess = await UserManager.SetNewUserAsync(newNickName);
+        
+        if (isSuccess == false)
+        {
+            Console.WriteLine("Here2");
+            dialogIsOpen = false;
+            return;
+        }
+        
         newNickName = String.Empty;
-
         dialogIsOpen = false;
     }
-
-    public async Task SetAsLastTeamBtnAsync()
-    {
-        var lastMatchUpInfo = (await LogDB.GetLogMatchHistoryAsync()).Last();
-
-        var team1Member = lastMatchUpInfo.Team1Data;
-        var team2Member = lastMatchUpInfo.Team2Data;
-
-        Console.WriteLine(team1Member);
-        Console.WriteLine(team2Member);
-
-        team1Member = Regex.Replace(team1Member, @",\s+", ",");
-        string[] nickNameArray1 = team1Member.Split(new char[] {','});
-        
-        team2Member = Regex.Replace(team2Member, @",\s+", ",");
-        string[] nickNameArray2 = team2Member.Split(new char[] {','});
-
-        var result = nickNameArray1.Zip(nickNameArray2, (a, b) => a + b).ToList();
-
-        foreach (var nickName in result)
-        {
-            NickName = nickName;
-            await InsertBtnAsync();
-        }
-    }
 }
-
-@*@code
-{
-    private void OnInput(ChangeEventArgs e)
-    {
-        NickName = e.Value.ToString();
-    }
-    
-    private async Task OnKeyDownAsync(KeyboardEventArgs e)
-    {
-        if (e.Key == "Enter")
-        {
-            if(NickName == String.Empty)
-                return;
-            
-            await InsertBtnAsync();
-        }
-    }
-}*@
