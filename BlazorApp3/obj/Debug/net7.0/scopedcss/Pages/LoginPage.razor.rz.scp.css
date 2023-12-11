@@ -6,12 +6,12 @@
 }
 
 body[b-jkl3omc22p] {
-    background: #edf5f5;
+    background: #ffffff;
     font-family: 'Rubik', sans-serif;
 }
 
 .login-form[b-jkl3omc22p] {
-    background: #fff;
+    background: rgba(217, 241, 195, 0.24);
     width: 500px;
     margin: 65px auto;
     display: -webkit-box;
@@ -105,4 +105,18 @@ body[b-jkl3omc22p] {
 }
 .login-form .action button:nth-child(2):hover[b-jkl3omc22p] {
     background: #3c4d6d;
+}
+
+html[b-jkl3omc22p], body[b-jkl3omc22p] {
+    height: 100%
+}
+
+.wrapper[b-jkl3omc22p] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-jkl3omc22p]{
+    min-height: 920px;
 }

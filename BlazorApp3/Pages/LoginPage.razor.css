@@ -6,12 +6,12 @@
 }
 
 body {
-    background: #edf5f5;
+    background: #ffffff;
     font-family: 'Rubik', sans-serif;
 }
 
 .login-form {
-    background: #fff;
+    background: rgba(217, 241, 195, 0.24);
     width: 500px;
     margin: 65px auto;
     display: -webkit-box;
@@ -105,4 +105,18 @@ body {
 }
 .login-form .action button:nth-child(2):hover {
     background: #3c4d6d;
+}
+
+html, body {
+    height: 100%
+}
+
+.wrapper {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container{
+    min-height: 920px;
 }

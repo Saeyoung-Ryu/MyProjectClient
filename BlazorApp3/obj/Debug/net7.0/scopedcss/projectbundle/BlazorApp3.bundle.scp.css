@@ -56,15 +56,6 @@ main[b-bg7gf7jof1] {
     margin-top: 20px;
 }
 
-footer[b-bg7gf7jof1] {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 7px;
-    position: fixed;
-    bottom: 0;
-    width: 97%;
-}
 .content[b-bg7gf7jof1] {
     display: flex;
     flex-direction: column;
@@ -160,10 +151,37 @@ footer[b-b2osv66iin] {
     margin-top: 20px; /* Adjust the margin as needed */
 }
 
+html[b-b2osv66iin], body[b-b2osv66iin] {
+    height: 100%
+}
+
+.wrapper[b-b2osv66iin] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-b2osv66iin]{
+    min-height: 900px;
+}
 /* _content/BlazorApp3/Pages/EditUser.razor.rz.scp.css */
 #Border-Dotted[b-bq4t509pdd]{border: 2px dotted}
 #Border-Solid[b-bq4t509pdd]{border: 1px solid}
 #Border-Solid3px[b-bq4t509pdd]{border: 3px solid #1a1e21}
+/* _content/BlazorApp3/Pages/Footer.razor.rz.scp.css */
+footer[b-1mv1gcxori] {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    height: 65px;
+    position: relative;
+    transform: translateY(0%);
+    border-top:1px solid #333;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 /* _content/BlazorApp3/Pages/LoginPage.razor.rz.scp.css */
 *[b-jkl3omc22p] {
     margin: 0;
@@ -173,12 +191,12 @@ footer[b-b2osv66iin] {
 }
 
 body[b-jkl3omc22p] {
-    background: #edf5f5;
+    background: #ffffff;
     font-family: 'Rubik', sans-serif;
 }
 
 .login-form[b-jkl3omc22p] {
-    background: #fff;
+    background: rgba(217, 241, 195, 0.24);
     width: 500px;
     margin: 65px auto;
     display: -webkit-box;
@@ -273,6 +291,20 @@ body[b-jkl3omc22p] {
 .login-form .action button:nth-child(2):hover[b-jkl3omc22p] {
     background: #3c4d6d;
 }
+
+html[b-jkl3omc22p], body[b-jkl3omc22p] {
+    height: 100%
+}
+
+.wrapper[b-jkl3omc22p] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-jkl3omc22p]{
+    min-height: 920px;
+}
 /* _content/BlazorApp3/Pages/MatchHistoryPage.razor.rz.scp.css */
 #Border-Dotted[b-pxsio5fims]{border: 2px dotted}
 #Border-Solid[b-pxsio5fims]{border: 1px solid}
@@ -289,6 +321,19 @@ body[b-jkl3omc22p] {
     border-collapse: collapse;
 }
 
+html[b-pxsio5fims], body[b-pxsio5fims] {
+    height: 100%
+}
+
+.wrapper[b-pxsio5fims] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-pxsio5fims]{
+    min-height: 900px;
+}
 /* _content/BlazorApp3/Pages/RankingPage.razor.rz.scp.css */
 #Border-Dotted[b-86gspctuc0]{border: 2px dotted}
 #Border-Solid[b-86gspctuc0]{border: 1px solid}
@@ -324,6 +369,19 @@ body[b-jkl3omc22p] {
     transform: translate(-50%, -50%);
 }
 
+html[b-86gspctuc0], body[b-86gspctuc0] {
+    height: 100%
+}
+
+.wrapper[b-86gspctuc0] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-86gspctuc0]{
+    min-height: 900px;
+}
 /* _content/BlazorApp3/Pages/SearchUserPage.razor.rz.scp.css */
 .TextStyle2[b-i5ov1uz8as] {
     color: #ffffff;
@@ -404,10 +462,25 @@ footer[b-i5ov1uz8as] {
     margin-top: 20px; /* Adjust the margin as needed */
 }
 
+html[b-i5ov1uz8as], body[b-i5ov1uz8as] {
+    height: 100%
+}
+
+.wrapper[b-i5ov1uz8as] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-i5ov1uz8as]{
+    min-height: 900px;
+}
+
 /* _content/BlazorApp3/Pages/SoloRankBattle.razor.rz.scp.css */
 #Border-Dotted[b-8nfo0tw6cx]{border: 2px dotted}
 #Border-Solid[b-8nfo0tw6cx]{border: 1px solid}
 #Border-Solid3px[b-8nfo0tw6cx]{border: 3px solid #1a1e21}
+/* _content/BlazorApp3/Pages/Test.razor.rz.scp.css */
 /* _content/BlazorApp3/Shared/MainLayout.razor.rz.scp.css */
 #Border-Dotted[b-uah1rvq9fm]{border: 2px dotted}
 #Border-Solid[b-uah1rvq9fm]{border: 1px solid}

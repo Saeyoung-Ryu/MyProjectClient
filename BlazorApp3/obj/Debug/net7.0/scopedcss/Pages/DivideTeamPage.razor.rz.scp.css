@@ -81,3 +81,16 @@ footer[b-b2osv66iin] {
     margin-top: 20px; /* Adjust the margin as needed */
 }
 
+html[b-b2osv66iin], body[b-b2osv66iin] {
+    height: 100%
+}
+
+.wrapper[b-b2osv66iin] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-b2osv66iin]{
+    min-height: 900px;
+}

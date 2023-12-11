@@ -13,3 +13,16 @@
     border-collapse: collapse;
 }
 
+html, body {
+    height: 100%
+}
+
+.wrapper {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container{
+    min-height: 900px;
+}

@@ -32,3 +32,16 @@
     transform: translate(-50%, -50%);
 }
 
+html[b-86gspctuc0], body[b-86gspctuc0] {
+    height: 100%
+}
+
+.wrapper[b-86gspctuc0] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-86gspctuc0]{
+    min-height: 900px;
+}

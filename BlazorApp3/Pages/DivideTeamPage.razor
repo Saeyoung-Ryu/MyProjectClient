@@ -10,218 +10,230 @@
 <DisplayPage/>
 <PageTitle>팀나누기</PageTitle>
 
-<main>
-  <section class="content">
-      <div class="search-container" style="display: flex; align-items: center;">
-          <MatTextField @bind-Value="@NickName" Label="Enter NickName" Icon="face" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
-          <button type="button" class="btn btn-light" @onclick="@InsertBtnAsync" style="line-height: 2.8; height: 2.8em;">추가하기</button>
-      </div>
-  </section>
-</main>
+<div class="wrapper">
+    <div class="home-container">
+    <div>
+        <main>
+            <section class="content">
+                <div class="search-container" style="display: flex; align-items: center;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="testImage.jpg" alt="UserSearch Image" style="width: 280px; height: 170px;" />
+                        <div style="display: flex; align-items: center; margin-top: 10px;">
+                            <MatTextField @bind-Value="@NickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
+                            <button type="button" class="btn btn-secondary" @onclick="@InsertBtnAsync" style="line-height: 2.8; height: 2.8em;">추가하기</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-@if (userTeamDivideInfos.Count > 0)
-{
-    
-    
-    <div style="text-align: center;">
-    <br/>
-        <button class="btn btn-danger" @onclick="ResetUserListBtn">Reset</button>
-        @if (userTeamDivideInfos.Count == 10)
+        @if (userTeamDivideInfos.Count > 0)
         {
-            <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
-            <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
-        }
-    @if (supUsers.Count > 0)
-    {
-        @if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
-        {
-            <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
-        }
-        else if(team1Info.IsAllFilled() && team2Info.IsAllFilled() && (team1Info.teamSide != 0 || team2Info.teamSide != 0))
-        {
-            <button class="btn btn-warning" @onclick="SwapTeamBtnAsync">팀 스왑</button>
-        }
-    }
-        <br><br>
-        <div style="display: inline-block; text-align: left;">
-    <table id="Border-Solid" style="display: inline-block; margin-right: 20px;" class="table table-border table-hover w-auto">
-        <thead>
-        <tr class="table-primary">
-            <th>닉네임</th>
-            <th>라인</th>
-            <th>제외</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var userinfo in userTeamDivideInfos)
-        {
-            <tr>
-                <td>
-                    <p>@userinfo.UserInfo.UserName</p></td>
-                <td>
-                    <p>
-                        <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) (Enum.Parse(typeof(LineType), e.Value.ToString()))">
-                            @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
-                            {
-                                if(lineTypeString.ToString() == "None")
-                                    continue;
+            <div style="text-align: center;">
+                <br/>
+                <button class="btn btn-danger" @onclick="ResetUserListBtn">Reset</button>
+                @if (userTeamDivideInfos.Count == 10)
+                {
+                    if (startBtnActive)
+                    {
+                        <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
+                    }
+                }
+                @if (supUsers.Count > 0)
+                {
+                    @if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
+                    {
+                        <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
+                    }
+                    else if (team1Info.IsAllFilled() && team2Info.IsAllFilled() && (team1Info.teamSide != 0 || team2Info.teamSide != 0))
+                    {
+                        <button class="btn btn-warning" @onclick="SwapTeamBtnAsync">팀 스왑</button>
+                    }
+                }
+                <br><br>
+                <div style="display: inline-block; text-align: left;">
+                    <table id="Border-Solid" style="display: inline-block; margin-right: 20px;" class="table table-border table-hover w-auto">
+                        <thead>
+                        <tr class="table-primary">
+                            <th>닉네임</th>
+                            <th>라인</th>
+                            <th>제외</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var userinfo in userTeamDivideInfos)
+                        {
+                            <tr>
+                                <td>
+                                    <p>@userinfo.UserInfo.UserName</p></td>
+                                <td>
+                                    <p>
+                                        <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.LineType = (LineType) (Enum.Parse(typeof(LineType), e.Value.ToString()))">
+                                            @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
+                                            {
+                                                if (lineTypeString.ToString() == "None")
+                                                    continue;
 
-                                <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.LineType.ToString())">@lineTypeString.ToString()</option>
-                            }
-                        </select>
-                    </p>
-                </td>
-                <td>
-                    <p>
-                        <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.ExceptionLine = (LineType)(Enum.Parse(typeof(LineType), e.Value.ToString()))">
-                            @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
-                            {
-                                if(lineTypeString.ToString() == "Random")
-                                    continue;
-                                            
-                                <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.ExceptionLine.ToString())">@lineTypeString.ToString()</option>
-                            }
-                        </select>
-                    </p>
-                </td>
-                <td><button class="btn btn-warning" @onclick="@(e => DeleteUserInListBtnAsync(@userinfo))">Remove</button></td>
-            </tr>
-        }
-        </tbody>
-    </table>
-    
-    @if (supUsers.Count > 0)
-    {
-        <table id="Border-Solid" style="display: inline-block;" class="table table-border table-hover w-auto">
-            <thead>
-            <tr class="table-primary">
-                <th>라인</th>
-                @if (team1Info.teamSide == 0)
-                {
-                    <th></th>
-                    <th></th>
-                }
-                else
-                {
-                    <th>
-                        @(team1Info.teamSide + " 팀")
-                    </th>
-                    <th>  
-                        @(team2Info.teamSide + " 팀")
-                    </th>
-                }
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th>탑</th>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.topUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in topUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                                <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.LineType.ToString())">@lineTypeString.ToString()</option>
+                                            }
+                                        </select>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => userinfo.ExceptionLine = (LineType) (Enum.Parse(typeof(LineType), e.Value.ToString()))">
+                                            @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
+                                            {
+                                                if (lineTypeString.ToString() == "Random")
+                                                    continue;
+
+                                                <option value="@lineTypeString" selected="@(lineTypeString.ToString() == userinfo.ExceptionLine.ToString())">@lineTypeString.ToString()</option>
+                                            }
+                                        </select>
+                                    </p>
+                                </td>
+                                <td><button class="btn btn-warning" @onclick="@(e => DeleteUserInListBtnAsync(@userinfo))">Remove</button></td>
+                            </tr>
                         }
-                    </select>
-                </td>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.topUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in topUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>정글</th>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.jgUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in jgUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.jgUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in jgUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>미드</th>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.midUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in midUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.midUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in midUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>원딜</th>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.adcUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in adcUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.adcUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in adcUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>서폿</th>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.supUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in supUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-                <td>
-                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.supUser = (e.Value.ToString())">
-                        <option value=@String.Empty> -- -- </option>
-                        @foreach (var user in supUsers)
-                        {
-                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
-                        }
-                    </select>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        
+                        </tbody>
+                    </table>
+
+                    @if (supUsers.Count > 0)
+                    {
+                        <table id="Border-Solid" style="display: inline-block;" class="table table-border table-hover w-auto">
+                            <thead>
+                            <tr class="table-primary">
+                                <th>라인</th>
+                                @if (team1Info.teamSide == 0)
+                                {
+                                    <th></th>
+                                    <th></th>
+                                }
+                                else
+                                {
+                                    <th>
+                                        @(team1Info.teamSide + " 팀")
+                                    </th>
+                                    <th>
+                                        @(team2Info.teamSide + " 팀")
+                                    </th>
+                                }
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>탑</th>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.topUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in topUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.topUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in topUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>정글</th>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.jgUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in jgUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.jgUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in jgUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>미드</th>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.midUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in midUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.midUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in midUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>원딜</th>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.adcUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in adcUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.adcUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in adcUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>서폿</th>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team1Info.supUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in supUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="CanReward" class="form-select" style="width: 200px; height:40px" @onchange="(e) => team2Info.supUser = (e.Value.ToString())">
+                                        <option value=@String.Empty> -- -- </option>
+                                        @foreach (var user in supUsers)
+                                        {
+                                            <option value="@user.UserInfo.UserName">@user.UserInfo.UserName</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
         @*@if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
         {
             <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
@@ -230,13 +242,17 @@
         {
             <button class="btn btn-warning" @onclick="SwapTeamBtnAsync">팀 스왑</button>
         }*@
-    }
+                    }
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+            <br><br><br><br><br>
+        }
     </div>
-    </div>
-    <div style="clear: both;"></div>
-    <br><br><br><br><br><br><br><br>
-}
+</div>
+</div>
 
+<Footer></Footer>
 
 @code
 {
@@ -263,6 +279,8 @@
 }
 @code
 {
+    bool startBtnActive = true;
+    
     bool panelOpenState = true;
     string NickName = "";
     List<UserTeamDivideInfo> userTeamDivideInfos = new List<UserTeamDivideInfo>();
@@ -314,6 +332,8 @@
         userTeamDivideInfos.Clear();
         ResetLists();
         ResetObjects();
+        
+        startBtnActive = true;
     }
 
     private void SetAllPositionNoneBtn()
@@ -328,6 +348,8 @@
         
         team1Info = new TeamInfo();
         team2Info = new TeamInfo();
+
+        startBtnActive = !startBtnActive;
     }
     
     private void DeleteUserInListBtnAsync(UserTeamDivideInfo user)
@@ -352,6 +374,8 @@
         adcUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Adc).ToList();
         supUsers = userTeamDivideInfos.Where(e => e.LineType == LineType.Support).ToList();
         isLoading = false;
+
+        startBtnActive = !startBtnActive;
     }
 
     private async Task SetTeamBtn()

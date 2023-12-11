@@ -4,7 +4,9 @@
 
 <PageTitle>랭킹</PageTitle>
 <DisplayPage/>
-
+<div class="wrapper">
+    <div class="home-container">
+	
 <br><br><br>
 @if (isLoading)
 {
@@ -196,7 +198,10 @@ else
         </MatTabGroup>
     }
 }
+</div>
+</div>
 
+<Footer></Footer>
 @code
 {
     private GetRankingRes RankingInfo { get; set; }

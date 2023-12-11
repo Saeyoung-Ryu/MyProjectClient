@@ -77,3 +77,17 @@ footer[b-i5ov1uz8as] {
     margin-top: 20px; /* Adjust the margin as needed */
 }
 
+html[b-i5ov1uz8as], body[b-i5ov1uz8as] {
+    height: 100%
+}
+
+.wrapper[b-i5ov1uz8as] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-i5ov1uz8as]{
+    min-height: 900px;
+}
+

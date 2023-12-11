@@ -1,15 +1,25 @@
 ﻿@page "/SearchUser"
 
 <DisplayPage/>
-
+<div class="wrapper">
+    <div class="home-container">
 <main>
   <section class="content">
       <div class="search-container" style="display: flex; align-items: center;">
-          <MatTextField @bind-Value="@searchedNickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
-          <button type="button" class="btn btn-light" style="line-height: 2.8; height: 2.8em;">Search</button>
+          <div style="display: flex; flex-direction: column; align-items: center;">
+              <img src="UserSearchImage.jpg" alt="Example Image" style="width: 280px; height: 130px;" />
+              <div style="display: flex; align-items: center; margin-top: 10px;">
+                  <MatTextField @bind-Value="@searchedNickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
+                  <button type="button" class="btn btn-secondary" style="line-height: 2.8; height: 2.8em;">Search</button>
+              </div>
+          </div>
       </div>
   </section>
 </main>
+	</div>
+</div>
+
+<Footer></Footer>
 
 @code
 {

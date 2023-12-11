@@ -13,3 +13,16 @@
     border-collapse: collapse;
 }
 
+html[b-pxsio5fims], body[b-pxsio5fims] {
+    height: 100%
+}
+
+.wrapper[b-pxsio5fims] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-pxsio5fims]{
+    min-height: 900px;
+}

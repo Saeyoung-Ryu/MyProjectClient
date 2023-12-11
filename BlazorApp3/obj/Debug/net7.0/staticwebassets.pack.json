@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/BlazorApp3.bundle.scp.css"
     },
     {
+      "Id": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/UserSearchImage.jpg",
+      "PackagePath": "staticwebassets/UserSearchImage.jpg"
+    },
+    {
       "Id": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/bootstrap/bootstrap.min.css",
       "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
     },
@@ -55,6 +59,10 @@
     {
       "Id": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/testImage.jpg",
+      "PackagePath": "staticwebassets/testImage.jpg"
     },
     {
       "Id": "obj/Debug/net7.0/staticwebassets/msbuild.BlazorApp3.Microsoft.AspNetCore.StaticWebAssets.props",

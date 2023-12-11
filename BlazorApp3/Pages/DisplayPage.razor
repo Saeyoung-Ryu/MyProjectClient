@@ -9,7 +9,7 @@
 <body>
 
 <header>
-  <h1 class="TextStyle2">팀짜기 프로그램</h1>
+    <h1 class="TextStyle2">@HeaderText</h1>
 </header>
 
 <nav>
@@ -21,19 +21,25 @@
   </ul>
 </nav>
 
-<footer>
-  <p>&copy; 2023 MangoRice Company</p>
-</footer>
 
 </body>
 </html>
+@inject NavigationManager NavigationManager
+@code {
+  private string HeaderText { get; set; } = "DivideTeam";
 
-@code
-{
-  public string searchedNickName { get; set; }
-  
-  void SearchUser()
+  protected override void OnInitialized()
   {
-    
+    UpdateHeaderText();
+  }
+
+  private void UpdateHeaderText()
+  {
+    string currentUrl = NavigationManager.Uri;
+
+    string[] stringArray = currentUrl.Split(new char[] {'/'});
+    HeaderText = stringArray.Last();
+
+    StateHasChanged();
   }
 }
