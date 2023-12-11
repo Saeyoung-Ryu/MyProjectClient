@@ -17,7 +17,4 @@
     <Import Project="$(NuGetPackageRoot)syncfusion.blazor.buttons/23.1.44/buildTransitive/Syncfusion.Blazor.Buttons.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.buttons/23.1.44/buildTransitive/Syncfusion.Blazor.Buttons.props')" />
     <Import Project="$(NuGetPackageRoot)matblazor/2.10.0/buildTransitive/MatBlazor.props" Condition="Exists('$(NuGetPackageRoot)matblazor/2.10.0/buildTransitive/MatBlazor.props')" />
   </ImportGroup>
-  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">/Users/saeyoungryu/.nuget/packages/newtonsoft.json/10.0.2</PkgNewtonsoft_Json>
-  </PropertyGroup>
 </Project>

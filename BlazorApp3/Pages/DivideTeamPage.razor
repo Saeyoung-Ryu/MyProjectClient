@@ -6,7 +6,9 @@
 @using System.Text.RegularExpressions
 @using BlazorApp3.Protocol
 @using Microsoft.Data.Sqlite
+@using System.Text.Json
 
+@inject IJSRuntime JSRuntime
 <DisplayPage/>
 <PageTitle>팀나누기</PageTitle>
 
@@ -277,6 +279,7 @@
         }
     }
 }
+
 @code
 {
     bool startBtnActive = true;
@@ -293,6 +296,16 @@
 
     public TeamInfo team1Info = new TeamInfo();
     public TeamInfo team2Info = new TeamInfo();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var storedData = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "userTeamDivideInfos");
+
+        if (!string.IsNullOrEmpty(storedData))
+        {
+            userTeamDivideInfos = JsonSerializer.Deserialize<List<UserTeamDivideInfo>>(storedData);
+        }
+    }
 
     private void ResetLists()
     {
@@ -323,6 +336,7 @@
             return;
         
         userTeamDivideInfos.Add(utd);
+        await JSRuntime.InvokeVoidAsync("localStorage.setItem", "userTeamDivideInfos", JsonSerializer.Serialize(userTeamDivideInfos));
 
         NickName = String.Empty;
     }
