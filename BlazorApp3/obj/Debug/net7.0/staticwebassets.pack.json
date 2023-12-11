@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets/testImage.jpg"
     },
     {
+      "Id": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/welcomeImage.jpg",
+      "PackagePath": "staticwebassets/welcomeImage.jpg"
+    },
+    {
       "Id": "obj/Debug/net7.0/staticwebassets/msbuild.BlazorApp3.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

@@ -33,7 +33,7 @@
         {
             <div style="text-align: center;">
                 <br/>
-                <button class="btn btn-danger" @onclick="ResetUserListBtn">Reset</button>
+                <button class="btn btn-danger" @onclick="ResetUserListAsyncBtn">Reset</button>
                 @if (userTeamDivideInfos.Count == 10)
                 {
                     if (startBtnActive)
@@ -341,13 +341,14 @@
         NickName = String.Empty;
     }
 
-    private void ResetUserListBtn()
+    private async Task ResetUserListAsyncBtn()
     {
         userTeamDivideInfos.Clear();
         ResetLists();
         ResetObjects();
         
         startBtnActive = true;
+        await JSRuntime.InvokeVoidAsync("localStorage.clear");
     }
 
     private void SetAllPositionNoneBtn()
