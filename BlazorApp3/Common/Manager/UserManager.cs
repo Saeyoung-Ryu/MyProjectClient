@@ -36,6 +36,7 @@ namespace BlazorApp3.Common.Manager
             
                 client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
                 var response = await client.PostAsJsonAsync("/api/GetUserInfoApproximate", setTeamReq);
+                Console.WriteLine("Protocol : GetUserInfoApproximate");
                 var getUserRes = await response.Content.ReadFromJsonAsync<GetUserRes>();
                 
                 return getUserRes.UserInfo;
