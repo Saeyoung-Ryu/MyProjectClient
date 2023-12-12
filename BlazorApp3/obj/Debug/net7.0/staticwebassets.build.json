@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rT3nTUEmZOF5x2FuuJRMa99CeXL6ZMeNw0p4BWKANKg=",
+  "Hash": "r6hiiReprleHWU78KvSUQWQ/lUDn37aKiBsBP3AtsFw=",
   "Source": "BlazorApp3",
   "BasePath": "_content/BlazorApp3",
   "Mode": "Default",
@@ -585,6 +585,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.png"
+    },
+    {
+      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/matchHistoryImage.jpg",
+      "SourceId": "BlazorApp3",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "BasePath": "_content/BlazorApp3",
+      "RelativePath": "matchHistoryImage.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/matchHistoryImage.jpg"
     },
     {
       "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/testImage.jpg",

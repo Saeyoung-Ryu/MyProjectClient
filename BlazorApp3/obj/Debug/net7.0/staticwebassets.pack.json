@@ -61,6 +61,10 @@
       "PackagePath": "staticwebassets/favicon.png"
     },
     {
+      "Id": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/matchHistoryImage.jpg",
+      "PackagePath": "staticwebassets/matchHistoryImage.jpg"
+    },
+    {
       "Id": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/testImage.jpg",
       "PackagePath": "staticwebassets/testImage.jpg"
     },
