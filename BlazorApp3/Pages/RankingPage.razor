@@ -24,8 +24,9 @@ else
         @if (RankingInfo.TotalRankList.Count > 0)
         {
             <button type="submit" class="btn btn-warning" @onclick="@ResetRankingBtnAsync">랭크 초기화</button>
+            <br><br>
         }
-    
+        <div class="d-flex justify-content-center">
         <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 900px; color: #198754">
             @if (RankingInfo?.TotalRankList.Count > 0)
             {
@@ -197,6 +198,7 @@ else
             }
 
         </MatTabGroup>
+        </div>
     }
 }
 </div>

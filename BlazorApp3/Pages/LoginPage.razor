@@ -28,7 +28,7 @@
         </div>
         <div class="action">
             <button type="button" onclick="">Register</button>
-            <button type="button" class="link" @onclick="NavigateToSearchUserPage">Sign in</button>
+            <button type="button" class="link" @onclick="NavigateToInitPage">Sign in</button>
         </div>
     </form>
 </div>
@@ -45,8 +45,8 @@
 @inject NavigationManager Navigation
 @code
 {
-    private void NavigateToSearchUserPage()
+    private void NavigateToInitPage()
     {
-        Navigation.NavigateTo("/SearchUser");
+        Navigation.NavigateTo("/Home");
     }
 }

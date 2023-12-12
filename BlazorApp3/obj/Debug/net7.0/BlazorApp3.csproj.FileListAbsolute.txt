@@ -147,3 +147,4 @@
 /Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/RankingPage.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Footer.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Test.razor.rz.scp.css
+/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/HomePage.razor.rz.scp.css

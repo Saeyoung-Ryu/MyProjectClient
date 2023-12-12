@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using BlazorApp3.Common.Type;
 
 namespace BlazorApp3.Protocol;

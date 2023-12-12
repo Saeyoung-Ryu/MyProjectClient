@@ -14,10 +14,11 @@
 
 <nav>
   <ul>
-    <li><a href="SearchUser">SearchUser</a></li>
-    <li><a href="DivideTeam">DivideTeam</a></li>
-    <li><a href="MatchHistory">MatchHistory</a></li>
-    <li><a href="Ranking">Ranking</a></li>
+    <li><a href="Home">클럽 홈</a></li>
+    <li><a href="SearchUser">멤버 검색</a></li>
+    <li><a href="DivideTeam">팀 나누기</a></li>
+    <li><a href="MatchHistory">매칭 전적</a></li>
+    <li><a href="Ranking">랭킹</a></li>
   </ul>
 </nav>
 
@@ -40,6 +41,17 @@
     string[] stringArray = currentUrl.Split(new char[] {'/'});
     HeaderText = stringArray.Last();
 
+      if (HeaderText == "SearchUser")
+        HeaderText = "멤버 검색";
+      if (HeaderText == "DivideTeam")
+        HeaderText = "팀 나누기";
+      if (HeaderText == "MatchHistory")
+        HeaderText = "매칭 전적";
+      if (HeaderText == "Ranking")  
+        HeaderText = "랭킹";  
+      if(HeaderText == "Home")
+        HeaderText = "클럽 홈";
+    
     StateHasChanged();
   }
 }
