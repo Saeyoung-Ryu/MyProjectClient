@@ -8,10 +8,6 @@
 </head>
 <body>
 
-<header>
-    <h1 class="TextStyle2">@HeaderText</h1>
-</header>
-
 <nav>
   <ul>
     <li><a href="Home">클럽 홈</a></li>
@@ -21,7 +17,9 @@
     <li><a href="Ranking">랭킹</a></li>
   </ul>
 </nav>
-
+<header>
+    <h1 class="TextStyle2">@HeaderText</h1>
+</header>
 
 </body>
 </html>
@@ -50,7 +48,7 @@
       if (HeaderText == "Ranking")  
         HeaderText = "랭킹";  
       if(HeaderText == "Home")
-        HeaderText = "클럽 홈";
+        HeaderText = "홈";
     
     StateHasChanged();
   }

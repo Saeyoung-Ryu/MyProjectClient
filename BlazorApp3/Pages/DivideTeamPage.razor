@@ -32,28 +32,33 @@
         @if (userTeamDivideInfos.Count > 0)
         {
             <div style="text-align: center;">
-                <br/>
-                <button class="btn btn-danger" @onclick="ResetUserListAsyncBtn">Reset</button>
+                
+                <button class="custom-btn btn-5" @onclick="ResetUserListAsyncBtn"><span>Reset</span></button>
+                @*<button class="btn btn-danger" @onclick="ResetUserListAsyncBtn">Reset</button>*@
                 @if (userTeamDivideInfos.Count == 10)
                 {
                     if (startBtnActive)
                     {
-                        <button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>
+                        <button class="custom-btn btn-1" @onclick="DivideTeamBtn">시작</button>
+                        @*<button class="btn btn-primary" @onclick="DivideTeamBtn">시작</button>*@
                     }
                     else
                     {
-                        <button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>
+                        <button class="custom-btn btn-2" @onclick="SetAllPositionNoneBtn">다시 시작</button>
+                        @*<button class="btn btn-info" @onclick="SetAllPositionNoneBtn">포지션 초기화</button>*@
                     }
                 }
                 @if (supUsers.Count > 0)
                 {
                     @if ((team1Info.IsAllFilled() && team2Info.IsAllFilled()) && (team1Info.teamSide == 0 || team2Info.teamSide == 0))
                     {
-                        <button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>
+                        <button class="custom-btn btn-3" @onclick="SetTeamBtn"><span>팀 선택</span></button>
+                        @*<button class="btn btn-primary" @onclick="SetTeamBtn">팀 선택</button>*@
                     }
                     else if (team1Info.IsAllFilled() && team2Info.IsAllFilled() && (team1Info.teamSide != 0 || team2Info.teamSide != 0))
                     {
-                        <button class="btn btn-warning" @onclick="SwapTeamBtnAsync">팀 스왑</button>
+                        <button class="custom-btn btn-4" @onclick="SwapTeamBtnAsync"><span>팀 스왑</span></button>
+                        @*<button class="btn btn-warning" @onclick="SwapTeamBtnAsync">팀 스왑</button>*@
                     }
                 }
                 <br><br>
@@ -337,6 +342,11 @@
     {
         team1Info = new TeamInfo();
         team2Info = new TeamInfo();
+    }
+
+    private void TestPrint()
+    {
+        Console.WriteLine("TestPrint");
     }
     
     private async Task InsertBtnAsync()
