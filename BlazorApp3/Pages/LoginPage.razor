@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using System.Security.Principal
+@using BlazorApp3.Common.Type
 
 <div class="wrapper">
     <div class="home-container">
@@ -16,20 +17,41 @@
 <img src="welcomeImage.jpg" alt="Example Image" style="width: 370px; height: 210px;" />
 <div class="login-form">
     <form>
-        <h1>Login</h1>
-        <div class="content">
-            <div class="input-field">
-                <input type="email" placeholder="Email" autocomplete="nope">
+        @if (isRegister)
+        {
+            <h1>Register</h1>
+            <div class="content">
+                <div class="input-field">
+                    <input type="email" placeholder="Email" autocomplete="nope" @bind="loginInfo.Email">
+                </div>
+                <div class="input-field">
+                    <input type="password" placeholder="Password" autocomplete="new-password" @bind="loginInfo.Password">
+                </div>
+                <div class="input-field">
+                    <input type="password" placeholder="ReEnter Password" autocomplete="new-password" @bind="reEnterPassword">
+                </div>
             </div>
-            <div class="input-field">
-                <input type="password" placeholder="Password" autocomplete="new-password">
+            <div class="action">
+                <button type="button" @onclick="RegisterBtnAsync">Sign Up</button>
             </div>
-            <a href="#" class="link">Forgot Your Password?</a>
-        </div>
-        <div class="action">
-            <button type="button" onclick="">Register</button>
-            <button type="button" class="link" @onclick="NavigateToInitPage">Sign in</button>
-        </div>
+        }
+        else
+        {
+            <h1>Login</h1>
+            <div class="content">
+                <div class="input-field">
+                    <input type="email" placeholder="Email" autocomplete="nope" @bind="loginInfo.Email">
+                </div>
+                <div class="input-field">
+                    <input type="password" placeholder="Password" autocomplete="new-password" @bind="loginInfo.Password">
+                </div>
+                <a href="#" class="link">Forgot Your Password?</a>
+            </div>
+            <div class="action">
+                <button type="button" @onclick="NeedToRegisterBtn">Register</button>
+                <button type="button" class="link" @onclick="NavigateToInitPage">Sign in</button>
+            </div>
+        }
     </form>
 </div>
 <!-- partial -->
@@ -45,8 +67,28 @@
 @inject NavigationManager Navigation
 @code
 {
+    LoginInfo loginInfo = new LoginInfo();
+    string reEnterPassword = string.Empty;
+    
+    bool isRegister = false;
     private void NavigateToInitPage()
     {
         Navigation.NavigateTo("/Home");
+    }
+
+    private void NeedToRegisterBtn()
+    {
+        isRegister = true;
+    }
+
+    private async Task RegisterBtnAsync()
+    {
+        if (loginInfo.Password != reEnterPassword)
+        {
+            
+            return;
+        }
+        
+        isRegister = false;
     }
 }

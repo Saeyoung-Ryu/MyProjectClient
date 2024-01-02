@@ -1,5 +1,5 @@
 #Border-Dotted[b-b2osv66iin]{border: 2px dotted}
-#Border-Solid[b-b2osv66iin]{border: 1px solid}
+#Border-Solid[b-b2osv66iin]{border: 1px solid; width: 70%; height: 70%}
 #Border-Solid3px[b-b2osv66iin]{border: 3px solid #1a1e21}
 
 .TextStyle2[b-b2osv66iin] {
@@ -13,6 +13,7 @@ body[b-b2osv66iin] {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    zoom: 90%;
 }
 
 header[b-b2osv66iin] {

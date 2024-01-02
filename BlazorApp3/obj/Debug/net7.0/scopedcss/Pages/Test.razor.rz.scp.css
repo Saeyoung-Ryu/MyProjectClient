@@ -1,0 +1,76 @@
+.cd__main[b-0ets44o0yo]{
+    background: linear-gradient(to right, #ffffff, #2d0b55) !important;
+    min-height: 720px;
+}
+body[b-0ets44o0yo] {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(to right, #ffffff, #2d0b55);
+}
+.menu ul[b-0ets44o0yo] {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: -80px;
+}
+li[b-0ets44o0yo] {
+    list-style: none;
+}
+.menu a[b-0ets44o0yo] {
+    position: relative;
+    text-decoration: none;
+    width: 180px;
+    height: 60px;
+    text-align: center;
+    line-height: 50px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    text-transform: capitalize;
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+.menu a:last-child[b-0ets44o0yo] {
+    margin-left: 50px;
+}
+.menu a svg[b-0ets44o0yo],
+.menu a svg rect[b-0ets44o0yo] {
+    position: absolute;
+    left: -25px;
+    width: 120px;
+    height: 50px;
+    fill: transparent;
+}
+.menu a svg rect[b-0ets44o0yo] {
+    stroke: #fff;
+    stroke-width: 3;
+    transition: 0.8s;
+    stroke-dasharray: 70, 402;
+    stroke-dashoffset: 280;
+}
+.menu a:hover svg rect[b-0ets44o0yo] {
+    stroke-dasharray: 500, 500;
+    stroke-dashoffset: 0;
+    stroke: #00c3ff;
+    fill: rgba(0, 250, 255, 0.2);
+    color: #fff;
+}
+
+.nav-link[b-0ets44o0yo] {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link svg rect[b-0ets44o0yo] {
+    fill: black;
+    width: 50px; /* Adjust the width as needed */
+    height: 2px; /* Adjust the height as needed */
+    /*margin-left: 10px; !* Adjust the margin as needed *!*/
+    vertical-align: middle;
+}
