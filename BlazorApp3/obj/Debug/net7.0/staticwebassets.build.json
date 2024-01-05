@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "r6hiiReprleHWU78KvSUQWQ/lUDn37aKiBsBP3AtsFw=",
+  "Hash": "pFU0JRaY8gkdH+IAVSCwwTQAsC+2YaLwcCNJJlg2Zko=",
   "Source": "BlazorApp3",
   "BasePath": "_content/BlazorApp3",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "BlazorApp3/wwwroot",
       "Source": "BlazorApp3",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "Pattern": "**"
     }
@@ -302,10 +302,10 @@
       "OriginalItemSpec": "/Users/saeyoungryu/.nuget/packages/syncfusion.blazor.core/23.1.44/staticwebassets/scripts/syncfusion-blazor.min.js"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/bundle/BlazorApp3.styles.css",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/bundle/BlazorApp3.styles.css",
       "SourceId": "BlazorApp3",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/bundle/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/bundle/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "BlazorApp3.styles.css",
       "AssetKind": "All",
@@ -318,13 +318,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/bundle/BlazorApp3.styles.css"
+      "OriginalItemSpec": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/bundle/BlazorApp3.styles.css"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/BlazorApp3.bundle.scp.css",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/BlazorApp3.bundle.scp.css",
       "SourceId": "BlazorApp3",
       "SourceType": "Computed",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "BlazorApp3.bundle.scp.css",
       "AssetKind": "All",
@@ -337,13 +337,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/BlazorApp3.bundle.scp.css"
+      "OriginalItemSpec": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/BlazorApp3.bundle.scp.css"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/bootstrap/bootstrap.min.css",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/bootstrap/bootstrap.min.css",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -359,10 +359,10 @@
       "OriginalItemSpec": "wwwroot/css/bootstrap/bootstrap.min.css"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/bootstrap/bootstrap.min.css.map",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/bootstrap/bootstrap.min.css.map",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -378,10 +378,10 @@
       "OriginalItemSpec": "wwwroot/css/bootstrap/bootstrap.min.css.map"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/FONT-LICENSE",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/FONT-LICENSE",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/FONT-LICENSE",
       "AssetKind": "All",
@@ -397,10 +397,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/FONT-LICENSE"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/font/css/open-iconic-bootstrap.min.css",
       "AssetKind": "All",
@@ -416,10 +416,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/font/css/open-iconic-bootstrap.min.css"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.eot",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.eot",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.eot",
       "AssetKind": "All",
@@ -435,10 +435,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/font/fonts/open-iconic.eot"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.otf",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.otf",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.otf",
       "AssetKind": "All",
@@ -454,10 +454,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/font/fonts/open-iconic.otf"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.svg",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.svg",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.svg",
       "AssetKind": "All",
@@ -473,10 +473,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/font/fonts/open-iconic.svg"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.ttf",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.ttf",
       "AssetKind": "All",
@@ -492,10 +492,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/font/fonts/open-iconic.ttf"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.woff",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/font/fonts/open-iconic.woff",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/font/fonts/open-iconic.woff",
       "AssetKind": "All",
@@ -511,10 +511,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/font/fonts/open-iconic.woff"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/ICON-LICENSE",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/ICON-LICENSE",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/ICON-LICENSE",
       "AssetKind": "All",
@@ -530,10 +530,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/ICON-LICENSE"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/open-iconic/README.md",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/open-iconic/README.md",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/open-iconic/README.md",
       "AssetKind": "All",
@@ -549,10 +549,10 @@
       "OriginalItemSpec": "wwwroot/css/open-iconic/README.md"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/css/site.css",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/site.css",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -568,10 +568,10 @@
       "OriginalItemSpec": "wwwroot/css/site.css"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/favicon.png",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/favicon.png",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -587,10 +587,10 @@
       "OriginalItemSpec": "wwwroot/favicon.png"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/matchHistoryImage.jpg",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/matchHistoryImage.jpg",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "matchHistoryImage.jpg",
       "AssetKind": "All",
@@ -606,10 +606,10 @@
       "OriginalItemSpec": "wwwroot/matchHistoryImage.jpg"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/testImage.jpg",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/testImage.jpg",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "testImage.jpg",
       "AssetKind": "All",
@@ -625,10 +625,10 @@
       "OriginalItemSpec": "wwwroot/testImage.jpg"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/UserSearchImage.jpg",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/UserSearchImage.jpg",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "UserSearchImage.jpg",
       "AssetKind": "All",
@@ -644,10 +644,10 @@
       "OriginalItemSpec": "wwwroot/UserSearchImage.jpg"
     },
     {
-      "Identity": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/welcomeImage.jpg",
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/welcomeImage.jpg",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/wwwroot/",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
       "BasePath": "_content/BlazorApp3",
       "RelativePath": "welcomeImage.jpg",
       "AssetKind": "All",

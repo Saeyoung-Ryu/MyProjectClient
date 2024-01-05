@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/saeyoungryu/Project/MyProject/BlazorApp3/BlazorApp3.csproj": {}
+    "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/BlazorApp3.csproj": {}
   },
   "projects": {
-    "/Users/saeyoungryu/Project/MyProject/BlazorApp3/BlazorApp3.csproj": {
+    "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/BlazorApp3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/BlazorApp3.csproj",
+        "projectUniqueName": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/BlazorApp3.csproj",
         "projectName": "BlazorApp3",
-        "projectPath": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/BlazorApp3.csproj",
+        "projectPath": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/BlazorApp3.csproj",
         "packagesPath": "/Users/saeyoungryu/.nuget/packages/",
-        "outputPath": "/Users/saeyoungryu/Project/MyProject/BlazorApp3/obj/",
+        "outputPath": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/saeyoungryu/.nuget/NuGet/NuGet.Config"

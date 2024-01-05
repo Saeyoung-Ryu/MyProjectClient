@@ -1,21 +1,49 @@
 ﻿@page "/SearchUser"
+@using BlazorApp3.Common.Manager
+@using BlazorApp3.Common.Type
 
 <PageTitle>Home</PageTitle>
 <DisplayPage/>
 <div class="wrapper">
     <div class="home-container">
 <main>
-  <section class="content">
-      <div class="search-container" style="display: flex; align-items: center;">
-          <div style="display: flex; flex-direction: column; align-items: center;">
-              <img src="UserSearchImage.jpg" alt="Example Image" style="width: 280px; height: 130px;" />
-              <div style="display: flex; align-items: center; margin-top: 10px;">
-                  <MatTextField @bind-Value="@searchedNickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
-                  <button type="button" class="btn btn-secondary" style="line-height: 2.8; height: 2.8em;">Search</button>
-              </div>
-          </div>
-      </div>
-  </section>
+    <section class="content">
+        <div class="search-container" style="display: flex; align-items: center;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <img src="UserSearchImage.jpg" alt="Example Image" style="width: 280px; height: 130px;"/>
+                <br>
+                <MatAccordion>
+                    <MatButton OnClick="@OpenDialog" Raised="true">유저 추가하기 ⊕</MatButton>
+                    <MatDialog @bind-IsOpen="@dialogIsOpen">
+                        <MatDialogContent>
+                            <MatSlideToggle TValue="bool" Label="모든 타자 추가" ValueChanged="@(e => Toggle1(e))"></MatSlideToggle>
+                            @if (!addAllBatter)
+                            {
+                                <br>
+                                <br>
+                                <MatSelect HelperText="Helper Text" Label="타자 선택" @bind-Value="@batterBasicIdToAddStringForm">
+                                    <MatOptionString></MatOptionString>
+                                    @*@foreach (var notOwnedBatterBasic in GetNotOwnedBatterBasics())
+                                                                          {
+                                                                              <MatOptionString Value="@(notOwnedBatterBasic.BatterBasicId.ToString())">@notOwnedBatterBasic.BatterName</MatOptionString>
+                                                                          }*@
+                                </MatSelect>
+                            }
+                        </MatDialogContent>
+                        <MatDialogActions>
+                            <MatButton OnClick="@CloseDialog">닫기</MatButton>
+                            @*<MatButton OnClick="@AddBatterBtnAsync">추가하기</MatButton>*@
+                        </MatDialogActions>
+                    </MatDialog>
+                </MatAccordion>
+                <br>
+                <div style="display: flex; align-items: center; margin-top: 10px;">
+                    <MatTextField @bind-Value="@searchedNickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
+                    <button type="button" class="btn btn-secondary" style="line-height: 2.8; height: 2.8em;" @onclick="@SearchUserAsync">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 	</div>
 </div>
@@ -24,10 +52,44 @@
 
 @code
 {
-  public string searchedNickName { get; set; }
-  
-  void SearchUser()
-  {
+    public string searchedNickName= string.Empty;
+
+    public UserInfo userInfo;
     
-  }
+    async Task SearchUserAsync()
+    {
+        userInfo = await UserManager.GetUserAsync(searchedNickName);
+        
+        
+    }
+}
+
+@code
+{
+    private bool dialogIsOpen = false;
+    private bool addAllBatter = false;
+    
+    private string batterBasicIdToAddStringForm = "0";
+    
+    void OpenDialog()
+    {
+        dialogIsOpen = true;
+    }
+    
+    void CloseDialog()
+    {
+        dialogIsOpen = false;
+    }
+    
+    private void Toggle1(bool toggled)
+    {
+        if (toggled)
+        {
+            addAllBatter = true;
+        }
+        else
+        {
+            addAllBatter = false;
+        }
+    }
 }

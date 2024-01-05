@@ -1,0 +1,13 @@
+footer[b-1mv1gcxori] {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    height: 65px;
+    position: relative;
+    transform: translateY(100%);
+    border-top:1px solid #333;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

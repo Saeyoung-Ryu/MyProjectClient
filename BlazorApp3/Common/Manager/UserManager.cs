@@ -7,8 +7,10 @@ namespace BlazorApp3.Common.Manager
 {
     public class UserManager
     {
-        public static async Task<UserInfo> GetUserAsync(String nickname, bool isApproximate = true)
+        public static async Task<UserInfo> GetUserAsync(String nickname)
         {
+            Console.WriteLine("Protocol : GetUserInfo");
+            
             using (var client = new HttpClient())
             {
                 GetUserReq setTeamReq = new GetUserReq()
@@ -18,15 +20,16 @@ namespace BlazorApp3.Common.Manager
             
                 client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
                 var response = await client.PostAsJsonAsync("/api/GetUserInfo", setTeamReq);
-                Console.WriteLine("Protocol : GetUserInfo");
                 var getUserRes = await response.Content.ReadFromJsonAsync<GetUserRes>();
                 
                 return getUserRes.UserInfo;
             }
         }
         
-        public static async Task<UserInfo> GetUserApproximateAsync(String nickname, bool isApproximate = true) // 이름대충처도 찾음
+        public static async Task<UserInfo> GetUserApproximateAsync(String nickname) // 이름대충처도 찾음
         {
+            Console.WriteLine("Protocol : GetUserInfoApproximate");
+            
             using (var client = new HttpClient())
             {
                 GetUserReq setTeamReq = new GetUserReq()
@@ -36,7 +39,6 @@ namespace BlazorApp3.Common.Manager
             
                 client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
                 var response = await client.PostAsJsonAsync("/api/GetUserInfoApproximate", setTeamReq);
-                Console.WriteLine("Protocol : GetUserInfoApproximate");
                 var getUserRes = await response.Content.ReadFromJsonAsync<GetUserRes>();
                 
                 return getUserRes.UserInfo;
@@ -45,6 +47,8 @@ namespace BlazorApp3.Common.Manager
         
         public static async Task<bool> SetNewUserAsync(String nickname)
         {
+            Console.WriteLine("Protocol : SetNewUser");
+            
             using (var client = new HttpClient())
             {
                 SetNewUserReq setTeamReq = new SetNewUserReq()
@@ -54,7 +58,6 @@ namespace BlazorApp3.Common.Manager
                 
                 client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
                 var response = await client.PostAsJsonAsync("/api/SetNewUser", setTeamReq);
-                Console.WriteLine("Protocol : SetNewUser");
                 var setNewUserRes = await response.Content.ReadFromJsonAsync<SetNewUserRes>();
 
                 return setNewUserRes.IsSuccess;

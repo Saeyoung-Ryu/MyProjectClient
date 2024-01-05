@@ -1,0 +1,47 @@
+#Border-Dotted[b-86gspctuc0]{border: 2px dotted}
+#Border-Solid[b-86gspctuc0]{border: 1px solid}
+#Border-Solid3px[b-86gspctuc0]{border: 3px solid #1a1e21}
+#Text1Style[b-86gspctuc0]{font-size: 23px;color : #41464b}
+#Text2Style[b-86gspctuc0]{font-size: 40px;color : #41464b}
+#Text3Style[b-86gspctuc0]{font-size: 14px;color : #1b6ec2}
+#Text4Style[b-86gspctuc0]{font-size: 20px;color : #157347}
+#Text5Style[b-86gspctuc0]{font-size: 12px;color : #6f42c1}
+#Text6Style[b-86gspctuc0]{font-size: 15px;color : #1c1f23}
+#Text7Style[b-86gspctuc0]{font-size: 15px;color : #0f5132}
+#table1[b-86gspctuc0], th[b-86gspctuc0], td[b-86gspctuc0]{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+#Text2Style[b-86gspctuc0]{font-size: 40px;color : #41464b}
+#loading-screen[b-86gspctuc0] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+#mat-progress-spinner[b-86gspctuc0] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+html[b-86gspctuc0], body[b-86gspctuc0] {
+    height: 100%
+}
+
+.wrapper[b-86gspctuc0] {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 7px;
+}
+
+.home-container[b-86gspctuc0]{
+    min-height: 900px;
+}

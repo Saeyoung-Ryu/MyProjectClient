@@ -1,5 +1,6 @@
 ﻿@page "/Ranking"
 @using BlazorApp3.Protocol
+@using BlazorApp3.Common.Manager
 
 
 <PageTitle>랭킹</PageTitle>
@@ -212,15 +213,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         isLoading = true;
-        using (var client = new HttpClient())
-        {
-            GetRankingReq getRankingReq = new GetRankingReq();
-            
-            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
-            var response = await client.PostAsJsonAsync("/api/Ranking/GetRanking", getRankingReq);
-            Console.WriteLine("Protocol : Ranking/GetRanking");
-            RankingInfo = await response.Content.ReadFromJsonAsync<GetRankingRes>();
-        }
+        RankingInfo = await RankManager.GetRankAsync();
         isLoading = false;
     }
 }
@@ -228,10 +221,6 @@ else
 @code
 {
     private bool isLoading = false;
-}
-
-@code
-{
     private int tabIndex = 0;
 }
 
@@ -241,27 +230,14 @@ else
     {
         isLoading = true;
         
-        using (var client = new HttpClient())
-        {
-            ResetRankingReq? getRankingReq = new ResetRankingReq();
-       
-            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
-            var response = await client.PostAsJsonAsync("/api/Ranking/ResetRanking", getRankingReq);
-            Console.WriteLine("Protocol : Ranking/ResetRanking");
-            var rankInfo = await response.Content.ReadFromJsonAsync<ResetRankingRes>();
-
-            if (rankInfo == null)
-            {
-                return;
-            }
-            
-            RankingInfo.TotalRankList = rankInfo.TotalRankList;
-            RankingInfo.TopRankList = rankInfo.TopRankList;
-            RankingInfo.JgRankList = rankInfo.JgRankList;
-            RankingInfo.MidRankList = rankInfo.MidRankList;
-            RankingInfo.AdcRankList = rankInfo.AdcRankList;
-            RankingInfo.SupRankList = rankInfo.SupRankList;
-        }
+        var rankInfo = await RankManager.ResetRankAsync();
+        
+        RankingInfo.TotalRankList = rankInfo.TotalRankList;
+        RankingInfo.TopRankList = rankInfo.TopRankList;
+        RankingInfo.JgRankList = rankInfo.JgRankList;
+        RankingInfo.MidRankList = rankInfo.MidRankList;
+        RankingInfo.AdcRankList = rankInfo.AdcRankList;
+        RankingInfo.SupRankList = rankInfo.SupRankList;
 
         isLoading = false;
     }
