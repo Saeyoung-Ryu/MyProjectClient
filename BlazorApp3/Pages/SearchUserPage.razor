@@ -1,51 +1,102 @@
-﻿@page "/SearchUser"
+﻿@page "/UserManager"
 @using BlazorApp3.Common.Manager
 @using BlazorApp3.Common.Type
+@using BlazorApp3.Protocol
+@using Enum
+
+@inject IMatToaster Toaster
 
 <PageTitle>Home</PageTitle>
 <DisplayPage/>
 <div class="wrapper">
     <div class="home-container">
-<main>
-    <section class="content">
-        <div class="search-container" style="display: flex; align-items: center;">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <img src="UserSearchImage.jpg" alt="Example Image" style="width: 280px; height: 130px;"/>
-                <br>
-                <MatAccordion>
-                    <MatButton OnClick="@OpenDialog" Raised="true">유저 추가하기 ⊕</MatButton>
-                    <MatDialog @bind-IsOpen="@dialogIsOpen">
-                        <MatDialogContent>
-                            <MatSlideToggle TValue="bool" Label="모든 타자 추가" ValueChanged="@(e => Toggle1(e))"></MatSlideToggle>
-                            @if (!addAllBatter)
-                            {
-                                <br>
-                                <br>
-                                <MatSelect HelperText="Helper Text" Label="타자 선택" @bind-Value="@batterBasicIdToAddStringForm">
-                                    <MatOptionString></MatOptionString>
-                                    @*@foreach (var notOwnedBatterBasic in GetNotOwnedBatterBasics())
-                                                                          {
-                                                                              <MatOptionString Value="@(notOwnedBatterBasic.BatterBasicId.ToString())">@notOwnedBatterBasic.BatterName</MatOptionString>
-                                                                          }*@
-                                </MatSelect>
-                            }
-                        </MatDialogContent>
-                        <MatDialogActions>
-                            <MatButton OnClick="@CloseDialog">닫기</MatButton>
-                            @*<MatButton OnClick="@AddBatterBtnAsync">추가하기</MatButton>*@
-                        </MatDialogActions>
-                    </MatDialog>
-                </MatAccordion>
-                <br>
-                <div style="display: flex; align-items: center; margin-top: 10px;">
-                    <MatTextField @bind-Value="@searchedNickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
-                    <button type="button" class="btn btn-secondary" style="line-height: 2.8; height: 2.8em;" @onclick="@SearchUserAsync">Search</button>
+        <main>
+            <section class="content">
+                <div class="search-container" style="display: flex; align-items: center;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="UserSearchImage.jpg" alt="Example Image" style="width: 280px; height: 130px;"/>
+                        <br>
+                        <MatAccordion>
+                            <MatButton OnClick="@OpenDialog" Raised="true">유저 추가하기 ⊕</MatButton>
+                            <MatDialog @bind-IsOpen="@dialogIsOpen">
+                                <MatDialogContent>
+                                    <p>
+                                        <MatTextField @bind-Value="@nickNameToAdd" Label="Standard"></MatTextField>
+                                    </p>
+                                </MatDialogContent>
+                                <MatDialogActions>
+                                    <MatButton OnClick="@CloseDialog">닫기</MatButton>
+                                    <MatButton OnClick="@AddNewUserBtnAsync">추가하기</MatButton>
+                                </MatDialogActions>
+                            </MatDialog>
+                        </MatAccordion>
+                        <br>
+                        <div style="display: flex; align-items: center; margin-top: 10px;">
+                            <MatTextField @bind-Value="@searchedNickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
+                            <button type="button" class="btn btn-secondary" style="line-height: 2.8; height: 2.8em;" @onclick="@SearchUserAsync">Search</button>
+                        </div>
+                    </div>
                 </div>
+            </section>
+            
+            <br><br>
+            <div class="d-flex justify-content-center">
+                @if (userInfo != null)
+                {
+                    <div>
+                        <br>
+                        <table id="Border-Solid" class="table table-border table-hover w-auto">
+                            <tbody>
+                            <tr>
+                                <th>닉네임</th>
+                                <td><input type="text" size="20" @bind="@userInfo.UserName"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        
+                        <br>
+                        <table id="Border-Solid" class="table table-border table-hover w-auto">
+                            <thead>
+                            <tr class="table-primary">
+                                <th>라인</th>
+                                <th>Win</th>
+                                <th>Lose</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Top</td>
+                                <td><input type="text" @bind="topWinRateHistory.WinCount"></td>
+                                <td><input type="text" @bind="topWinRateHistory.LoseCount"></td>
+                            </tr>
+                            <tr>
+                                <td>Jungle</td>
+                                <td><input type="text" @bind="jgWinRateHistory.WinCount"></td>
+                                <td><input type="text" @bind="jgWinRateHistory.LoseCount"></td>
+                            </tr>
+                            <tr>
+                                <td>Mid</td>
+                                <td><input type="text" @bind="midWinRateHistory.WinCount"></td>
+                                <td><input type="text" @bind="midWinRateHistory.LoseCount"></td>
+                            </tr>
+                            <tr>
+                                <td>Adc</td>
+                                <td><input type="text" @bind="adcWinRateHistory.WinCount"></td>
+                                <td><input type="text" @bind="adcWinRateHistory.LoseCount"></td>
+                            </tr>
+                            <tr>
+                                <td>Support</td>
+                                <td><input type="text" @bind="supWinRateHistory.WinCount"></td>
+                                <td><input type="text" @bind="supWinRateHistory.LoseCount"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-warning" @onclick="@EditUserAsync">수정 완료</button>
+                    </div>
+                }
             </div>
-        </div>
-    </section>
-</main>
-	</div>
+        </main>
+    </div>
 </div>
 
 <Footer></Footer>
@@ -55,21 +106,92 @@
     public string searchedNickName= string.Empty;
 
     public UserInfo userInfo;
+    public string nickNameBeforeEdit = string.Empty;
+    
+    List<UserWinRateHistory> userWinRateHistories = new List<UserWinRateHistory>();
+    
+    UserWinRateHistory topWinRateHistory = new UserWinRateHistory();
+    UserWinRateHistory jgWinRateHistory = new UserWinRateHistory();
+    UserWinRateHistory midWinRateHistory = new UserWinRateHistory();
+    UserWinRateHistory adcWinRateHistory = new UserWinRateHistory();
+    UserWinRateHistory supWinRateHistory = new UserWinRateHistory();
+
+    void Reset()
+    {
+        topWinRateHistory = new UserWinRateHistory();
+        jgWinRateHistory = new UserWinRateHistory();
+        midWinRateHistory = new UserWinRateHistory();
+        adcWinRateHistory = new UserWinRateHistory();
+        supWinRateHistory = new UserWinRateHistory();
+        
+        nickNameBeforeEdit = string.Empty;
+    }
     
     async Task SearchUserAsync()
     {
+        Reset();
         userInfo = await UserManager.GetUserAsync(searchedNickName);
         
+        if(userInfo == null)
+        {
+            return;
+        }
+
+        nickNameBeforeEdit = userInfo.UserName;
+        var userWinRateHistories = (await RankManager.GetUserWinRateHistory(userInfo.Seq)).UserWinRateHistory;
+
+        topWinRateHistory = userWinRateHistories.First(e => e.LineType == (int) LineType.Top);
+        jgWinRateHistory = userWinRateHistories.First(e => e.LineType == (int) LineType.Jungle);
+        midWinRateHistory = userWinRateHistories.First(e => e.LineType == (int) LineType.Mid);
+        adcWinRateHistory = userWinRateHistories.First(e => e.LineType == (int) LineType.Adc);
+        supWinRateHistory = userWinRateHistories.First(e => e.LineType == (int) LineType.Support);
+    }
+
+    async Task AddNewUserBtnAsync()
+    {
+        var user = await UserManager.GetUserAsync(nickNameToAdd);
+        if (user != null)
+        {
+            return;
+        }
+
+        await UserManager.SetNewUserAsync(nickNameToAdd);
+        nickNameToAdd = string.Empty;
+        CloseDialog();
+    }
+
+    async Task EditUserAsync()
+    {
+        List<UserWinRateHistory> list = new List<UserWinRateHistory>()
+        {
+            topWinRateHistory, jgWinRateHistory, midWinRateHistory, adcWinRateHistory, supWinRateHistory
+        };
+
+        await RankManager.SetUserWinRateHistory(list, userInfo.Seq, userInfo.UserName);
+
+        if (userInfo.UserName != nickNameBeforeEdit)
+        {
+            var isDuplicatedNickName = await UserManager.SetUserNickNameAsync(userInfo);
+
+            if (!isDuplicatedNickName)
+            {
+                nickNameBeforeEdit = userInfo.UserName;
+            }
+            else
+            {
+                //Show(MatToastType.Warning);
+                return;
+            }    
+        }
         
+        //Show(MatToastType.Success);
     }
 }
 
 @code
 {
-    private bool dialogIsOpen = false;
-    private bool addAllBatter = false;
-    
-    private string batterBasicIdToAddStringForm = "0";
+    string nickNameToAdd = string.Empty;
+    bool dialogIsOpen = false;
     
     void OpenDialog()
     {
@@ -80,16 +202,59 @@
     {
         dialogIsOpen = false;
     }
-    
-    private void Toggle1(bool toggled)
+}
+
+@*@code {
+    private string title = "";
+    private string message = "";
+    private bool showProgressBar;
+    private bool showCloseButton;
+    private bool actionOnClick;
+    private string maximumOpacity;
+
+    private string showTransitionDuration;
+    private string visibleStateDuration;
+    private string hideTransitionDuration;
+
+    private bool requireInteraction;
+
+    protected override void OnInitialized()
     {
-        if (toggled)
+        showProgressBar = Toaster.Configuration.ShowProgressBar;
+        showCloseButton = Toaster.Configuration.ShowCloseButton;
+        maximumOpacity = Toaster.Configuration.MaximumOpacity.ToString();
+
+        showTransitionDuration = Toaster.Configuration.ShowTransitionDuration.ToString();
+        visibleStateDuration = Toaster.Configuration.VisibleStateDuration.ToString();
+        hideTransitionDuration = Toaster.Configuration.HideTransitionDuration.ToString();
+
+        requireInteraction = Toaster.Configuration.RequireInteraction;
+    }
+
+    public void Show(MatToastType type, string icon = "")
+    {
+        if (type == MatToastType.Warning)
         {
-            addAllBatter = true;
+            message = "Duplicated NickName!";
+            icon = "error";
         }
         else
         {
-            addAllBatter = false;
+            message = "Change Success!";
+            icon = "check_circle";
         }
+
+        Toaster.Add(message, type, title, icon, config =>
+        {
+            config.ShowCloseButton = showCloseButton;
+            config.ShowProgressBar = showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(hideTransitionDuration);
+
+            config.RequireInteraction = requireInteraction;
+        });
     }
-}
+}*@

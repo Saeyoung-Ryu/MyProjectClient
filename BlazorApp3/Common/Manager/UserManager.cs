@@ -63,5 +63,24 @@ namespace BlazorApp3.Common.Manager
                 return setNewUserRes.IsSuccess;
             }
         }
+        
+        public static async Task<bool> SetUserNickNameAsync(UserInfo userInfo)
+        {
+            Console.WriteLine("Protocol : SetUserNickName");
+            
+            using (var client = new HttpClient())
+            {
+                SetUserNickNameReq setTeamReq = new SetUserNickNameReq()
+                {
+                    NickName = userInfo.UserName,
+                    Seq = userInfo.Seq
+                };
+                
+                client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
+                var response = await client.PostAsJsonAsync("/api/SetUserNickName", setTeamReq);
+                var setUserNickNameRes = await response.Content.ReadFromJsonAsync<SetUserNickNameRes>();
+                return setUserNickNameRes.IsDuplicatedNickName;
+            }
+        }
     }
 }

@@ -79,16 +79,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         isLoading = true;
-        using (var client = new HttpClient())
-        {
-            GetMatchHistoryReq getMatchHistoryReq = new GetMatchHistoryReq();
-            
-            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
-            var response = await client.PostAsJsonAsync("/api/GetMatchHistory", getMatchHistoryReq);
-            Console.WriteLine("Protocol : GetMatchHistory");
-            var getMatchHistoryRes = await response.Content.ReadFromJsonAsync<GetMatchHistoryRes>();
-            logMatchHistoryList = getMatchHistoryRes.LogMatchHistoryList.OrderByDescending(e => e.Time).ToList();
-        }
+        var matchHistoryRes = await MatchHistoryManager.GetMatchHistoryAsync();
+        logMatchHistoryList = matchHistoryRes.LogMatchHistoryList.OrderByDescending(e => e.Time).ToList();
         isLoading = false;
     }
     
@@ -97,18 +89,8 @@ else
         canClick = false;
         
         logMatchHistory.Team1Win = 1;
-        using (var client = new HttpClient())
-        {
-            SetTeamWinReq setTeamWinReq = new SetTeamWinReq()
-            {
-                LogMatchHistory = logMatchHistory,
-                WinTeam = 1
-            };
-            
-            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
-            var response = await client.PostAsJsonAsync("/api/SetTeamWin", setTeamWinReq);
-            Console.WriteLine("Protocol : SetTeamWin");
-        }
+        await MatchHistoryManager.SetTeamWinAsync(logMatchHistory);
+        
         canClick = true;
     }
 
@@ -117,26 +99,8 @@ else
         canClick = false;
         
         logMatchHistory.Team2Win = 1;
-        using (var client = new HttpClient())
-        {
-            SetTeamWinReq setTeamWinReq = new SetTeamWinReq()
-            {
-                LogMatchHistory = logMatchHistory,
-                WinTeam = 2
-            };
-            
-            client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
-            var response = await client.PostAsJsonAsync("/api/SetTeamWin", setTeamWinReq);
-            Console.WriteLine("Protocol : SetTeamWin");
-        }
+        await MatchHistoryManager.SetTeamWinAsync(logMatchHistory);
+        
         canClick = true;
-    }
-
-    private async Task ResetRankAsync()
-    {
-        isLoading = true;
-        /*await RankManager.SetOverallRankInfoListAsync();
-        await RankManager.SetOtherLaneRanks();*/
-        isLoading = false;
     }
 }

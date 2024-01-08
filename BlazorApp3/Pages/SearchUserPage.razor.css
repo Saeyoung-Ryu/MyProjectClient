@@ -1,3 +1,7 @@
+#Border-Dotted{border: 2px dotted}
+#Border-Solid{border: 1px solid}
+#Border-Solid3px{border: 3px solid #1a1e21}
+
 .TextStyle2 {
     color: #ffffff;
     text-shadow: 2px 2px 0px #bdbdbd;

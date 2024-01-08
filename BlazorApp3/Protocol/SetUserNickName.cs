@@ -5,7 +5,7 @@ namespace BlazorApp3.Protocol;
 
 public class SetUserNickNameRes
 {
-    
+    public bool IsDuplicatedNickName { get; set; }
 }
 
 public class SetUserNickNameReq

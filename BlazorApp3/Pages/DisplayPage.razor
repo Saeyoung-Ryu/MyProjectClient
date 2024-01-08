@@ -11,7 +11,7 @@
 <nav>
   <ul>
     <li><a href="">홈</a></li>
-    <li><a href="SearchUser">멤버 검색</a></li>
+    <li><a href="UserManager">멤버 검색</a></li>
     <li><a href="DivideTeam">팀 나누기</a></li>
     <li><a href="MatchHistory">매칭 전적</a></li>
     <li><a href="Ranking">랭킹</a></li>
@@ -39,7 +39,7 @@
     string[] stringArray = currentUrl.Split(new char[] {'/'});
     HeaderText = stringArray.Last();
 
-      if (HeaderText == "SearchUser")
+      if (HeaderText == "UserManager")
         HeaderText = "멤버 검색";
       if (HeaderText == "DivideTeam")
         HeaderText = "팀 나누기";
