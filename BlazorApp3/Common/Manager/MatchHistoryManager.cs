@@ -23,12 +23,18 @@ public class MatchHistoryManager
     {
         Console.WriteLine("Protocol : SetTeamWin");
         
+        int winTeam = 0;
+        if (logMatchHistory.Team1Win == 1)
+            winTeam = 1;
+        else if (logMatchHistory.Team2Win == 1)
+            winTeam = 2;
+        
         using (var client = new HttpClient())
         {
             SetTeamWinReq setTeamWinReq = new SetTeamWinReq()
             {
                 LogMatchHistory = logMatchHistory,
-                WinTeam = 1
+                WinTeam = winTeam
             };
             
             client.BaseAddress = new Uri(MyProjectInfoConfig.Instance.ServerAddress);
