@@ -210,7 +210,6 @@
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/staticwebassets.pack.json
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/DisplayPage.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/DivideTeamPage.razor.rz.scp.css
-/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/EditUser.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Footer.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/HomePage.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/LoginPage.razor.rz.scp.css

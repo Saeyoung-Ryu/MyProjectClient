@@ -104,3 +104,62 @@ else
         canClick = true;
     }
 }
+
+@inject IMatToaster Toaster
+
+@code{
+    private long firstDummyClubSeq = 0;
+    private long lastDummyClubSeq = 0;
+    
+    private string title = "";
+    private string message = "";
+    private bool showProgressBar;
+    private bool showCloseButton;
+    private bool actionOnClick;
+    private string maximumOpacity;
+
+    private string showTransitionDuration;
+    private string visibleStateDuration;
+    private string hideTransitionDuration;
+
+    private bool requireInteraction;
+
+    protected override void OnInitialized()
+    {
+        showProgressBar = Toaster.Configuration.ShowProgressBar;
+        showCloseButton = Toaster.Configuration.ShowCloseButton;
+        maximumOpacity = Toaster.Configuration.MaximumOpacity.ToString();
+
+        showTransitionDuration = Toaster.Configuration.ShowTransitionDuration.ToString();
+        visibleStateDuration = Toaster.Configuration.VisibleStateDuration.ToString();
+        hideTransitionDuration = Toaster.Configuration.HideTransitionDuration.ToString();
+
+        requireInteraction = Toaster.Configuration.RequireInteraction;
+    }
+
+    public void Show(MatToastType type, string icon, string message)
+    {
+        Toaster.Add(message, type, title, icon, config =>
+        {
+            config.ShowCloseButton = showCloseButton;
+            config.ShowProgressBar = showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(hideTransitionDuration);
+
+            config.RequireInteraction = requireInteraction;
+        });
+    }
+
+    private void ShowUpdateSuccess()
+    {
+        Show(MatToastType.Info, "check_circle", $"Updated Successfully");
+    }
+
+    private void ShowError(string errorMessage)
+    {
+        Show(MatToastType.Warning, "error", $"{errorMessage}");
+    }
+}
