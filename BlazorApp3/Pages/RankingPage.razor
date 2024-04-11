@@ -206,39 +206,3 @@ else
 </div></div>
 
 <Footer></Footer>
-@code
-{
-    private GetRankingRes RankingInfo { get; set; }
-    
-    protected override async Task OnInitializedAsync()
-    {
-        isLoading = true;
-        RankingInfo = await RankManager.GetRankAsync();
-        isLoading = false;
-    }
-}
-
-@code
-{
-    private bool isLoading = false;
-    private int tabIndex = 0;
-}
-
-@code
-{
-    private async Task ResetRankingBtnAsync()
-    {
-        isLoading = true;
-        
-        var rankInfo = await RankManager.ResetRankAsync();
-        
-        RankingInfo.TotalRankList = rankInfo.TotalRankList;
-        RankingInfo.TopRankList = rankInfo.TopRankList;
-        RankingInfo.JgRankList = rankInfo.JgRankList;
-        RankingInfo.MidRankList = rankInfo.MidRankList;
-        RankingInfo.AdcRankList = rankInfo.AdcRankList;
-        RankingInfo.SupRankList = rankInfo.SupRankList;
-
-        isLoading = false;
-    }
-}

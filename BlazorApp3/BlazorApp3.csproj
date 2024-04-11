@@ -29,4 +29,19 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Pages\SearchUserPage.cs">
+        <DependentUpon>SearchUserPage.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\DivideTeamPage.cs">
+        <DependentUpon>DivideTeamPage.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\MatchHistoryPage.cs">
+        <DependentUpon>MatchHistoryPage.razor</DependentUpon>
+      </Compile>
+      <Compile Update="Pages\RankingPage.cs">
+        <DependentUpon>RankingPage.razor</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
