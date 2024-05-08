@@ -1,6 +1,7 @@
 .TextStyle2[b-bg7gf7jof1] {
     color: #ffffff;
-    text-shadow: 2px 2px 0px #bdbdbd;
+    font-weight: bold; /* Make the text thicker */
+    font-size: 54px; /* Increase the font size */
 }
 
 .TextStyle3[b-bg7gf7jof1] { font-family: fantasy; }

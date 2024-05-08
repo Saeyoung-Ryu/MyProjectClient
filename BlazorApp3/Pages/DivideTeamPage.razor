@@ -19,7 +19,7 @@
             <section class="content">
                 <div class="search-container" style="display: flex; align-items: center;">
                     <div style="display: flex; flex-direction: column; align-items: center;">
-                        <img src="testImage.jpg" alt="UserSearch Image" style="width: 280px; height: 170px;" />
+                        @*<img src="testImage.jpg" alt="UserSearch Image" style="width: 280px; height: 170px;" />*@
                         <div style="display: flex; align-items: center; margin-top: 10px;">
                             <MatTextField @onkeydown="HandleKeyPress" @bind-Value="@NickName" Label="Enter NickName" Icon="search" style="line-height: 2.8; height: 2.8em; margin-right: 10px;"></MatTextField>
                             <button type="button" class="btn btn-secondary" @onclick="@InsertBtnAsync" style="line-height: 2.8; height: 2.8em;">추가하기</button>

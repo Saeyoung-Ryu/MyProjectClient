@@ -42,6 +42,9 @@
       <Compile Update="Pages\RankingPage.cs">
         <DependentUpon>RankingPage.razor</DependentUpon>
       </Compile>
+      <Compile Update="Pages\LoginPage.cs">
+        <DependentUpon>LoginPage.razor</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

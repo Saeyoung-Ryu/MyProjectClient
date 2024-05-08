@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject NavigationManager NavManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,11 +12,14 @@
 
 <nav>
   <ul>
-    <li><a href="">홈</a></li>
-    <li><a href="UserManager">멤버 검색</a></li>
-    <li><a href="DivideTeam">팀 나누기</a></li>
-    <li><a href="MatchHistory">매칭 전적</a></li>
-    <li><a href="Ranking">랭킹</a></li>
+    @if (!NavigationManager.Uri.Contains("FirstPage"))
+    {
+      <li><a href="">홈</a></li>
+      <li><a href="UserManager">멤버 검색</a></li>
+      <li><a href="DivideTeam">팀 나누기</a></li>
+      <li><a href="MatchHistory">매칭 전적</a></li>
+      <li><a href="Ranking">랭킹</a></li>
+    }
   </ul>
 </nav>
 <header>
@@ -49,6 +54,8 @@
         HeaderText = "랭킹";  
       if(HeaderText == "Home")
         HeaderText = "홈";
+      if (HeaderText == "FirstPage")
+        HeaderText = "Welcome to TEAM GG";
     
     StateHasChanged();
   }

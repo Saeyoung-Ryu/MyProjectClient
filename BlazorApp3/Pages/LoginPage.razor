@@ -14,7 +14,7 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<img src="welcomeImage.jpg" alt="Example Image" style="width: 370px; height: 210px;" />
+@*<img src="welcomeImage.jpg" alt="Example Image" style="width: 370px; height: 210px;" />*@
 <div class="login-form">
     <form>
         @if (isRegister)
@@ -61,32 +61,3 @@
 </div>
 
 <Footer></Footer>
-
-@inject NavigationManager Navigation
-@code
-{
-    LoginInfo loginInfo = new LoginInfo();
-    string reEnterPassword = string.Empty;
-    
-    bool isRegister = false;
-    private void NavigateToInitPage()
-    {
-        Navigation.NavigateTo("/Home");
-    }
-
-    private void NeedToRegisterBtn()
-    {
-        isRegister = true;
-    }
-
-    private async Task RegisterBtnAsync()
-    {
-        if (loginInfo.Password != reEnterPassword)
-        {
-            
-            return;
-        }
-        
-        isRegister = false;
-    }
-}

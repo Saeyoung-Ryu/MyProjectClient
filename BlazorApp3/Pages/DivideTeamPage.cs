@@ -243,47 +243,4 @@ public partial class DivideTeamPage
             Console.WriteLine("Protocol : MatchHistory/SetTeam");
         }
     }
-
-    // Team1 = 1팀, 2팀 랜덤선택된 그 팀
-    private async Task Team1WinBtnAsync()
-    {
-        Console.WriteLine("1팀 승리");
-    }
-
-    private async Task Team2WinBtnAsync()
-    {
-        Console.WriteLine("2팀 승리");
-    }
-    
-    void OpenDialog()
-    {
-        dialogIsOpen = true;
-    }
- 
-    void CloseDialog()
-    {
-        dialogIsOpen = false;
-    }
-    
-    public async Task AddNewUserAsyncBtn()
-    {
-        var userInfo = await UserManager.GetUserAsync(NickName);
-
-        if (userInfo != null)
-        {
-            dialogIsOpen = false;
-            return;
-        }
-
-        var isSuccess = await UserManager.SetNewUserAsync(newNickName);
-        
-        if (isSuccess == false)
-        {
-            dialogIsOpen = false;
-            return;
-        }
-        
-        newNickName = String.Empty;
-        dialogIsOpen = false;
-    }
 }
