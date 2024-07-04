@@ -54,6 +54,9 @@
       <Compile Update="Pages\Home.cs">
         <DependentUpon>Home.razor</DependentUpon>
       </Compile>
+      <Compile Update="Pages\DashBoardPage.cs">
+        <DependentUpon>DashBoardPage.razor</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

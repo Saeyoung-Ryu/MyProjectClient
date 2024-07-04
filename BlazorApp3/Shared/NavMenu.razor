@@ -1,6 +1,6 @@
 ﻿<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 custom-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">LOGO</a>
+        <a class="navbar-brand" href=""><span class="oi oi-home" aria-hidden="true"></span></a>
         <button class="navbar-toggler @NavButtonCssClass" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-label="Toggle navigation" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
@@ -8,18 +8,18 @@
         <div class="collapse navbar-collapse @NavBarCssClass" id="navbarCollapse" @onclick="ToggleNavMenu">
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="ShowDashboardCreatePopup">
+                        <span class="oi oi-plus" aria-hidden="true"></span> 대시보드 생성
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="counter">
-                        <span class="oi oi-plus" aria-hidden="true"></span> Counter
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="ShowPremiumShopPopup">
+                        <span class="oi oi-star" aria-hidden="true"></span> PREMIUM
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="fetchdata">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="ShowLoginPopup">
+                        <span class="oi oi-account-login" aria-hidden="true"></span> 로그인
                     </NavLink>
                 </li>
             </ul>
@@ -27,13 +27,113 @@
     </div>
 </nav>
 
+@if (openDashBoardCreatePopUp)
+{
+    <div class="modal-backdrop show"></div> <!-- Semi-transparent background -->
+    <div class="modal show d-block" tabindex="-1" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">대시보드 생성</h5>
+                    <button type="button" class="btn-close" aria-label="Close" @onclick="CloseDashboardCreatePopup"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your form or content here -->
+                    <p>Modal content goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseDashboardCreatePopup">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (openPremiumShopPopUp)
+{
+    <div class="modal-backdrop show"></div> <!-- Semi-transparent background -->
+    <div class="modal show d-block" tabindex="-1" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">프리미엄 구매</h5>
+                    <button type="button" class="btn-close" aria-label="Close" @onclick="ClosePremiumShopPopup"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your form or content here -->
+                    <p>Modal content goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="ClosePremiumShopPopup">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (openLoginPopUp)
+{
+    <div class="modal-backdrop show"></div> <!-- Semi-transparent background -->
+    <div class="modal show d-block" tabindex="-1" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">로그인</h5>
+                    <button type="button" class="btn-close" aria-label="Close" @onclick="CloseLoginPopup"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your form or content here -->
+                    <p>Modal content goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseLoginPopup">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
     private bool collapseNavMenu = true;
     private string? NavBarCssClass => collapseNavMenu ? null : "show";
     private string? NavButtonCssClass => collapseNavMenu ? "collapsed" : null;
+    
+    private bool openDashBoardCreatePopUp = false;
+    private bool openLoginPopUp = false;
+    private bool openPremiumShopPopUp = false;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void ShowDashboardCreatePopup(MouseEventArgs e)
+    {
+        openDashBoardCreatePopUp = true;
+    }
+
+    private void CloseDashboardCreatePopup()
+    {
+        openDashBoardCreatePopUp = false;
+    }
+    
+    private void ShowLoginPopup(MouseEventArgs e)
+    {
+        openLoginPopUp = true;
+    }
+
+    private void CloseLoginPopup()
+    {
+        openLoginPopUp = false;
+    }
+    
+    private void ShowPremiumShopPopup(MouseEventArgs e)
+    {
+        openPremiumShopPopUp = true;
+    }
+
+    private void ClosePremiumShopPopup()
+    {
+        openPremiumShopPopUp = false;
     }
 }

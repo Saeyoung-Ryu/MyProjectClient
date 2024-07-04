@@ -1,14 +1,17 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+@inject NavigationManager Navigation
+@inject IMatToaster Toaster
+
+<PageTitle>롤 팀짜기</PageTitle>
 
 <br><br><br><br>
 <div class="text-center">
     <img src="Logo.jpg" alt="Logo" />
     
     <div class="input-group mt-3 justify-content-center">
-        <input type="text" class="form-control" style="max-width: 500px;" placeholder="Search DashBoard...">
-        <button class="btn btn-secondary">SEARCH</button>
+        <input type="text" class="form-control" style="max-width: 500px;" placeholder="대시보드 검색" @bind="searchedDashBoardName" @onkeydown="HandleKeyPress">
+        <button class="btn btn-secondary" @onclick="MoveToDashBoardPage">검색</button>
     </div>
     
     <br><br><br>
@@ -43,10 +46,87 @@
 
             </MatTab>
 
-            <MatTab Label="My DashBoard">
+            <MatTab Label="내 대시보드">
 
             </MatTab>
         </MatTabGroup>
     </div>
 </div>
 
+@code 
+{
+    private string _title = "";
+    private string _message = "Test Message";
+    private bool _showProgressBar;
+    private bool _showCloseButton;
+    private bool _actionOnClick;
+    private string _maximumOpacity;
+
+    private string _showTransitionDuration;
+    private string _visibleStateDuration;
+    private string _hideTransitionDuration;
+
+    private bool _requireInteraction;
+
+    public string _maxDisplayedToasts
+    {
+        get { return Toaster.Configuration.MaxDisplayedToasts.ToString(); }
+        set { Toaster.Configuration.MaxDisplayedToasts = Convert.ToInt32(value); }
+    }
+
+    private string _toastPosition
+    {
+        get { return Toaster.Configuration.Position.ToString(); }
+        set { Toaster.Configuration.Position = (MatToastPosition)Enum.Parse(typeof(MatToastPosition), value); }
+    }
+
+    private void ShowDashBoardNotExist(MatToastType type, string message, string icon = "")
+    {
+        Toaster.Add(message, type, _title, icon, config =>
+        {
+            config.ShowCloseButton = _showCloseButton;
+            config.ShowProgressBar = _showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(_maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(_showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(_visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(_hideTransitionDuration);
+
+            config.RequireInteraction = _requireInteraction;
+
+            if (_actionOnClick)
+            {
+                config.Onclick = toast =>
+                {
+                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
+                    return Task.CompletedTask;
+                };
+            }
+        });
+    }
+    
+    private void ShowError(MatToastType type, string message, string icon = "")
+    {
+        Toaster.Add(message, type, _title, icon, config =>
+        {
+            config.ShowCloseButton = _showCloseButton;
+            config.ShowProgressBar = _showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(_maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(_showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(_visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(_hideTransitionDuration);
+
+            config.RequireInteraction = _requireInteraction;
+
+            if (_actionOnClick)
+            {
+                config.Onclick = toast =>
+                {
+                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
+                    return Task.CompletedTask;
+                };
+            }
+        });
+    }
+}

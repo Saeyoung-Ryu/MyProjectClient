@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MatBlazor;
+using Protocol.Type;
 using RiotSharp.Misc;
 using Syncfusion.Blazor;
 
@@ -18,6 +19,7 @@ builder.Services.AddMatToaster(config =>
     config.MaximumOpacity = 95;
     config.VisibleStateDuration = 3000;
 });
+builder.Services.AddScoped<Player>();
 
 var app = builder.Build();
 
