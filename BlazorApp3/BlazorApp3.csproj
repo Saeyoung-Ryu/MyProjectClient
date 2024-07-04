@@ -21,6 +21,12 @@
       <None Update="Pages\UserAdd.razor.css">
         <DependentUpon>Counter.razor</DependentUpon>
       </None>
+      <None Update="Pages\nicepage.razor.js">
+        <DependentUpon>nicepage.razor</DependentUpon>
+      </None>
+      <None Update="Pages\Nicepage.razor.js">
+        <DependentUpon>Nicepage.razor</DependentUpon>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

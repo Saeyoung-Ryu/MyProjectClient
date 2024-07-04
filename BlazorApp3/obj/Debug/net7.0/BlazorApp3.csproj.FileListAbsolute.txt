@@ -217,7 +217,6 @@
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/RankingPage.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/SearchUserPage.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/SoloRankBattle.razor.rz.scp.css
-/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Test.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Shared/MainLayout.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Shared/NavMenu.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/bundle/BlazorApp3.styles.css
@@ -228,3 +227,6 @@
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/BlazorApp3.pdb
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/BlazorApp3.genruntimeconfig.cache
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/ref/BlazorApp3.dll
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Test2.razor.rz.scp.css
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Nicepage.razor.rz.scp.css
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Home.razor.rz.scp.css

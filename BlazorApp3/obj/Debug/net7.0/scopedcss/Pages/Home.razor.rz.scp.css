@@ -1,0 +1,188 @@
+.text-center[b-kob6kijb82] {
+    text-align: center;
+}
+
+.text-center img[b-kob6kijb82] {
+    max-width: 10%; /* Ensure image fits within its container */
+}
+
+.input-group[b-kob6kijb82] {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Adjust as needed */
+}
+
+.input-group .form-control[b-kob6kijb82] {
+    flex: 1; /* Take remaining space */
+}
+
+.input-group .btn[b-kob6kijb82] {
+    margin-left: 10px; /* Space between input and button */
+}
+
+.input-group[b-kob6kijb82] {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Adjust as needed */
+}
+
+.input-group .form-control[b-kob6kijb82] {
+    flex: 1; /* Take remaining space */
+}
+
+.input-group .btn[b-kob6kijb82] {
+    margin-left: 10px; /* Space between input and button */
+}
+
+.u-section-1 .u-sheet-1[b-kob6kijb82] {
+    min-height: 183px;
+}
+
+.u-section-1 .u-text-1[b-kob6kijb82] {
+    font-weight: 900;
+    margin: 104px auto 1px;
+}.u-section-2 .u-sheet-1[b-kob6kijb82] {
+     min-height: 307px;
+ }
+
+.u-section-2 .u-form-1[b-kob6kijb82] {
+    height: 68px;
+    width: 740px;
+    margin: 107px auto 60px;
+}
+
+.u-section-2 .u-label-1[b-kob6kijb82] {
+    font-weight: 700;
+}
+
+.u-section-2 .u-btn-1[b-kob6kijb82] {
+    --radius: 50px;
+}
+
+@media (max-width: 991px) {
+    .u-section-2 .u-form-1[b-kob6kijb82] {
+        width: 720px;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-2 .u-form-1[b-kob6kijb82] {
+        width: 540px;
+    }
+}
+
+@media (max-width: 575px) {
+    .u-section-2 .u-form-1[b-kob6kijb82] {
+        width: 340px;
+    }
+}.u-section-3 .u-sheet-1[b-kob6kijb82] {
+     min-height: 599px;
+ }
+
+.u-section-3 .u-tabs-1[b-kob6kijb82] {
+    min-height: 410px;
+    height: auto;
+    margin: 60px 0 60px auto;
+}
+
+.u-section-3 .u-tab-item-1[b-kob6kijb82] {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.u-section-3 .u-tab-link-1[b-kob6kijb82] {
+    font-size: 1.25rem;
+    background-image: none;
+    font-weight: 600;
+    padding: 10px 25px;
+}
+
+.u-section-3 .u-tab-item-2[b-kob6kijb82] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.u-section-3 .u-tab-link-2[b-kob6kijb82] {
+    font-size: 1.25rem;
+    background-image: none;
+    font-weight: 600;
+    padding: 10px 25px;
+}
+
+.u-section-3 .u-tab-pane-1[b-kob6kijb82] {
+    background-image: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.u-section-3 .u-container-layout-1[b-kob6kijb82] {
+    padding: 30px 25px;
+}
+
+.u-section-3 .u-table-1[b-kob6kijb82] {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.u-section-3 .u-tab-pane-2[b-kob6kijb82] {
+    background-image: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.u-section-3 .u-container-layout-2[b-kob6kijb82] {
+    padding: 30px 25px;
+}
+
+.u-section-3 .u-table-2[b-kob6kijb82] {
+    margin: 0 0 -30px;
+}
+
+@media (max-width: 1199px) {
+    .u-section-3 .u-tabs-1[b-kob6kijb82] {
+        margin-right: initial;
+        margin-left: initial;
+    }
+
+    .u-section-3 .u-table-1[b-kob6kijb82] {
+        height: 256px;
+    }
+
+    .u-section-3 .u-table-2[b-kob6kijb82] {
+        margin-right: initial;
+        margin-left: initial;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-3 .u-container-layout-1[b-kob6kijb82] {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .u-section-3 .u-container-layout-2[b-kob6kijb82] {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}.u-section-4 .u-sheet-1[b-kob6kijb82] {
+     min-height: 400px;
+ }
+
+.u-table-entity colgroup col[b-kob6kijb82] {
+    width: 25%; /* Adjust width as per your requirements */
+}
+
+.u-table-entity[b-kob6kijb82] {
+    width: 100%; /* Ensure tables take full width of their container */
+    max-width: 800px; /* Set maximum width to prevent stretching */
+    margin: 0 auto; /* Center-align tables */
+    table-layout: fixed; /* Fix table layout to prevent columns from expanding */
+}
+
+.u-table-entity colgroup col[b-kob6kijb82] {
+    width: 25%; /* Adjust column widths as needed */
+}
+
+.tab-button[b-kob6kijb82] {
+    padding: 10px 20px; /* Adjust padding as needed */
+}

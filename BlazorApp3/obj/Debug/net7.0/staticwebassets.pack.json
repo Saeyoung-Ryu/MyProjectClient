@@ -1,8 +1,16 @@
 {
   "Files": [
     {
+      "Id": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Nicepage.razor.js",
+      "PackagePath": "staticwebassets/Pages/Nicepage.razor.js"
+    },
+    {
       "Id": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/BlazorApp3.bundle.scp.css",
       "PackagePath": "staticwebassets/BlazorApp3.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/Logo.jpg",
+      "PackagePath": "staticwebassets/Logo.jpg"
     },
     {
       "Id": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/UserSearchImage.jpg",

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "pFU0JRaY8gkdH+IAVSCwwTQAsC+2YaLwcCNJJlg2Zko=",
+  "Hash": "j6OI7EwfpoJcVUlwLqLB8hVAdtSpFD3JmMXEisIWzWE=",
   "Source": "BlazorApp3",
   "BasePath": "_content/BlazorApp3",
   "Mode": "Default",
@@ -340,6 +340,25 @@
       "OriginalItemSpec": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/projectbundle/BlazorApp3.bundle.scp.css"
     },
     {
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Nicepage.razor.js",
+      "SourceId": "BlazorApp3",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/",
+      "BasePath": "_content/BlazorApp3",
+      "RelativePath": "Pages/Nicepage.razor.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "Pages/Nicepage.razor.js"
+    },
+    {
       "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/css/bootstrap/bootstrap.min.css",
       "SourceId": "BlazorApp3",
       "SourceType": "Discovered",
@@ -585,6 +604,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.png"
+    },
+    {
+      "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/Logo.jpg",
+      "SourceId": "BlazorApp3",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/",
+      "BasePath": "_content/BlazorApp3",
+      "RelativePath": "Logo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Logo.jpg"
     },
     {
       "Identity": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/wwwroot/matchHistoryImage.jpg",

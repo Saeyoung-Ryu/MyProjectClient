@@ -1,16 +1,22 @@
 ﻿@inherits LayoutComponentBase
 
-<PageTitle></PageTitle>
+<div class="container-fluid p-0">
+    <NavMenu />
 
-<div class="page">
-    @*<div class="media">
-        <NavMenu/>
-    </div>*@
+    <div class="content">
+        @Body
+    </div>
 
-    <main>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+    <footer class="footer">
+        <div class="container text-center">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <hr/>
+            <p>&copy; 2024 Your Company</p>
+            <br>
+        </div>
+    </footer>
 </div>
+
+@code {
+    // Optional: Add any layout-specific code here
+}

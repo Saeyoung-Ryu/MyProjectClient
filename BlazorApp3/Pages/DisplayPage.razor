@@ -19,7 +19,9 @@
       <li><a href="DivideTeam">팀 나누기</a></li>
       <li><a href="MatchHistory">매칭 전적</a></li>
       <li><a href="Ranking">랭킹</a></li>
+      <li class="right-align"><a href="@GetLoginLogoutUrl()">@GetLoginLogoutText()</a></li>
     }
+
   </ul>
 </nav>
 <header>
@@ -58,5 +60,16 @@
         HeaderText = "Welcome to TEAM GG";
     
     StateHasChanged();
+  }
+  
+  private bool IsLoggedIn { get; set; } = false; // Replace with actual login status check
+  private string GetLoginLogoutText()
+  {
+    return IsLoggedIn ? "로그아웃" : "로그인";
+  }
+
+  private string GetLoginLogoutUrl()
+  {
+    return IsLoggedIn ? "Logout" : "Login";
   }
 }

@@ -42,6 +42,10 @@ build_metadata.AdditionalFiles.CssScope = b-b2osv66iin
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9vdGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-1mv1gcxori
 
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-kob6kijb82
+
 [/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/HomePage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-j1jpucb9qy
@@ -53,6 +57,10 @@ build_metadata.AdditionalFiles.CssScope = b-jkl3omc22p
 [/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/MatchHistoryPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWF0Y2hIaXN0b3J5UGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-pxsio5fims
+
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Nicepage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTmljZXBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-seamr9rq0n
 
 [/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/RankingPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmFua2luZ1BhZ2UucmF6b3I=
@@ -66,9 +74,9 @@ build_metadata.AdditionalFiles.CssScope = b-i5ov1uz8as
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU29sb1JhbmtCYXR0bGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-8nfo0tw6cx
 
-[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Test.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVzdC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-0ets44o0yo
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Test2.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVzdDIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-irz78hpu4b
 
 [/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=

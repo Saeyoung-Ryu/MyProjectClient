@@ -67,3 +67,7 @@ main {
     margin-top: 20px; /* Adjust the margin as needed */
 }
 
+.nav ul li.right-align {
+    float: right;
+}
+

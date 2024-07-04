@@ -1,0 +1,17 @@
+body[b-irz78hpu4b] {
+    background: #1E1930;
+    color: #D2D1D5;
+}
+tr:nth-child(even)[b-irz78hpu4b] {
+    background-color: #2e2649;
+}
+tr:nth-child(odd)[b-irz78hpu4b] {
+    background-color: #423b5b;
+}
+th[b-irz78hpu4b] {
+    background-color: #342F44;
+    color: white;
+}
+.noBorder[b-irz78hpu4b] {
+    border:none !important;
+}

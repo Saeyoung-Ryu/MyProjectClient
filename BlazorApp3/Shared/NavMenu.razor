@@ -1,55 +1,39 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 custom-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Menu</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+        <a class="navbar-brand" href="">LOGO</a>
+        <button class="navbar-toggler @NavButtonCssClass" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-label="Toggle navigation" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse @NavBarCssClass" id="navbarCollapse" @onclick="ToggleNavMenu">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="counter">
+                        <span class="oi oi-plus" aria-hidden="true"></span> Counter
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink class="nav-link" href="fetchdata">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                    </NavLink>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="SearchUser">
-                <span class="oi oi-home" aria-hidden="true"></span> 유저 검색
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="DivideTeam">
-                <span class="oi oi-account-login" aria-hidden="true"></span> 내전 팀 짜기
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="SoloRankBattle">
-                <span class="oi oi-account-logout" aria-hidden="true"></span> 솔랭 내기
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="MatchHistory">
-                <span class="oi oi-clock" aria-hidden="true"></span> 매치 기록
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Ranking">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> 랭킹
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="EditUser">
-                <span class="oi oi-audio" aria-hidden="true"></span> 유저 정보 수정
-            </NavLink>
-        </div>
-    </nav>
-</div>
+</nav>
 
 @code {
     private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string? NavBarCssClass => collapseNavMenu ? null : "show";
+    private string? NavButtonCssClass => collapseNavMenu ? "collapsed" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
-
 }

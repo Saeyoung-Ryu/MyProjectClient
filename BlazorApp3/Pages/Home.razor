@@ -1,0 +1,36 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<br><br><br><br>
+<div class="text-center">
+    <img src="Logo.jpg" alt="Logo" />
+    
+    <div class="input-group mt-3 justify-content-center">
+        <input type="text" class="form-control" style="max-width: 500px;" placeholder="Search DashBoard...">
+        <button class="btn btn-secondary">SEARCH</button>
+    </div>
+    
+    <br><br><br>
+    
+    <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 500px; color: #198754">
+        <MatTab Label="Tab1">
+                        
+        </MatTab>
+            
+        <MatTab Label="Tab2">
+                        
+        </MatTab>
+            
+        <MatTab Label="Tab3">
+                
+        </MatTab>
+    </MatTabGroup>
+
+</div>
+
+@code
+{
+    private int tabIndex = 0;
+}
+
