@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Db6NG/lmBsQ6eNkXXP0+UFrTMqShEsDR/bcJzsbojew2OsT7jhjT630bVPSQ4EbPx+9etWrIjNJsXRa7SYK8Hw==",
+  "dgSpecHash": "T0Fg5utMxqr6hZf3EN3/onvA3B632rFnr53Gy2cR86si93gk38lQsA1a3ehm6MtL0YuxfFbZO9CeNUqh7IpOXw==",
   "success": true,
   "projectFilePath": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/BlazorApp3.csproj",
   "expectedPackageFiles": [
     "/Users/saeyoungryu/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/matblazor/2.10.0/matblazor.2.10.0.nupkg.sha512",
+    "/Users/saeyoungryu/.nuget/packages/messagepack/2.5.168/messagepack.2.5.168.nupkg.sha512",
+    "/Users/saeyoungryu/.nuget/packages/messagepack.annotations/2.5.168/messagepack.annotations.2.5.168.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.aspnetcore.authorization/7.0.0/microsoft.aspnetcore.authorization.7.0.0.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.aspnetcore.components/7.0.0/microsoft.aspnetcore.components.7.0.0.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.aspnetcore.components.analyzers/7.0.0/microsoft.aspnetcore.components.analyzers.7.0.0.nupkg.sha512",
@@ -20,6 +22,7 @@
     "/Users/saeyoungryu/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.jsinterop/7.0.0/microsoft.jsinterop.7.0.0.nupkg.sha512",
+    "/Users/saeyoungryu/.nuget/packages/microsoft.net.stringtools/17.6.3/microsoft.net.stringtools.17.6.3.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.netcore.targets/1.1.0/microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/microsoft.win32.primitives/4.3.0/microsoft.win32.primitives.4.3.0.nupkg.sha512",

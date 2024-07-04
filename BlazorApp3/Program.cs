@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using BlazorApp3.Common;
-using BlazorApp3.Common.Manager;
 using MatBlazor;
 using RiotSharp.Misc;
 using Syncfusion.Blazor;
@@ -40,10 +38,5 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
-
-{
-    // DB Setting
-    MyProjectInfoConfig.Refresh(); // connectionString 가지고오는 함수
-}
 
 app.Run();

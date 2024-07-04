@@ -1,4 +1,4 @@
-using BlazorApp3.Common.Manager;
+/*using BlazorApp3.Common.Manager;
 using BlazorApp3.Protocol;
 
 namespace BlazorApp3.Pages;
@@ -31,4 +31,4 @@ public partial class RankingPage
 
         isLoading = false;
     }
-}
+}*/

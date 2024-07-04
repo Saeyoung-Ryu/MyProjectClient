@@ -1,4 +1,4 @@
-using BlazorApp3.Common;
+/*using BlazorApp3.Common;
 using BlazorApp3.Common.Manager;
 using BlazorApp3.Common.Type;
 using BlazorApp3.Protocol;
@@ -32,4 +32,4 @@ public partial class LoginPage
     {
         isRegister = true;
     }
-}
+}*/

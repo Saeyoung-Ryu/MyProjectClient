@@ -12,25 +12,41 @@
     </div>
     
     <br><br><br>
-    
-    <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 500px; color: #198754">
-        <MatTab Label="Tab1">
-                        
-        </MatTab>
-            
-        <MatTab Label="Tab2">
-                        
-        </MatTab>
-            
-        <MatTab Label="Tab3">
-                
-        </MatTab>
-    </MatTabGroup>
+    <div class="input-group mt-3 justify-content-center">
+        <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 500px; color: #198754">
+            <MatTab Label="인기 랭킹">
+                <br><br>
+                <table class="table">
+                   <thead>
+                   <tr>
+                       <th scope="col"></th>
+                       <th scope="col">대시보드</th>
+                       <th scope="col">방장</th>
+                       <th scope="col">점수</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   @for (int i = 1; i <= dashBoardInfos.Count; i++)
+                   {
+                       <tr>
+                           <td>@i</td>
+                           <td>@dashBoardInfos[i - 1].Name</td>
+                           <td>@dashBoardInfos[i - 1].MasterName</td>
+                           <td>@dashBoardInfos[i - 1].Point</td>
+                       </tr>
+                   }
+                   </tbody>
+                </table>
+            </MatTab>
 
+            <MatTab Label="점수 랭킹">
+
+            </MatTab>
+
+            <MatTab Label="My DashBoard">
+
+            </MatTab>
+        </MatTabGroup>
+    </div>
 </div>
-
-@code
-{
-    private int tabIndex = 0;
-}
 

@@ -13,6 +13,7 @@
           "Microsoft.Data.Sqlite": "7.0.5",
           "MySqlConnector": "2.2.5",
           "Newtonsoft.Json": "13.0.3",
+          "Protocol": "1.0.0",
           "RiotSharp": "4.0.0",
           "Syncfusion.Blazor.Buttons": "23.1.44",
           "Syncfusion.Blazor.Core": "23.1.44"
@@ -38,6 +39,26 @@
           "lib/net6.0/MatBlazor.dll": {
             "assemblyVersion": "2.10.0.0",
             "fileVersion": "2.10.0.0"
+          }
+        }
+      },
+      "MessagePack/2.5.168": {
+        "dependencies": {
+          "MessagePack.Annotations": "2.5.168",
+          "Microsoft.NET.StringTools": "17.6.3"
+        },
+        "runtime": {
+          "lib/net6.0/MessagePack.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.168.60572"
+          }
+        }
+      },
+      "MessagePack.Annotations/2.5.168": {
+        "runtime": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.168.60572"
           }
         }
       },
@@ -102,6 +123,14 @@
       },
       "Microsoft.Extensions.Primitives/7.0.0": {},
       "Microsoft.JSInterop/7.0.0": {},
+      "Microsoft.NET.StringTools/17.6.3": {
+        "runtime": {
+          "lib/net7.0/Microsoft.NET.StringTools.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "17.6.3.22601"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.Win32.Primitives/4.3.0": {
@@ -994,6 +1023,14 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "Protocol/1.0.0": {
+        "dependencies": {
+          "MessagePack": "2.5.168"
+        },
+        "runtime": {
+          "Protocol.dll": {}
+        }
       }
     }
   },
@@ -1016,6 +1053,20 @@
       "sha512": "sha512-VyxrSrtNxsj4XmFu5QI5CcBGGRMcFXfYmVGrTwuMhRkT052qXQii4c0lSgUMgTo4Ii11dMw/xr1wjosh3mA7LA==",
       "path": "matblazor/2.10.0",
       "hashPath": "matblazor.2.10.0.nupkg.sha512"
+    },
+    "MessagePack/2.5.168": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-F2qElrtPQF9tDIcrNicsFdoELaRlXlcSXxwvX4ExH7hU6LjdeIxpgrF2o5nqaZahLbSKaqkRtOU15+gVCjNiLw==",
+      "path": "messagepack/2.5.168",
+      "hashPath": "messagepack.2.5.168.nupkg.sha512"
+    },
+    "MessagePack.Annotations/2.5.168": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SYIU9qfbVJvpi/qGoQt9bdhLzuywhx5Mx0syWbYz4V+vr3WNHkQgWok+HUDnh84BVCQlxwMZhYGBaRNN15HoxA==",
+      "path": "messagepack.annotations/2.5.168",
+      "hashPath": "messagepack.annotations.2.5.168.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization/7.0.0": {
       "type": "package",
@@ -1114,6 +1165,13 @@
       "sha512": "sha512-C9diwCnaWZ7PH3zOyf2zgcwFEqbSU11DzCnUPXCf5cqXMFeZDrEDP+M74TiCURKJ5vxImRvMtD7RiHYCtkxoXw==",
       "path": "microsoft.jsinterop/7.0.0",
       "hashPath": "microsoft.jsinterop.7.0.0.nupkg.sha512"
+    },
+    "Microsoft.NET.StringTools/17.6.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N0ZIanl1QCgvUumEL1laasU0a7sOE5ZwLZVTn0pAePnfhq8P7SvTjF8Axq+CnavuQkmdQpGNXQ1efZtu5kDFbA==",
+      "path": "microsoft.net.stringtools/17.6.3",
+      "hashPath": "microsoft.net.stringtools.17.6.3.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
@@ -1730,6 +1788,11 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "Protocol/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -51,6 +51,13 @@
       <Compile Update="Pages\LoginPage.cs">
         <DependentUpon>LoginPage.razor</DependentUpon>
       </Compile>
+      <Compile Update="Pages\Home.cs">
+        <DependentUpon>Home.razor</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\whatIsMyLifeAbout\Protocol\Protocol\Protocol.csproj" />
     </ItemGroup>
 
 </Project>

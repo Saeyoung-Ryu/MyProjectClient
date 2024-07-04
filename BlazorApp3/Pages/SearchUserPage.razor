@@ -1,4 +1,5 @@
-﻿@page "/UserManager"
+﻿@*
+@page "/UserManager"
 @using BlazorApp3.Common.Manager
 @using BlazorApp3.Common.Type
 @using BlazorApp3.Protocol
@@ -14,7 +15,7 @@
             <section class="content">
                 <div class="search-container" style="display: flex; align-items: center;">
                     <div style="display: flex; flex-direction: column; align-items: center;">
-                        @*<img src="UserSearchImage.jpg" alt="Example Image" style="width: 280px; height: 130px;"/>*@
+                        $1$<img src="UserSearchImage.jpg" alt="Example Image" style="width: 280px; height: 130px;"/>#1#
                         <br>
                         <MatAccordion>
                             <MatButton OnClick="@OpenDialog" Raised="true">유저 추가하기 ⊕</MatButton>
@@ -110,3 +111,4 @@
 {
     
 }
+*@

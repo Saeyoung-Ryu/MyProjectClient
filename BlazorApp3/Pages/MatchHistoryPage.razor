@@ -1,3 +1,4 @@
+@*
 @page "/MatchHistory"
 @using BlazorApp3.Common.Type
 @using Enum
@@ -19,7 +20,7 @@ else
     @if (logMatchHistoryList.Count > 0)
     {
         <div style="display: flex; flex-direction: column; align-items: center;">
-            @*<img src="matchHistoryImage.jpg" alt="Example Image" style="width: 330px; height: 170px;" />*@
+            $1$<img src="matchHistoryImage.jpg" alt="Example Image" style="width: 330px; height: 170px;" />#1#
             <div style="text-align: center;">
                 <div id="container" class style="width: 100%; height: 700px; overflow: auto; margin-top: 10px">
                     <table id="Border-Solid" style="display: inline-block; margin-right: 20px;" class="table ta2le-border table-hover w-auto">
@@ -69,3 +70,4 @@ else
 </div>
 
 <Footer></Footer>
+*@

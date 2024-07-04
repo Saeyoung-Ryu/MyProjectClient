@@ -1,4 +1,4 @@
-using BlazorApp3.Common.Manager;
+/*using BlazorApp3.Common.Manager;
 using BlazorApp3.Common.Type;
 using Enum;
 
@@ -94,4 +94,4 @@ public partial class SearchUserPage
     {
         dialogIsOpen = false;
     }
-}
+}*/

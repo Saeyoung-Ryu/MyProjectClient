@@ -230,3 +230,8 @@
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Test2.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Nicepage.razor.rz.scp.css
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Home.razor.rz.scp.css
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/bin/Debug/net7.0/MessagePack.dll
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/bin/Debug/net7.0/MessagePack.Annotations.dll
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/bin/Debug/net7.0/Microsoft.NET.StringTools.dll
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/bin/Debug/net7.0/Protocol.dll
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/bin/Debug/net7.0/Protocol.pdb

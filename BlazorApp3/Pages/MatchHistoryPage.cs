@@ -1,4 +1,4 @@
-using BlazorApp3.Common.Manager;
+/*using BlazorApp3.Common.Manager;
 using BlazorApp3.Common.Type;
 
 namespace BlazorApp3.Pages;
@@ -36,4 +36,4 @@ public partial class MatchHistoryPage
         
         canClick = true;
     }
-}
+}*/
