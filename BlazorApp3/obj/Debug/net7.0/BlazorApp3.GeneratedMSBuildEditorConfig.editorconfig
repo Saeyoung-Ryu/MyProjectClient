@@ -9,89 +9,91 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BlazorApp3
 build_property.RootNamespace = BlazorApp3
-build_property.ProjectDir = /Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/
+build_property.ProjectDir = /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3
+build_property.MSBuildProjectDirectory = /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/App.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Shared/SurveyPrompt.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/_Imports.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/DashBoardPage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/DashBoardPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGFzaEJvYXJkUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-4spi4yjdlo
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/DisplayPage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/DisplayPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGlzcGxheVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-bg7gf7jof1
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/DivideTeamPage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/DivideTeamPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGl2aWRlVGVhbVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-b2osv66iin
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/Footer.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Footer.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRm9vdGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-1mv1gcxori
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/Home.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-kob6kijb82
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/HomePage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/HomePage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSG9tZVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-j1jpucb9qy
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/LoginPage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/LoginPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW5QYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-jkl3omc22p
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/MatchHistoryPage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/MatchHistoryPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWF0Y2hIaXN0b3J5UGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-pxsio5fims
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/Nicepage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Nicepage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTmljZXBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-seamr9rq0n
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/RankingPage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/RankingPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmFua2luZ1BhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-86gspctuc0
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/SearchUserPage.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/SearchUserPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2VhcmNoVXNlclBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-i5ov1uz8as
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/SoloRankBattle.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/SoloRankBattle.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU29sb1JhbmtCYXR0bGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-8nfo0tw6cx
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/Test2.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Test2.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVzdDIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-irz78hpu4b
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Shared/MainLayout.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-uah1rvq9fm
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Shared/NavMenu.razor]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-z3lckddl0i
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/Error.cshtml]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/Pages/_Host.cshtml]
+[/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

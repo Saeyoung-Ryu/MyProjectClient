@@ -1,4 +1,7 @@
-﻿<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 custom-navbar">
+﻿@inject NavigationManager Navigation
+@inject IMatToaster Toaster
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 custom-navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href=""><span class="oi oi-home" aria-hidden="true"></span></a>
         <button class="navbar-toggler @NavButtonCssClass" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -6,6 +9,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse @NavBarCssClass" id="navbarCollapse" @onclick="ToggleNavMenu">
+            <form class="d-flex me-auto" role="search" @onsubmit="MoveToDashBoardPage">
+                <input class="form-control me-2" type="search" placeholder="대시보드 검색" aria-label="Search" @bind="searchedDashBoardName">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="ShowDashboardCreatePopup">
@@ -101,6 +108,8 @@
     private bool openDashBoardCreatePopUp = false;
     private bool openLoginPopUp = false;
     private bool openPremiumShopPopUp = false;
+    
+    private string searchedDashBoardName = "";
 
     private void ToggleNavMenu()
     {
@@ -135,5 +144,95 @@
     private void ClosePremiumShopPopup()
     {
         openPremiumShopPopUp = false;
+    }
+    
+    private void MoveToDashBoardPage()
+    {
+        try
+        {
+            Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
+        }
+        catch (Exception)
+        {
+            ShowError(MatToastType.Warning, "잠시 후 다시 시도해주세요.");
+        }
+    }
+}
+
+@code 
+{
+    private string _title = "";
+    private string _message = "Test Message";
+    private bool _showProgressBar;
+    private bool _showCloseButton;
+    private bool _actionOnClick;
+    private string _maximumOpacity;
+
+    private string _showTransitionDuration;
+    private string _visibleStateDuration;
+    private string _hideTransitionDuration;
+
+    private bool _requireInteraction;
+
+    public string _maxDisplayedToasts
+    {
+        get { return Toaster.Configuration.MaxDisplayedToasts.ToString(); }
+        set { Toaster.Configuration.MaxDisplayedToasts = Convert.ToInt32(value); }
+    }
+
+    private string _toastPosition
+    {
+        get { return Toaster.Configuration.Position.ToString(); }
+        set { Toaster.Configuration.Position = (MatToastPosition)Enum.Parse(typeof(MatToastPosition), value); }
+    }
+
+    private void ShowDashBoardNotExist(MatToastType type, string message, string icon = "")
+    {
+        Toaster.Add(message, type, _title, icon, config =>
+        {
+            config.ShowCloseButton = _showCloseButton;
+            config.ShowProgressBar = _showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(_maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(_showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(_visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(_hideTransitionDuration);
+
+            config.RequireInteraction = _requireInteraction;
+
+            if (_actionOnClick)
+            {
+                config.Onclick = toast =>
+                {
+                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
+                    return Task.CompletedTask;
+                };
+            }
+        });
+    }
+    
+    private void ShowError(MatToastType type, string message, string icon = "")
+    {
+        Toaster.Add(message, type, _title, icon, config =>
+        {
+            config.ShowCloseButton = _showCloseButton;
+            config.ShowProgressBar = _showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(_maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(_showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(_visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(_hideTransitionDuration);
+
+            config.RequireInteraction = _requireInteraction;
+
+            if (_actionOnClick)
+            {
+                config.Onclick = toast =>
+                {
+                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
+                    return Task.CompletedTask;
+                };
+            }
+        });
     }
 }

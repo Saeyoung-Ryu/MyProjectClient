@@ -6,6 +6,8 @@ public partial class DashBoardPage
 {
     [Parameter]
     public string DashBoardName { get; set; }
+    
+    public int tabIndex = 0;
 
     protected override void OnInitialized()
     {
@@ -30,7 +32,7 @@ public partial class DashBoardPage
             
             if (string.IsNullOrEmpty(DashBoardName))
             {
-                Navigation.NavigateTo("/Home");
+                Navigation.NavigateTo("/");
             }
             
             // dashBoardName 존재하는지 찾기

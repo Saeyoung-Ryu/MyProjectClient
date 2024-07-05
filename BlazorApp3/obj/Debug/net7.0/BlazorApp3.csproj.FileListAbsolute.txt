@@ -322,3 +322,4 @@
 /Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/obj/Debug/net7.0/BlazorApp3.genruntimeconfig.cache
 /Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/obj/Debug/net7.0/ref/BlazorApp3.dll
 /Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/DashBoardPage.razor.rz.scp.css
+/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/DashBoardPage.razor.rz.scp.css

@@ -80,13 +80,13 @@ public partial class Home
     {
         try
         {
-            DashBoardInfo dashBoardInfo = null;
+            /*DashBoardInfo dashBoardInfo = null;
 
             if (dashBoardInfo == null)
             {
                 ShowDashBoardNotExist(MatToastType.Secondary, "존재하지 않는 대시보드 입니다!");
                 return;
-            }
+            }*/
             
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }

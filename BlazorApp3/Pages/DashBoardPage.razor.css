@@ -186,3 +186,15 @@
 .tab-button {
     padding: 10px 20px; /* Adjust padding as needed */
 }
+
+.bold-shadow {
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: 4em; /* Adjust this value to make the text bigger */
+}
+
+.small-table {
+    width: 50%; /* Adjust the width to your preference */
+    margin: 0 auto; /* Center the table within the tab */
+}
+
