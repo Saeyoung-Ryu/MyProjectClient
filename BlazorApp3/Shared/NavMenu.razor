@@ -15,19 +15,19 @@
             </form>
             <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="ShowDashboardCreatePopup">
+                    <button class="btn nav-link" @onclick="ShowDashboardCreatePopup">
                         <span class="oi oi-plus" aria-hidden="true"></span> 대시보드 생성
-                    </NavLink>
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="ShowPremiumShopPopup">
+                    <button class="btn nav-link" @onclick="ShowPremiumShopPopup">
                         <span class="oi oi-star" aria-hidden="true"></span> PREMIUM
-                    </NavLink>
+                    </button>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @onclick="ShowLoginPopup">
+                    <button class="btn nav-link" @onclick="ShowLoginPopup">
                         <span class="oi oi-account-login" aria-hidden="true"></span> 로그인
-                    </NavLink>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -116,7 +116,7 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
-    private void ShowDashboardCreatePopup(MouseEventArgs e)
+    private void ShowDashboardCreatePopup()
     {
         openDashBoardCreatePopUp = true;
     }
@@ -126,7 +126,7 @@
         openDashBoardCreatePopUp = false;
     }
     
-    private void ShowLoginPopup(MouseEventArgs e)
+    private void ShowLoginPopup()
     {
         openLoginPopUp = true;
     }
@@ -136,7 +136,7 @@
         openLoginPopUp = false;
     }
     
-    private void ShowPremiumShopPopup(MouseEventArgs e)
+    private void ShowPremiumShopPopup()
     {
         openPremiumShopPopUp = true;
     }
@@ -150,6 +150,7 @@
     {
         try
         {
+            Navigation.NavigateTo($"/");
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }
         catch (Exception)

@@ -1,0 +1,36 @@
+@* EditModal.razor *@
+<div class="modal" tabindex="-1" style="@(Show ? "display: block;" : "display: none;")">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Notification</h5>
+                <button type="button" class="btn-close" aria-label="Close" @onclick="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Edit your notification here.</p>
+                @* Add your form or input fields here *@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="Close">Close</button>
+                <button type="button" class="btn btn-primary" @onclick="Save">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool Show { get; set; }
+    [Parameter] public EventCallback<bool> ShowChanged { get; set; }
+
+    private void Close()
+    {
+        Show = false;
+        ShowChanged.InvokeAsync(Show);
+    }
+
+    private void Save()
+    {
+        // Add save logic here
+        Close();
+    }
+}

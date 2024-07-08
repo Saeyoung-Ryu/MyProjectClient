@@ -14,43 +14,92 @@
 <div class="input-group mt-3 justify-content-center">
     <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 1500px; color: #198754">
         
-        <MatTab Label="About">
-            <br><br><br><br>
-            <table class="table small-table">
-                <thead>
-                <tr>
-                    <th scope="col">대시보드</th>
-                    <th scope="col">방장</th>
-                    <th scope="col">점수</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>bbbb</td>
-                    <td>cccc</td>
-                    <td>dddd</td>
-                </tr>
-                <tr>
-                    <td>bbbb</td>
-                    <td>cccc</td>
-                    <td>dddd</td>
-                </tr>
-                <tr>
-                    <td>bbbb</td>
-                    <td>cccc</td>
-                    <td>dddd</td>
-                </tr>
-                <tr>
-                    <td>aaaa</td>
-                    <td>cccc</td>
-                    <td>dddd</td>
-                </tr>
-                </tbody>
-            </table>
+        <MatTab Label="소개">
+            
+            
+            <div class="container">
+                <br><br>
+                <hr class="hr-text" data-content="공지 사항">
+                <div class="notification-footer">
+                    <span class="edit-text">수정</span>
+                </div>
+                <br>
+                <h2 class="black-text">@dashBoardInfo.Notification</h2>
+                <br>
+
+                <hr class="hr-text" data-content="상세 정보">
+                <p class="black-text">생성일 : @dashBoardInfo.CreateTime</p>
+                <p class="black-text">생성자 : @dashBoardInfo.MasterName</p>
+                <p class="black-text">클럽 포인트 : @dashBoardInfo.Point</p>
+                <p class="black-text">멤버 수 : @dashBoardInfo.MemberTotalRankOrderByName.Count</p>
+            </div>
+
+            @*<EditNotificationPopUp Show="@showEditModal" ShowChanged="@((value) => showEditModal = value)" />*@
         </MatTab>
 
-        <MatTab Label="Ranking">
-
+        <MatTab Label="랭킹">
+            <br><br><br><br>
+            <div class="input-group mt-3 justify-content-center">
+                <MatTabGroup @bind-ActiceIndex="@rankTabIndex" Style="width: 850px; color: rgba(231,220,69,0.24)">
+                    <MatTab Label="전체">
+                        <br><br>
+                        <table class="table small-table">
+                            <thead>
+                            <tr>
+                                <th scope="col">랭킹</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">승리</th>
+                                <th scope="col">패배</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>bbbb</td>
+                                <td>cccc</td>
+                                <td>dddd</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>bbbb</td>
+                                <td>cccc</td>
+                                <td>dddd</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>bbbb</td>
+                                <td>cccc</td>
+                                <td>dddd</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>aaaa</td>
+                                <td>cccc</td>
+                                <td>dddd</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </MatTab>
+            
+                    <MatTab Label="탑">
+                            
+                    </MatTab>
+            
+                    <MatTab Label="정글">
+            
+                    </MatTab>
+                    <MatTab Label="미드">
+                                
+                    </MatTab>
+                    <MatTab Label="원딜">
+                                
+                    </MatTab>
+                    <MatTab Label="서포터">
+                                
+                    </MatTab>
+                </MatTabGroup>
+            </div>
+            
         </MatTab>
 
         <MatTab Label="팀 나누기">
@@ -67,55 +116,80 @@
 </div>
  
  
-@code {
-    private string _title = "Test Title";
-            private string _message = "Test Message";
-            private bool _showProgressBar;
-            private bool _showCloseButton;
-            private bool _actionOnClick;
-            private string _maximumOpacity;
- 
-            private string _showTransitionDuration;
-            private string _visibleStateDuration;
-            private string _hideTransitionDuration;
- 
-            private bool _requireInteraction;
- 
-            public string _maxDisplayedToasts
+@code 
+{
+    private string _title = "";
+    private string _message = "Test Message";
+    private bool _showProgressBar;
+    private bool _showCloseButton;
+    private bool _actionOnClick;
+    private string _maximumOpacity;
+
+    private string _showTransitionDuration;
+    private string _visibleStateDuration;
+    private string _hideTransitionDuration;
+
+    private bool _requireInteraction;
+
+    public string _maxDisplayedToasts
+    {
+        get { return Toaster.Configuration.MaxDisplayedToasts.ToString(); }
+        set { Toaster.Configuration.MaxDisplayedToasts = Convert.ToInt32(value); }
+    }
+
+    private string _toastPosition
+    {
+        get { return Toaster.Configuration.Position.ToString(); }
+        set { Toaster.Configuration.Position = (MatToastPosition)Enum.Parse(typeof(MatToastPosition), value); }
+    }
+
+    private void ShowDashBoardNotExist(MatToastType type, string message, string icon = "")
+    {
+        Toaster.Add(message, type, _title, icon, config =>
+        {
+            config.ShowCloseButton = _showCloseButton;
+            config.ShowProgressBar = _showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(_maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(_showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(_visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(_hideTransitionDuration);
+
+            config.RequireInteraction = _requireInteraction;
+
+            if (_actionOnClick)
             {
-                get { return Toaster.Configuration.MaxDisplayedToasts.ToString(); }
-                set { Toaster.Configuration.MaxDisplayedToasts = Convert.ToInt32(value); }
-            }
- 
- 
-            private string _toastPosition
-            {
-                get { return Toaster.Configuration.Position.ToString(); }
-                set { Toaster.Configuration.Position = (MatToastPosition)Enum.Parse(typeof(MatToastPosition), value); }
-            }
- 
-            public void Show(MatToastType type, string icon = "")
-            {
-                Toaster.Add(_message, type, _title, icon, config =>
+                config.Onclick = toast =>
                 {
-                    config.ShowCloseButton = _showCloseButton;
-                    config.ShowProgressBar = _showProgressBar;
-                    config.MaximumOpacity = Convert.ToInt32(_maximumOpacity);
- 
-                    config.ShowTransitionDuration = Convert.ToInt32(_showTransitionDuration);
-                    config.VisibleStateDuration = Convert.ToInt32(_visibleStateDuration);
-                    config.HideTransitionDuration = Convert.ToInt32(_hideTransitionDuration);
- 
-                    config.RequireInteraction = _requireInteraction;
- 
-                    if (_actionOnClick)
-                    {
-                        config.Onclick = toast =>
-                        {
-                            Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
-                            return Task.CompletedTask;
-                        };
-                    }
-                });
+                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
+                    return Task.CompletedTask;
+                };
             }
-        }
+        });
+    }
+    
+    private void ShowError(MatToastType type, string message, string icon = "")
+    {
+        Toaster.Add(message, type, _title, icon, config =>
+        {
+            config.ShowCloseButton = _showCloseButton;
+            config.ShowProgressBar = _showProgressBar;
+            config.MaximumOpacity = Convert.ToInt32(_maximumOpacity);
+
+            config.ShowTransitionDuration = Convert.ToInt32(_showTransitionDuration);
+            config.VisibleStateDuration = Convert.ToInt32(_visibleStateDuration);
+            config.HideTransitionDuration = Convert.ToInt32(_hideTransitionDuration);
+
+            config.RequireInteraction = _requireInteraction;
+
+            if (_actionOnClick)
+            {
+                config.Onclick = toast =>
+                {
+                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
+                    return Task.CompletedTask;
+                };
+            }
+        });
+    }
+}
