@@ -1,6 +1,7 @@
 using MatBlazor;
 using Microsoft.AspNetCore.Components;
 using Protocol.Type;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorApp3.Pages;
 
@@ -9,12 +10,17 @@ public partial class DashBoardPage
     [Parameter]
     public string DashBoardName { get; set; }
     
-    public int tabIndex = 0;
-    public int rankTabIndex = 0;
+    private int tabIndex = 0;
+    private int rankTabIndex = 0;
     private bool showEditModal = false;
     
-    public DashBoardInfo dashBoardInfo = new DashBoardInfo();
+    private DashBoardInfo dashBoardInfo = new DashBoardInfo();
+    private string enteredNickName = string.Empty;
 
+    private List<RiotPlayer> divideTeamList = new List<RiotPlayer>();
+    
+    private List<string> suggestions = new List<string> { "appleAAAAA", "bananaBBBBB" };
+    private List<string> filteredSuggestions = new List<string>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -53,6 +59,16 @@ public partial class DashBoardPage
             }
             
             // dashBoardName 존재하는지 찾기
+        }
+    }
+    
+    private async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await Task.Delay(100); // 빈값을 검색해버리는 이슈 수정
+
+            AddUserDivideTeamListBtn();
         }
     }
 
@@ -114,5 +130,32 @@ public partial class DashBoardPage
     private void ShowEditModal()
     {
         showEditModal = true;
+    }
+
+    private void AddUserDivideTeamListBtn()
+    {
+        if (enteredNickName == string.Empty)
+            return;
+        
+        RiotPlayer riotPlayer = new RiotPlayer();
+        riotPlayer.NickName = enteredNickName;
+        divideTeamList.Add(riotPlayer);
+
+        enteredNickName = string.Empty;
+    }
+
+    private void RemoveUserDivideTeamListBtn(string nickName)
+    {
+        divideTeamList.RemoveAll(e => e.NickName == nickName);
+    }
+
+    private void ResetListBtn()
+    {
+        divideTeamList.Clear();
+    }
+
+    private void DivideTeamBtn()
+    {
+        
     }
 }
