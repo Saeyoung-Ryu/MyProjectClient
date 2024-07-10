@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MatBlazor;
+using MudBlazor.Services;
 using Protocol.Type;
 using RiotSharp.Misc;
 using Syncfusion.Blazor;
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddMudServices();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMatToaster(config =>
 {
