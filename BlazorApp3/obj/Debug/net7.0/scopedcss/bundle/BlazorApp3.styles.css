@@ -1,3 +1,6 @@
+@import '_content/AuralizeBlazor/AuralizeBlazor.bundle.scp.css';
+@import '_content/Nextended.Blazor/Nextended.Blazor.bundle.scp.css';
+
 /* _content/BlazorApp3/Pages/DashBoardPage.razor.rz.scp.css */
 .table-container[b-4spi4yjdlo] {
     max-height: 300px; /* Adjust this height as needed */

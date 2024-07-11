@@ -16,8 +16,6 @@
     <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 1500px; color: #198754">
         
         <MatTab Label="소개">
-            
-            
             <div class="container">
                 <br><br>
                 <hr class="hr-text" data-content="공지 사항">
@@ -191,7 +189,7 @@
                         <input type="text" class="form-control" list="datalistOptions" id="exampleDataList" style="max-width: 300px;" placeholder="닉네임 + 태그 입력" @bind="enteredNickName" @onkeydown="HandleKeyPress" disabled="@(divideTeamList.Count >= 10)">
                         
                         <datalist id="datalistOptions">
-                            @foreach (var item in suggestions)
+                            @foreach (var item in dashBoardMembers)
                             {
                                 <option value="@item"></option>
                             }
@@ -300,10 +298,24 @@
         </MatTab>
 
         <MatTab Label="전적">
-
+            <br><br>
+            
+            
         </MatTab>
 
     </MatTabGroup>
+
+    <MatDialog @bind-IsOpen="@addNewMemberDialogIsOpen">
+        <MatDialogTitle>Add New Member</MatDialogTitle>
+        <MatDialogContent>
+            <p>@enteredNickName</p>
+            <p>유저를 새로 추가 하시겠습니까?</p>
+        </MatDialogContent>
+        <MatDialogActions>
+            <MatButton OnClick="@AddNewUserBtn">OK</MatButton>
+            <MatButton OnClick="@CancelAddNewUserBtn">CANCEL</MatButton>
+        </MatDialogActions>
+    </MatDialog>
 </div>
 
 </div>
@@ -379,7 +391,7 @@
             {
                 config.Onclick = toast =>
                 {
-                    Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
+                    // Console.WriteLine($"Title: \"{toast.Title}\"; message: \"{toast.Message}\"; Type: {toast.Options.Type}");
                     return Task.CompletedTask;
                 };
             }

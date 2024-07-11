@@ -107,6 +107,7 @@
     
     private void ShowError(MatToastType type, string message, string icon = "")
     {
+        Console.WriteLine("ShowError");
         Toaster.Add(message, type, _title, icon, config =>
         {
             config.ShowCloseButton = _showCloseButton;

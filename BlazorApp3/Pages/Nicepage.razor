@@ -1,1 +1,75 @@
-﻿
+﻿@page "/NicePage"
+
+@using System.Net.Http.Json
+
+<MudTable @ref="@_table" Items="@_elements" RowsPerPage="4" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
+    <HeaderContent>
+        <MudTh>Nr</MudTh>
+        <MudTh>Sign</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@context.Number</MudTd>
+        <MudTd DataLabel="Sign">@context.Sign</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudButton Variant="Variant.Filled">Default</MudButton>
+        <MudButton Variant="Variant.Filled">Default</MudButton>
+    </RowTemplate>
+    <PagerContent>
+        <MudPagination SelectedChanged="PageChanged" Count="@((_table.GetFilteredItemsCount() + _table.RowsPerPage - 1) / _table.RowsPerPage)" Class="pa-4"/>
+    </PagerContent>
+</MudTable>
+@code {
+
+    public class Element
+    {
+        public int Number { get; set; }
+        public string Sign { get; set; }
+        public string Name { get; set; }
+    } 
+    
+    private MudTable<Element> _table;
+    private List<Element> _elements = new List<Element>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _elements = new List<Element>();
+
+        _elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+        _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});_elements.Add(new Element() {Name = "a", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "b", Number = 1, Sign = "2"});
+    _elements.Add(new Element() {Name = "c", Number = 12, Sign = "2"});
+    }
+
+    private void PageChanged(int i)
+    {
+        _table.NavigateTo(i - 1);
+    }
+}

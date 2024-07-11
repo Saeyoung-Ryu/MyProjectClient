@@ -1,5 +1,6 @@
 using MatBlazor;
 using Microsoft.AspNetCore.Components.Web;
+using Protocol;
 using Protocol.Type;
 
 
@@ -67,31 +68,38 @@ public partial class Home
         if (e.Key == "Enter")
         {
             await Task.Delay(100); // 빈값을 검색해버리는 이슈 수정
-            PerformSearch();
+            await PerformSearch();
         }
     }
 
-    private void PerformSearch()
+    private async Task PerformSearch()
     {
-        MoveToDashBoardPage();
+        await MoveToDashBoardPage();
     }
 
-    private void MoveToDashBoardPage()
+    private async Task MoveToDashBoardPage()
     {
         try
         {
-            /*DashBoardInfo dashBoardInfo = null;
-
-            if (dashBoardInfo == null)
+            var findDashBoardReq = new FindDashBoardReq
             {
-                ShowDashBoardNotExist(MatToastType.Secondary, "존재하지 않는 대시보드 입니다!");
+                ProtocolId = ProtocolId.FindDashBoard,
+                DashBoardName = searchedDashBoardName
+            };
+            var res = await HttpManager.SendHttpServerRequestAsync(findDashBoardReq);
+            var findDashBoardRes = (FindDashBoardRes) res;
+            
+            if (findDashBoardRes.Exist == false)
+            {
+                ShowError(MatToastType.Warning, "대시보드가 존재하지 않습니다.");
                 return;
-            }*/
+            }
             
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            Console.WriteLine(e);
             ShowError(MatToastType.Warning, "잠시 후 다시 시도해주세요.");
         }
     }

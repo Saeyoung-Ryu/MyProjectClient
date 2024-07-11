@@ -4,6 +4,8 @@ using Protocol.Type;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using Protocol.Enum;
+using System.Net.Http.Json;
+
 
 namespace BlazorApp3.Pages;
 
@@ -21,11 +23,13 @@ public partial class DashBoardPage
 
     private List<RiotPlayer> divideTeamList = new List<RiotPlayer>();
     
-    private List<string> suggestions = new List<string> { "appleAAAAA", "bananaBBBBB" };
+    private List<string> dashBoardMembers = new List<string> { "appleAAAAA", "bananaBBBBB" };
     private List<string> filteredSuggestions = new List<string>();
 
     private bool isDivideBtnClicked = false;
 
+    private bool addNewMemberDialogIsOpen = false;
+    private bool alreadyAddedMemberDialogIsOpen = false;
     protected override async Task OnInitializedAsync()
     {
         dashBoardInfo = await GetDashBoardInfoAsync();
@@ -135,12 +139,42 @@ public partial class DashBoardPage
     {
         showEditModal = true;
     }
+    
+    private void AddNewUserBtn()
+    {
+        dashBoardMembers.Add(enteredNickName);
+        
+        AddUserDivideTeamList();
+        addNewMemberDialogIsOpen = false;
+    }
+
+    private void CancelAddNewUserBtn()
+    {
+        addNewMemberDialogIsOpen = false;
+    }
 
     private void AddUserDivideTeamListBtn()
     {
         if (enteredNickName == string.Empty)
             return;
+
+        if (divideTeamList.Select(e => e.NickName).Contains(enteredNickName))
+        {
+            ShowError(MatToastType.Info, "이미 추가된 유저입니다.");
+            enteredNickName = string.Empty;
+            return;
+        }
         
+        if (!dashBoardMembers.Contains(enteredNickName))
+            addNewMemberDialogIsOpen = true;
+        else
+        {
+            AddUserDivideTeamList();
+        }
+    }
+
+    private void AddUserDivideTeamList()
+    {
         RiotPlayer riotPlayer = new RiotPlayer();
         riotPlayer.NickName = enteredNickName;
         divideTeamList.Add(riotPlayer);

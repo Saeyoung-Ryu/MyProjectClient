@@ -15,7 +15,15 @@
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)syncfusion.blazor.core/23.1.44/buildTransitive/Syncfusion.Blazor.Core.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.core/23.1.44/buildTransitive/Syncfusion.Blazor.Core.props')" />
     <Import Project="$(NuGetPackageRoot)syncfusion.blazor.buttons/23.1.44/buildTransitive/Syncfusion.Blazor.Buttons.props" Condition="Exists('$(NuGetPackageRoot)syncfusion.blazor.buttons/23.1.44/buildTransitive/Syncfusion.Blazor.Buttons.props')" />
+    <Import Project="$(NuGetPackageRoot)nextended.blazor/7.0.38/buildTransitive/Nextended.Blazor.props" Condition="Exists('$(NuGetPackageRoot)nextended.blazor/7.0.38/buildTransitive/Nextended.Blazor.props')" />
     <Import Project="$(NuGetPackageRoot)mudblazor/7.0.0/buildTransitive/MudBlazor.props" Condition="Exists('$(NuGetPackageRoot)mudblazor/7.0.0/buildTransitive/MudBlazor.props')" />
+    <Import Project="$(NuGetPackageRoot)mudblazor.markdown/1.0.2/buildTransitive/MudBlazor.Markdown.props" Condition="Exists('$(NuGetPackageRoot)mudblazor.markdown/1.0.2/buildTransitive/MudBlazor.Markdown.props')" />
+    <Import Project="$(NuGetPackageRoot)blazorjs/2.1.6/buildTransitive/BlazorJS.props" Condition="Exists('$(NuGetPackageRoot)blazorjs/2.1.6/buildTransitive/BlazorJS.props')" />
+    <Import Project="$(NuGetPackageRoot)auralizeblazor/1.0.2/buildTransitive/AuralizeBlazor.props" Condition="Exists('$(NuGetPackageRoot)auralizeblazor/1.0.2/buildTransitive/AuralizeBlazor.props')" />
+    <Import Project="$(NuGetPackageRoot)mudblazor.extensions/2.0.0/buildTransitive/MudBlazor.Extensions.props" Condition="Exists('$(NuGetPackageRoot)mudblazor.extensions/2.0.0/buildTransitive/MudBlazor.Extensions.props')" />
     <Import Project="$(NuGetPackageRoot)matblazor/2.10.0/buildTransitive/MatBlazor.props" Condition="Exists('$(NuGetPackageRoot)matblazor/2.10.0/buildTransitive/MatBlazor.props')" />
   </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgBuildBundlerMinifier Condition=" '$(PkgBuildBundlerMinifier)' == '' ">/Users/saeyoungryu/.nuget/packages/buildbundlerminifier/3.2.449</PkgBuildBundlerMinifier>
+  </PropertyGroup>
 </Project>

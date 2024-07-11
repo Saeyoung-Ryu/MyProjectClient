@@ -1,4 +1,5 @@
-﻿@inject NavigationManager Navigation
+﻿@using Protocol
+@inject NavigationManager Navigation
 @inject IMatToaster Toaster
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4 custom-navbar">
@@ -146,11 +147,24 @@
         openPremiumShopPopUp = false;
     }
     
-    private void MoveToDashBoardPage()
+    private async Task MoveToDashBoardPage()
     {
         try
         {
-            Navigation.NavigateTo($"/");
+            var findDashBoardReq = new FindDashBoardReq
+            {
+                ProtocolId = ProtocolId.FindDashBoard,
+                DashBoardName = searchedDashBoardName
+            };
+            var res = await HttpManager.SendHttpServerRequestAsync(findDashBoardReq);
+            var findDashBoardRes = (FindDashBoardRes) res;
+            
+            if (findDashBoardRes.Exist == false)
+            {
+                ShowError(MatToastType.Warning, "대시보드가 존재하지 않습니다.");
+                return;
+            }
+            
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }
         catch (Exception)
@@ -214,6 +228,7 @@
     
     private void ShowError(MatToastType type, string message, string icon = "")
     {
+        Console.WriteLine("ShowError");
         Toaster.Add(message, type, _title, icon, config =>
         {
             config.ShowCloseButton = _showCloseButton;
