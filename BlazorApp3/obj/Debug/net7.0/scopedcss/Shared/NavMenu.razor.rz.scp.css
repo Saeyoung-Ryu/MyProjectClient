@@ -12,3 +12,9 @@
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
     backdrop-filter: blur(5px); /* Adjust blur amount as needed */
 }
+
+.horizontal-container[b-z3lckddl0i] {
+    display: flex;
+    align-items: center; /* Vertically center align items */
+    gap: 1rem; /* Optional: adds space between elements */
+}

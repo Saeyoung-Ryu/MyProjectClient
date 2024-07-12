@@ -9,299 +9,306 @@
 
 <br>
 <div class="text-center">
-    <h1 class="bold-shadow">@DashBoardName</h1>
-    <br>
+<h1 class="bold-shadow">@DashBoardName</h1>
+<br>
 
-<div class="input-group mt-3 justify-content-center">
+@if (isLoading)
+{
+    <MatProgressBar Indeterminate="true"></MatProgressBar> 
+}
+
+else
+{
+    <div class="input-group mt-3 justify-content-center">
     <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 1500px; color: #198754">
         
-        <MatTab Label="소개">
-            <div class="container">
-                <br><br>
-                <hr class="hr-text" data-content="공지 사항">
-                <div class="notification-footer">
-                    <span class="edit-text">수정</span>
-                </div>
-                <br>
-                <h2 class="black-text">@dashBoardInfo.Notification</h2>
-                <br>
-
-                <hr class="hr-text" data-content="상세 정보">
-                <p class="black-text">생성일 : @dashBoardInfo.CreateTime</p>
-                <p class="black-text">생성자 : @dashBoardInfo.MasterName</p>
-                <p class="black-text">클럽 포인트 : @dashBoardInfo.Point</p>
-                <p class="black-text">멤버 수 : @dashBoardInfo.MemberTotalRankOrderByName.Count</p>
-            </div>
-
-            @*<EditNotificationPopUp Show="@showEditModal" ShowChanged="@((value) => showEditModal = value)" />*@
-        </MatTab>
-
-        <MatTab Label="랭킹">
-            <br><br><br><br>
-            <div class="input-group mt-3 justify-content-center">
-                <MudTabs Elevation="1" Rounded="true" PanelClass="pa-6">
-                    <MudTabPanel Text="전체">
-                        <br><br>
-                            <table class="table small-table">
-                            <thead>
-                            <tr>
-                                <th scope="col">랭킹</th>
-                                <th scope="col">이름</th>
-                                <th scope="col">승리</th>
-                                <th scope="col">패배</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>bbbb</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>bbbb</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>bbbb</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>aaaa</td>
-                                <td>cccc</td>
-                                <td>dddd</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </MudTabPanel>
-                    <MudTabPanel Text="탑">
-                        <MudText>Item Two</MudText>
-                    </MudTabPanel>
-                    <MudTabPanel Text="정글">
-                        <MudText>Item Three</MudText>
-                    </MudTabPanel>
-                    <MudTabPanel Text="미드">
-                        <MudText>Item Three</MudText>
-                    </MudTabPanel>
-                    <MudTabPanel Text="원딜">
-                        <MudText>Item Three</MudText>
-                    </MudTabPanel>
-                    <MudTabPanel Text="서폿">
-                        <MudText>Item Three</MudText>
-                    </MudTabPanel>
-                </MudTabs>
-            </div>
-            
-        </MatTab>
-
-        <MatTab Label="팀 나누기">
-            <br>
-            @if (!isDivideBtnClicked)
-            {
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Autocomplete Input</title>
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-                </head>
-                <body>
-                <div class="container mt-5">
-                    <div class="input-group justify-content-center">
-                        <input type="text" class="form-control" list="datalistOptions" id="exampleDataList" style="max-width: 300px;" placeholder="닉네임 + 태그 입력" @bind="enteredNickName" @onkeydown="HandleKeyPress" disabled="@(divideTeamList.Count >= 10)">
-                        
-                        <datalist id="datalistOptions">
-                            @foreach (var item in dashBoardMembers)
-                            {
-                                <option value="@item"></option>
-                            }
-                        </datalist>
-                        
-                        <button class="btn btn-secondary" @onclick="AddUserDivideTeamListBtn">추가</button>
-                    </div>
-                </div>
-                </body>
-                </html>
-                
-                @if (divideTeamList.Count > 0)
-                {
-                    <button type="button" class="btn btn-outline-danger" @onclick="ResetListBtn">Reset</button>
-                    <br><br>
-                }
-            
-                <table class="table small-table">
-                    <tbody>
-                    @{
-                        var index = 1;
-                    }
-                    @foreach (var player in divideTeamList)
-                    {
-                        <tr>
-                            <td>@index</td>
-                            <td>@player.NickName</td>
-                            <td>
-                                <p>
-                                    <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => player.LineType = (LineType)(Enum.Parse(typeof(LineType), e.Value.ToString()))">
-                                        @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
-                                        {
-                                            if (lineTypeString.ToString() == "None")
-                                                continue;
-
-                                            <option value="@lineTypeString" selected="@(lineTypeString.ToString() == player.LineType.ToString())">@lineTypeString.ToString()</option>
-                                        }
-                                    </select>
-                                </p>
-                            </td>
-                            <td><MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" @onclick="() => RemoveUserDivideTeamListBtn(player.NickName)"></MudIconButton></td>
-                        </tr>
-                        index++;
-                    }
-                    </tbody>
-                </table>
-            
-                @if (divideTeamList.Count == 10)
-                {
-                    <br><br>
-                    <button type="button" class="btn btn-outline-primary" @onclick="StartDivideRandomLineBtn">라인 나누기</button>
-                }
-            }
-            else
-            {
-                <div class="d-flex justify-content-start mb-3">
-                    <span style="cursor: pointer;" @onclick="() => isDivideBtnClicked = false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M9.354 12.354a.5.5 0 0 0 0-.708L5.707 8l3.647-3.646a.5.5 0 0 0 0-.708l-.708-.707a.5.5 0 0 0-.707 0l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .707 0l.708-.707z"/>
-                            <path fill-rule="evenodd" d="M10 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                        뒤로가기
-                    </span>
-                </div>
-                
-                <MudDropContainer T="DropItem" Items="_items" ItemsSelector="@((item, dropzone) => item.Identifier == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-column flex-grow-1">
-                    <ChildContent>
-                        
-                        <div class="d-flex justify-content-center">
-                            <MudDropZone T="DropItem" Identifier="All" Class="rounded mud-background-gray pa-6 ma-8 half-width mb-4">
-                                <MudText Typo="Typo.h6" Class="mb-4" Style="color: black"></MudText>
-                            </MudDropZone>
-                        </div>
-
-                        <div>
-                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ResetTv" Color="Color.Error" @onclick="ResetDividedBtn">초기화</MudButton>
-                            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.DataSaverOff" Color="Color.Primary">랜덤 팀</MudButton>
-                        </div>
-
-                        <div class="d-flex flex-grow-1">
-                            <MudDropZone T="DropItem" Identifier="블루" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1 mr-4">
-                                <MudText Typo="Typo.h6" Class="mb-4" Style="color: blue">블루</MudText>
-                            </MudDropZone>
-
-                            <div>
-                                <br><br><br>
-                                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.SyncAlt" Color="Color.Primary" @onclick="SwapTeamBtn">SWAP</MudButton>
-                            </div>
-
-                            <MudDropZone T="DropItem" Identifier="레드" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                                <MudText Typo="Typo.h6" Class="mb-4" Style="color: orangered">레드</MudText>
-                            </MudDropZone>
-                        </div>
-
-                        <div>
-                            <br>
-                            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Default">확정</MudButton>
-                        </div>
-                    </ChildContent>
-                    <ItemRenderer>
-                        <MudPaper Elevation="25" Class="pa-4 my-4">@context.Name</MudPaper>
-                    </ItemRenderer>
-                </MudDropContainer>
-            }
-            
-        </MatTab>
-
-        <MatTab Label="전적">
+    <MatTab Label="소개">
+        <div class="container">
             <br><br>
+            <hr class="hr-text" data-content="공지 사항">
+            <div class="notification-footer">
+                <span class="edit-text">수정</span>
+            </div>
+            <br>
+            <h2 class="black-text">@dashBoardInfo.Notification</h2>
+            <br>
+
+            <hr class="hr-text" data-content="상세 정보">
+            <p class="black-text">생성일 : @dashBoardInfo.CreateTime</p>
+            <p class="black-text">생성자 : @dashBoardInfo.MasterName</p>
+            <p class="black-text">클럽 포인트 : @dashBoardInfo.Point</p>
+            <p class="black-text">멤버 수 : @dashBoardInfo.MemberTotalRank.Count</p>
+        </div>
+
+        @*<EditNotificationPopUp Show="@showEditModal" ShowChanged="@((value) => showEditModal = value)" />*@
+    </MatTab>
+
+    <MatTab Label="랭킹">
+        <br><br><br><br>
+        <div class="input-group mt-3 justify-content-center">
+            <MudTabs Elevation="1" Rounded="true" PanelClass="pa-6">
+                <MudTabPanel Text="전체">
+                    <br><br>
+                    <table class="table small-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">랭킹</th>
+                            <th scope="col">이름</th>
+                            <th scope="col">승리</th>
+                            <th scope="col">패배</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>bbbb</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>bbbb</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>bbbb</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>aaaa</td>
+                            <td>cccc</td>
+                            <td>dddd</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </MudTabPanel>
+                <MudTabPanel Text="탑">
+                    <MudText>Item Two</MudText>
+                </MudTabPanel>
+                <MudTabPanel Text="정글">
+                    <MudText>Item Three</MudText>
+                </MudTabPanel>
+                <MudTabPanel Text="미드">
+                    <MudText>Item Three</MudText>
+                </MudTabPanel>
+                <MudTabPanel Text="원딜">
+                    <MudText>Item Three</MudText>
+                </MudTabPanel>
+                <MudTabPanel Text="서폿">
+                    <MudText>Item Three</MudText>
+                </MudTabPanel>
+            </MudTabs>
+        </div>
+            
+    </MatTab>
+
+    <MatTab Label="팀 나누기">
+        <br>
+        @if (!isDivideBtnClicked)
+        {
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Autocomplete Input</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            </head>
+            <body>
+            <div class="container mt-5">
+                <div class="input-group justify-content-center">
+                    <input type="text" class="form-control" list="datalistOptions" id="exampleDataList" style="max-width: 300px;" placeholder="닉네임 + 태그 입력" @bind="enteredNickName" @onkeydown="HandleKeyPress" disabled="@(divideTeamList.Count >= 10)">
+                        
+                    <datalist id="datalistOptions">
+                        @foreach (var item in dashBoardMembers)
+                        {
+                            <option value="@item"></option>
+                        }
+                    </datalist>
+                        
+                    <button class="btn btn-secondary" @onclick="AddUserDivideTeamListBtn">추가</button>
+                </div>
+            </div>
+            </body>
+            </html>
+                
+            @if (divideTeamList.Count > 0)
+            {
+                <button type="button" class="btn btn-outline-danger" @onclick="ResetListBtn">Reset</button>
+                <br><br>
+            }
+            
+            <table class="table small-table">
+                <tbody>
+                @{
+                    var index = 1;
+                }
+                @foreach (var player in divideTeamList)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@player.NickName</td>
+                        <td>
+                            <p>
+                                <select class="form-select" style="width: 120px; height:40px" @onchange="(e) => player.LineType = (LineType)(Enum.Parse(typeof(LineType), e.Value.ToString()))">
+                                    @foreach (object lineTypeString in Enum.GetValues(typeof(LineType)))
+                                    {
+                                        if (lineTypeString.ToString() == "None")
+                                            continue;
+
+                                        <option value="@lineTypeString" selected="@(lineTypeString.ToString() == player.LineType.ToString())">@lineTypeString.ToString()</option>
+                                    }
+                                </select>
+                            </p>
+                        </td>
+                        <td><MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" @onclick="() => RemoveUserDivideTeamListBtn(player.NickName)"></MudIconButton></td>
+                    </tr>
+                    index++;
+                }
+                </tbody>
+            </table>
+            
+            @if (divideTeamList.Count == 10)
+            {
+                <br><br>
+                <button type="button" class="btn btn-outline-primary" @onclick="StartDivideRandomLineBtn">라인 나누기</button>
+            }
+        }
+        else
+        {
+            <div class="d-flex justify-content-start mb-3">
+                <span @onclick="() => isDivideBtnClicked = false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M9.354 12.354a.5.5 0 0 0 0-.708L5.707 8l3.647-3.646a.5.5 0 0 0 0-.708l-.708-.707a.5.5 0 0 0-.707 0l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .707 0l.708-.707z"/>
+                        <path fill-rule="evenodd" d="M10 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    <MudIcon Icon="@Icons.Material.Filled.ArrowBack" Size="Size.Large"/>
+                </span>
+            </div>
+                
+            <MudDropContainer T="DropItem" Items="_items" ItemsSelector="@((item, dropzone) => item.Identifier == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-column flex-grow-1">
+                <ChildContent>
+                        
+                    <div class="d-flex justify-content-center">
+                        <MudDropZone T="DropItem" Identifier="All" Class="rounded mud-background-gray pa-6 ma-8 half-width mb-4" AllowReorder="true" Style="">
+                            <MudText Typo="Typo.h6" Class="mb-4" Style="color: black">전체</MudText>
+                        </MudDropZone>
+                    </div>
+
+                    <div>
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ResetTv" Color="Color.Error" @onclick="ResetDividedBtn">초기화</MudButton>
+                        <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.DataSaverOff" Color="Color.Primary">랜덤 팀</MudButton>
+                    </div>
+
+                    <div class="d-flex flex-grow-1">
+                        <MudDropZone T="DropItem" Identifier="블루" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1 mr-4" AllowReorder="true">
+                            <MudText Typo="Typo.h6" Class="mb-4" Style="color: blue">블루</MudText>
+                        </MudDropZone>
+
+                        <div>
+                            <br><br><br>
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.SyncAlt" Color="Color.Primary" @onclick="SwapTeamBtn">SWAP</MudButton>
+                        </div>
+
+                        <MudDropZone T="DropItem" Identifier="레드" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1" AllowReorder="true">
+                            <MudText Typo="Typo.h6" Class="mb-4" Style="color: orangered">레드</MudText>
+                        </MudDropZone>
+                    </div>
+
+                    <div>
+                        <br>
+                        <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Default">확정</MudButton>
+                    </div>
+                </ChildContent>
+                <ItemRenderer>
+                    <MudPaper Elevation="25" Class="pa-4 my-4">@context.Name</MudPaper>
+                </ItemRenderer>
+            </MudDropContainer>
+        }
+            
+    </MatTab>
+
+    <MatTab Label="전적">
+        <br><br>
             
             
-        </MatTab>
+    </MatTab>
 
     </MatTabGroup>
 
@@ -316,11 +323,10 @@
             <MatButton OnClick="@CancelAddNewUserBtn">CANCEL</MatButton>
         </MatDialogActions>
     </MatDialog>
+    </div>
+}
 </div>
 
-</div>
- 
- 
 @code 
 {
     private string _title = "";

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using Protocol.Enum;
 using System.Net.Http.Json;
+using Protocol;
 
 
 namespace BlazorApp3.Pages;
@@ -30,14 +31,20 @@ public partial class DashBoardPage
 
     private bool addNewMemberDialogIsOpen = false;
     private bool alreadyAddedMemberDialogIsOpen = false;
+
+    private bool isLoading = false;
+    
     protected override async Task OnInitializedAsync()
     {
+        isLoading = true;
         dashBoardInfo = await GetDashBoardInfoAsync();
 
         if (dashBoardInfo == null)
         {
             ShowError(MatToastType.Warning, "DashBoard Not Found");
         }
+
+        isLoading = false;
     }
 
     protected override void OnInitialized()
@@ -82,7 +89,17 @@ public partial class DashBoardPage
 
     private async Task<DashBoardInfo> GetDashBoardInfoAsync()
     {
-        return dashBoardInfo = new DashBoardInfo()
+        var getDashBoardInfoReq = new GetDashBoardInfoReq()
+        {
+            ProtocolId = ProtocolId.GetDashBoardInfo,
+            DashBoardName = DashBoardName
+        };
+        var res = await HttpManager.SendHttpServerRequestAsync(getDashBoardInfoReq);
+        var getDashBoardInfoRes = (GetDashBoardInfoRes) res;
+
+        return getDashBoardInfoRes.DashBoardInfo;
+
+        /*return dashBoardInfo = new DashBoardInfo()
         {
             DashBoardSeq = 1,
             Name = DashBoardName,
@@ -132,7 +149,7 @@ public partial class DashBoardPage
             },
             Point = 100,
             Notification = "Notification Example 1234",
-        };
+        };*/
     }
     
     private void ShowEditModal()
@@ -236,43 +253,6 @@ public partial class DashBoardPage
             existingItem.Identifier = "All";
                 
         item.Identifier = targetZoneIdentifier;
-        /*if (dropInfo.Item.Identifier == "All")
-        {
-            var existingItem = _items.FirstOrDefault(x => x.Name != item.Name && x.LineType == item.LineType);
-
-            if (existingItem == null)
-                return;
-            
-            if (targetZoneIdentifier == "블루")
-                existingItem.Identifier = "레드";
-                
-            if (targetZoneIdentifier == "레드")
-                existingItem.Identifier = "블루";
-                
-            if (targetZoneIdentifier == "All")
-                existingItem.Identifier = "All";
-                
-            item.Identifier = targetZoneIdentifier;
-        }
-        else
-        {
-            dropInfo.Item.Identifier = dropInfo.DropzoneIdentifier;
-            
-            item.Identifier = targetZoneIdentifier;
-            var existingItem = _items.FirstOrDefault(x => x.LineType == item.LineType && x.Name != item.Name);
-
-            if (existingItem == null)
-                return;
-                
-            if (targetZoneIdentifier == "블루")
-                existingItem.Identifier = "레드";
-                
-            if (targetZoneIdentifier == "레드")
-                existingItem.Identifier = "블루";
-            
-            if (targetZoneIdentifier == "All")
-                existingItem.Identifier = "All";
-        }*/
     }
     
     private List<DropItem> _items = new()

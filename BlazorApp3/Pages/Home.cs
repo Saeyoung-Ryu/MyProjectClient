@@ -99,7 +99,6 @@ public partial class Home
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
             ShowError(MatToastType.Warning, "잠시 후 다시 시도해주세요.");
         }
     }

@@ -1,4 +1,5 @@
 ﻿@using Protocol
+@using Protocol.Enum
 @inject NavigationManager Navigation
 @inject IMatToaster Toaster
 
@@ -46,9 +47,22 @@
                     <button type="button" class="btn-close" aria-label="Close" @onclick="CloseDashboardCreatePopup"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Your form or content here -->
-                    <p>Modal content goes here.</p>
+                    <br>
+                    <span>생성가능 횟수 : @createableDashBoardCount</span>
+                    @*<div class="horizontal-container">*@
+                    <MudTextField @bind-Value="createDashBoardName"
+                                  Label="대시보드 이름 입력"
+                                  HelperText=@(successCreateDashBoard ? "대시보드를 생성하였습니다" : isDuplicatedDashBoardName ? "이미 존재하는 대시보드입니다!" : "")
+                                  Variant="Variant.Filled"
+                                  MaxLength="15"/>
+                    <br>
+                    <MudTextField @bind-Value="createDashBoardNotification" Label="소개글" Variant="Variant.Outlined" FullWidth="true" Placeholder="대시보드 소개글을 입력하세요." MaxLength="100" Disabled="@(createableDashBoardCount <= 0)"></MudTextField>
+                    <br>
+                    <MudButton Variant="Variant.Outlined" @onclick="CreateDashBoardBtnAsync" FullWidth="true" Disabled="@(createableDashBoardCount <= 0)">생성</MudButton>
+                    
+                    @*</div>*@
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @onclick="CloseDashboardCreatePopup">Close</button>
                 </div>
@@ -110,7 +124,17 @@
     private bool openLoginPopUp = false;
     private bool openPremiumShopPopUp = false;
     
+    private string createDashBoardName = "";
+    private string createDashBoardNotification = "";
+    private bool isDuplicatedDashBoardName = false;
+    private bool successCreateDashBoard = false;
+    private string loginEmailAddress = "";
+
+    private int createableDashBoardCount = 1;
+    
     private string searchedDashBoardName = "";
+
+    private bool dashBoardFound = false;
 
     private void ToggleNavMenu()
     {
@@ -119,6 +143,10 @@
 
     private void ShowDashboardCreatePopup()
     {
+        createDashBoardName = string.Empty;
+        isDuplicatedDashBoardName = false;
+        successCreateDashBoard = false;
+        
         openDashBoardCreatePopUp = true;
     }
 
@@ -161,15 +189,45 @@
             
             if (findDashBoardRes.Exist == false)
             {
-                ShowError(MatToastType.Warning, "대시보드가 존재하지 않습니다.");
+                dashBoardFound = false;
                 return;
             }
-            
+
+            dashBoardFound = true;
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }
         catch (Exception)
         {
-            ShowError(MatToastType.Warning, "잠시 후 다시 시도해주세요.");
+            ShowToast(MatToastType.Warning, "잠시 후 다시 시도해주세요.");
+        }
+    }
+
+    private async Task CreateDashBoardBtnAsync()
+    {
+        try
+        {
+            var createDashBoardReq = new CreateDashBoardReq()
+            {
+                ProtocolId = ProtocolId.CreateDashBoard,
+                DashBoardName = createDashBoardName,
+                Notification = createDashBoardNotification,
+                Suid = 1234
+            };
+            var res = await HttpManager.SendHttpServerRequestAsync(createDashBoardReq);
+            var createDashBoardRes = (CreateDashBoardRes) res;
+            
+            if (createDashBoardRes.Result != Result.None)
+                isDuplicatedDashBoardName = true;
+            else
+            {
+                createableDashBoardCount--;
+                isDuplicatedDashBoardName = false;
+                successCreateDashBoard = true;
+            }
+        }
+        catch (Exception e)
+        {
+            isDuplicatedDashBoardName = true;
         }
     }
 }
@@ -226,9 +284,8 @@
         });
     }
     
-    private void ShowError(MatToastType type, string message, string icon = "")
+    private void ShowToast(MatToastType type, string message, string icon = "")
     {
-        Console.WriteLine("ShowError");
         Toaster.Add(message, type, _title, icon, config =>
         {
             config.ShowCloseButton = _showCloseButton;
