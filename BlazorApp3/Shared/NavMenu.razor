@@ -105,15 +105,111 @@
                     <button type="button" class="btn-close" aria-label="Close" @onclick="CloseLoginPopup"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Your form or content here -->
-                    <p>Modal content goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" @onclick="CloseLoginPopup">Close</button>
+                    <br>
+                    <div class="logo-container">
+                        <img src="Logo.jpg" alt="Logo" class="logo" />
+                    </div>
+                    <br>
+                    <div>
+                        <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Outlined"/>
+                    </div>
+                    <div>
+                        <MudTextField @bind-Value="Password" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                    </div>
+                    <br>
+                    <div>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="LoginBtnAsync" Style="height: 50px">LOGIN</MudButton>
+                    </div>
+                    <br>
+                    <div class="text-links">
+                        <span class="link" @onclick="SignInClicked">Sign In</span> | <span class="link" @onclick="FindPasswordClicked">Find Password</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+}
+
+@if (DoSignIn)
+{
+    <div class="modal-backdrop show"></div> <!-- Semi-transparent background -->
+    <div class="modal show d-block" tabindex="-1" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">회원가입</h5>
+                    <button type="button" class="btn-close" aria-label="Close" @onclick="CloseSignInPopUp"></button>
+                </div>
+                <div class="modal-body">
+                    <br>
+                    <div class="logo-container">
+                        <img src="Logo.jpg" alt="Logo" class="logo" />
+                    </div>
+                    <br>
+                    @if (!verificationMailSent)
+                    {
+                        <div>
+                            <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Outlined"/>
+                        </div>
+                        <div>
+                            <MudTextField @bind-Value="Password" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                            @if (Password != String.Empty && !DidPasswordMetRules())
+                            {
+                                <div style="color: red; font-size: 0.8em;">비밀번호 형식이 틀립니다.</div>
+                            }
+                            <div style="color: gray; font-size: 0.8em; margin-top: 4px;">
+                                비밀번호 규칙:
+                                <ul>
+                                    <li>* 최소 8자 이상</li>
+                                    <li>* 대문자 하나 이상 포함</li>
+                                    <li>* 소문자 하나 이상 포함</li>
+                                    <li>* 숫자 하나 이상 포함</li>
+                                    <li>* 특수 문자 하나 이상 포함</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <MudTextField @bind-Value="CheckPassword" Label="비밀번호 확인" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(CheckPassword) && Password != CheckPassword)
+                    {
+                        <div style="color: red; font-size: 0.8em;">비밀번호가 다릅니다.</div>
+                    }
+                    <br>
+                    <div>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!DidPasswordMetRules() || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(CheckPassword) || string.IsNullOrEmpty(Password) || Password != CheckPassword)" FullWidth="true" OnClick="SignInBtnStep1Async_SendVerificationMail" Style="height: 50px">@(verificationMailSent ? "인증메일 다시 보내기" : "인증메일 보내기")</MudButton>
+                    </div>
+                    @if (verificationMailSent)
+                    {
+                        <br>
+                        <div>
+                            <MudTextField @bind-Value="VerificationCode" Label="인증 코드를 입력하세요." Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="@timerDisplay"/>
+                        </div>
+                        <br>
+                        <div>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="SignInBtnStep2Async_CheckCode" Style="height: 50px">확인</MudButton>
+                        </div>
+                    }
+                    <br>
+                    <div class="text-links">
+                        <span class="link" @onclick="ShowLoginPopup">Login</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code
+{
+    public enum SignInResult
+    {
+        None = 0,
+        Success = 1,
+        EmailAlreadyExist = 2,
+        PasswordCheckDifferent = 3
+    }
 }
 
 @code {
@@ -136,6 +232,74 @@
     private string searchedDashBoardName = "";
 
     private bool dashBoardFound = false;
+    
+    // Login Objects
+    bool isShow;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    public string Email { get; set; } = "";
+    public string VerificationCode { get; set; } = "";
+    public string Password { get; set;} = "";
+    public string CheckPassword { get; set; } = "";
+
+    private string timerDisplay;
+    private TimeSpan timeRemaining = TimeSpan.FromMinutes(5);
+    private System.Timers.Timer timer;
+    
+    private bool DoSignIn { get; set; }
+    private bool DoFindPassword { get; set; }
+
+    private bool verificationMailSent = false;
+
+    SignInResult signInResult = SignInResult.None;
+
+    void ResetLoginInfos()
+    {
+        Email = "";
+        VerificationCode = "";
+        Password = "";
+        CheckPassword = "";
+
+        DoSignIn = false;
+        DoFindPassword = false;
+
+        verificationMailSent = false;
+
+        signInResult = SignInResult.None;
+
+        timerDisplay = "";
+        timeRemaining = TimeSpan.FromMinutes(5);
+        timer.Stop();
+    }
+    
+    void ButtonTestclick()
+    {
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+    
+    private void SignInClicked()
+    {
+        openLoginPopUp = false;
+        DoSignIn = true;
+        // You can add additional logic here
+    }
+
+    private void FindPasswordClicked()
+    {
+        DoFindPassword = true;
+        // You can add additional logic here
+    }
 
     private string GetHelperText()
     {
@@ -197,12 +361,20 @@
     
     private void ShowLoginPopup()
     {
+        DoSignIn = false;
         openLoginPopUp = true;
     }
 
     private void CloseLoginPopup()
     {
+        ResetLoginInfos();
         openLoginPopUp = false;
+    }
+
+    private void CloseSignInPopUp()
+    {
+        ResetLoginInfos();
+        DoSignIn = false;
     }
     
     private void ShowPremiumShopPopup()
@@ -224,6 +396,99 @@
         catch (Exception)
         {
             ShowToast(MatToastType.Warning, "잠시 후 다시 시도해주세요.");
+        }
+    }
+    
+    private void UpdateTimer(object sender, System.Timers.ElapsedEventArgs e)
+    {
+        if (timeRemaining.TotalSeconds > 0)
+        {
+            timeRemaining = timeRemaining.Subtract(TimeSpan.FromSeconds(1));
+            timerDisplay = timeRemaining.ToString(@"mm\:ss");
+            InvokeAsync(StateHasChanged); // Trigger re-render
+        }
+        else
+        {
+            timer.Stop();
+        }
+    }
+    
+    private bool DidPasswordMetRules()
+    {
+        if (string.IsNullOrEmpty(Password)) return false;
+
+        bool hasMinimum8Chars = Password.Length >= 8;
+        bool hasUpperCaseLetter = Password.Any(char.IsUpper);
+        bool hasLowerCaseLetter = Password.Any(char.IsLower);
+        bool hasDecimalDigit = Password.Any(char.IsDigit);
+        bool hasSpecialCharacter = Password.Any(ch => !char.IsLetterOrDigit(ch));
+
+        return hasMinimum8Chars && hasUpperCaseLetter && hasLowerCaseLetter && hasDecimalDigit && hasSpecialCharacter;
+    }
+
+    private async Task SignInBtnStep1Async_SendVerificationMail()
+    {
+        try
+        {
+            // 인증메일 다시보내기를 누르면 타이머 초기화시키기
+            if (timer != null)
+            {
+                timerDisplay = "";
+                timeRemaining = TimeSpan.FromMinutes(5);
+                timer.Stop();
+            }
+            
+            verificationMailSent = true; // 위치 아래로 바꾸기 테스트용
+            timerDisplay = timeRemaining.ToString(@"mm\:ss");
+            timer = new System.Timers.Timer(1000); // Set up the timer for 1 second intervals
+            timer.Elapsed += UpdateTimer;
+            timer.Start();
+            
+            var signInEmailAuthSendStepReq = new SignInEmailAuthSendStepReq()
+            {
+                ProtocolId = ProtocolId.SignInEmailAuthSendStep,
+                Email = Email,
+                LoginType = LoginType.Guest
+            };
+            
+            var res = await HttpManager.SendHttpServerRequestAsync(signInEmailAuthSendStepReq);
+            var signInEmailAuthSendStepRes = (SignInEmailAuthSendStepRes) res;
+
+            // 이메일이 이미 존재하면 아래 작은글씨로 이미 존재하는 이메일이라고 보여주기
+
+            if (res.Result == Result.EmailAlreadyExists)
+                signInResult = SignInResult.EmailAlreadyExist;
+            else if (signInEmailAuthSendStepRes.AuthResult)
+                signInResult = SignInResult.Success;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    private async Task SignInBtnStep2Async_CheckCode()
+    {
+        
+    }
+
+    private async Task LoginBtnAsync()
+    {
+        try
+        {
+            var loginReq = new LoginReq()
+            {
+                ProtocolId = ProtocolId.Login,
+                Email = Email,
+                Password = Password,
+                LoginType = LoginType.Guest
+            };
+            var res = await HttpManager.SendHttpServerRequestAsync(loginReq);
+            var loginRes = (LoginRes) res;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
         }
     }
 

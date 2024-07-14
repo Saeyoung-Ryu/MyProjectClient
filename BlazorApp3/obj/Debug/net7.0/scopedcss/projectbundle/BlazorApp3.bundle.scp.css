@@ -44713,3 +44713,23 @@ main[b-uah1rvq9fm] {
 .helper-text-error[b-z3lckddl0i] {
     color: red;
 }
+
+.logo-container[b-z3lckddl0i] {
+    text-align: center;
+}
+.logo[b-z3lckddl0i] {
+    max-width: 100px; /* Adjust the size as needed */
+    height: auto;
+}
+.text-links[b-z3lckddl0i] {
+    text-align: center;
+    margin-top: 10px;
+}
+.link[b-z3lckddl0i] {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+.link:hover[b-z3lckddl0i] {
+    color: darkblue;
+}

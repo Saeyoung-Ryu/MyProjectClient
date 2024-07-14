@@ -25,3 +25,23 @@
 .helper-text-error {
     color: red;
 }
+
+.logo-container {
+    text-align: center;
+}
+.logo {
+    max-width: 100px; /* Adjust the size as needed */
+    height: auto;
+}
+.text-links {
+    text-align: center;
+    margin-top: 10px;
+}
+.link {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+.link:hover {
+    color: darkblue;
+}

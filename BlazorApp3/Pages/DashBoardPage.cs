@@ -62,9 +62,6 @@ public partial class DashBoardPage
     {
         try
         {
-            // Player.Suid = 1;
-            // Console.WriteLine(Player.Suid);
-            // Console.WriteLine("OnParameterSet");
             Reset();
             isLoading = true;
 
