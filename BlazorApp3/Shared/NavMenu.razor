@@ -52,9 +52,10 @@
                     @*<div class="horizontal-container">*@
                     <MudTextField @bind-Value="createDashBoardName"
                                   Label="대시보드 이름 입력"
-                                  HelperText=@(successCreateDashBoard ? "대시보드를 생성하였습니다" : isDuplicatedDashBoardName ? "이미 존재하는 대시보드입니다!" : "")
                                   Variant="Variant.Filled"
-                                  MaxLength="15"/>
+                                  MaxLength="15" />
+                    
+                    <p style="@GetHelperTextStyle()">@GetHelperText()</p>
                     <br>
                     <MudTextField @bind-Value="createDashBoardNotification" Label="소개글" Variant="Variant.Outlined" FullWidth="true" Placeholder="대시보드 소개글을 입력하세요." MaxLength="100" Disabled="@(createableDashBoardCount <= 0)"></MudTextField>
                     <br>
@@ -136,6 +137,45 @@
 
     private bool dashBoardFound = false;
 
+    private string GetHelperText()
+    {
+        if (successCreateDashBoard)
+        {
+            return "대시보드를 생성하였습니다";
+        }
+        else if (isDuplicatedDashBoardName)
+        {
+            return "이미 존재하는 대시보드입니다!";
+        }
+        return string.Empty;
+    }
+    
+    private string GetHelperTextStyle()
+    {
+        if (successCreateDashBoard)
+        {
+            return "color: blue;";
+        }
+        else if (isDuplicatedDashBoardName)
+        {
+            return "color: red;";
+        }
+        return string.Empty;
+    }
+
+    private string GetHelperTextClass()
+    {
+        if (successCreateDashBoard)
+        {
+            return "helper-text-success";
+        }
+        else if (isDuplicatedDashBoardName)
+        {
+            return "helper-text-error";
+        }
+        return string.Empty;
+    }
+    
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
@@ -179,21 +219,6 @@
     {
         try
         {
-            var findDashBoardReq = new FindDashBoardReq
-            {
-                ProtocolId = ProtocolId.FindDashBoard,
-                DashBoardName = searchedDashBoardName
-            };
-            var res = await HttpManager.SendHttpServerRequestAsync(findDashBoardReq);
-            var findDashBoardRes = (FindDashBoardRes) res;
-            
-            if (findDashBoardRes.Exist == false)
-            {
-                dashBoardFound = false;
-                return;
-            }
-
-            dashBoardFound = true;
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }
         catch (Exception)

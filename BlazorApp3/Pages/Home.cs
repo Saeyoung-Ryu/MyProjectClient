@@ -81,19 +81,19 @@ public partial class Home
     {
         try
         {
-            var findDashBoardReq = new FindDashBoardReq
-            {
-                ProtocolId = ProtocolId.FindDashBoard,
-                DashBoardName = searchedDashBoardName
-            };
-            var res = await HttpManager.SendHttpServerRequestAsync(findDashBoardReq);
-            var findDashBoardRes = (FindDashBoardRes) res;
-            
-            if (findDashBoardRes.Exist == false)
-            {
-                ShowError(MatToastType.Warning, "대시보드가 존재하지 않습니다.");
-                return;
-            }
+            // var findDashBoardReq = new FindDashBoardReq
+            // {
+            //     ProtocolId = ProtocolId.FindDashBoard,
+            //     DashBoardName = searchedDashBoardName
+            // };
+            // var res = await HttpManager.SendHttpServerRequestAsync(findDashBoardReq);
+            // var findDashBoardRes = (FindDashBoardRes) res;
+            //
+            // if (findDashBoardRes.Exist == false)
+            // {
+            //     ShowError(MatToastType.Warning, "대시보드가 존재하지 않습니다.");
+            //     return;
+            // }
             
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }

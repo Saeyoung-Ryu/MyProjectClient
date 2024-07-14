@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using Protocol.Enum;
 using System.Net.Http.Json;
+using Microsoft.AspNetCore.Authorization;
 using Protocol;
 
 
@@ -33,22 +34,64 @@ public partial class DashBoardPage
     private bool alreadyAddedMemberDialogIsOpen = false;
 
     private bool isLoading = false;
-    
-    protected override async Task OnInitializedAsync()
-    {
-        isLoading = true;
-        dashBoardInfo = await GetDashBoardInfoAsync();
+    private bool dashBoardExist = false;
 
-        if (dashBoardInfo == null)
-        {
-            ShowError(MatToastType.Warning, "DashBoard Not Found");
-        }
+    private void Reset()
+    {
+        tabIndex = 0;
+        rankTabIndex = 0;
+        showEditModal = false;
+    
+        dashBoardInfo = new DashBoardInfo();
+        enteredNickName = string.Empty;
+
+        divideTeamList = new List<RiotPlayer>();
+    
+        dashBoardMembers = new List<string> { "appleAAAAA", "bananaBBBBB" };
+        filteredSuggestions = new List<string>();
+
+        isDivideBtnClicked = false;
+
+        addNewMemberDialogIsOpen = false;
+        alreadyAddedMemberDialogIsOpen = false;
 
         isLoading = false;
+        dashBoardExist = false;
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            // Player.Suid = 1;
+            // Console.WriteLine(Player.Suid);
+            // Console.WriteLine("OnParameterSet");
+            Reset();
+            isLoading = true;
+
+            var getDashBoardInfo = await GetDashBoardInfoAsync();
+
+            if (getDashBoardInfo == null || getDashBoardInfo.DashBoardInfo == null)
+            {
+                dashBoardExist = false;
+                isLoading = false;
+                throw new Exception();
+            }
+            
+            dashBoardInfo =  getDashBoardInfo.DashBoardInfo;
+            dashBoardExist = true;
+            isLoading = false;
+        }
+        catch (Exception)
+        {
+            dashBoardExist = false;
+            ShowError(MatToastType.Warning, "DashBoard Not Found");
+        }
     }
 
     protected override void OnInitialized()
     {
+        Console.WriteLine("Initialized");
+        
         _showProgressBar = Toaster.Configuration.ShowProgressBar;
         _showCloseButton = Toaster.Configuration.ShowCloseButton;
         _maximumOpacity = Toaster.Configuration.MaximumOpacity.ToString();
@@ -87,69 +130,24 @@ public partial class DashBoardPage
         }
     }
 
-    private async Task<DashBoardInfo> GetDashBoardInfoAsync()
+    private async Task<GetDashBoardInfoRes?> GetDashBoardInfoAsync()
     {
-        var getDashBoardInfoReq = new GetDashBoardInfoReq()
+        try
         {
-            ProtocolId = ProtocolId.GetDashBoardInfo,
-            DashBoardName = DashBoardName
-        };
-        var res = await HttpManager.SendHttpServerRequestAsync(getDashBoardInfoReq);
-        var getDashBoardInfoRes = (GetDashBoardInfoRes) res;
+            var getDashBoardInfoReq = new GetDashBoardInfoReq()
+            {
+                ProtocolId = ProtocolId.GetDashBoardInfo,
+                DashBoardName = DashBoardName
+            };
+            var res = await HttpManager.SendHttpServerRequestAsync(getDashBoardInfoReq);
+            var getDashBoardInfoRes = (GetDashBoardInfoRes) res;
 
-        return getDashBoardInfoRes.DashBoardInfo;
-
-        /*return dashBoardInfo = new DashBoardInfo()
+            return getDashBoardInfoRes;
+        }
+        catch (Exception e)
         {
-            DashBoardSeq = 1,
-            Name = DashBoardName,
-            CreateTime = DateTime.UtcNow,
-            MasterName = "Master1",
-            ManagerNameList = new List<string>()
-            {
-                "Manager1",
-                "Manager2",
-                "Manager3",
-            },
-            MemberTotalRankOrderByName = new List<string>()
-            {
-                "Member1",
-                "Member2",
-                "Member3",
-            },
-            MemberSupRankOrderByName = new List<string>()
-            {
-                "Member1",
-                "Member2",
-                "Member3",
-            },
-            MemberAdcRankOrderByName = new List<string>()
-            {
-                "Member1",
-                "Member2",
-                "Member3",
-            },
-            MemberMidRankOrderByName = new List<string>()
-            {
-                "Member1",
-                "Member2",
-                "Member3",
-            },
-            MemberJgRankOrderByName = new List<string>()
-            {
-                "Member1",
-                "Member2",
-                "Member3",
-            },
-            MemberTopRankOrderByName = new List<string>()
-            {
-                "Member1",
-                "Member2",
-                "Member3",
-            },
-            Point = 100,
-            Notification = "Notification Example 1234",
-        };*/
+            throw;
+        }
     }
     
     private void ShowEditModal()

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QQDWdDTIhTAKkA0EakLMNk5Sm59N9PdFjOaY26R8J1+t/l5vBRhqZCDJkrP2KzacrvCZ8LgLA1YIZmwjSNJsCg==",
+  "dgSpecHash": "oA7ceVx+MFGlHbSAl9AefAyqrbA7QettlvWW6IMcJVkXeJz6WjyW1VdIAZS8GXqTwM+0MrgC7/rMC+D5MI9E2w==",
   "success": true,
-  "projectFilePath": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/BlazorApp3.csproj",
+  "projectFilePath": "/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/BlazorApp3.csproj",
   "expectedPackageFiles": [
     "/Users/saeyoungryu/.nuget/packages/auralizeblazor/1.0.2/auralizeblazor.1.0.2.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/blazored.fluentvalidation/2.2.0/blazored.fluentvalidation.2.2.0.nupkg.sha512",
