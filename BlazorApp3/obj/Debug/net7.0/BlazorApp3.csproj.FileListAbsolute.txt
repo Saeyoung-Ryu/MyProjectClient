@@ -391,3 +391,5 @@
 /Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/obj/Debug/net7.0/jsmodules/jsmodules.build.manifest.json
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/bin/Debug/net7.0/Blazored.LocalStorage.dll
 /Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Temp.razor.rz.scp.css
+/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/bin/Debug/net7.0/Blazored.LocalStorage.dll
+/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/obj/Debug/net7.0/scopedcss/Pages/Temp.razor.rz.scp.css

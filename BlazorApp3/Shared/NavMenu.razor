@@ -133,6 +133,14 @@
                     <div>
                         <MudTextField @bind-Value="Password" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
                     </div>
+                    @if (loginResult == LoginResult.NotExistAccount)
+                    {
+                        <div style="color: red; font-size: 0.8em;">가입하지 않은 이메일 입니다.</div>
+                    }
+                    @if (loginResult == LoginResult.WrongPassword)
+                    {
+                        <div style="color: red; font-size: 0.8em;">비밀번호가 틀렸습니다.</div>
+                    }
                     <br>
                     <div>
                         <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="LoginBtnAsync" Style="height: 50px">LOGIN</MudButton>
@@ -408,6 +416,14 @@
         EmailAlreadyExist = 2,
         PasswordCheckDifferent = 3
     }
+
+    public enum LoginResult
+    {
+        None = 0,
+        Success = 1,
+        NotExistAccount = 2,
+        WrongPassword = 3
+    }
 }
 
 @code {
@@ -456,6 +472,7 @@
     VerificationResult verificationResult = VerificationResult.None;
     FindPasswordResult findPasswordResult = FindPasswordResult.None;
     NickNameCreateResult nickNameCreateResult = NickNameCreateResult.None;
+    LoginResult loginResult = LoginResult.None;
     
     private string nickname = "";
     
@@ -496,6 +513,7 @@
         nickname = "";
         nickNameCreateResult = NickNameCreateResult.None;
         findPasswordResult = FindPasswordResult.None;
+        loginResult = LoginResult.None;
     }
     
     void ButtonTestclick()
@@ -829,6 +847,10 @@
                 CloseLoginPopup();
                 await ReloadPageAsync();
             }
+            else if (loginRes.Result == Result.NotExistEmail)
+                loginResult = LoginResult.NotExistAccount;
+            else if (loginRes.Result == Result.WrongPassword)
+                loginResult = LoginResult.WrongPassword;
         }
         catch (Exception e)
         {
