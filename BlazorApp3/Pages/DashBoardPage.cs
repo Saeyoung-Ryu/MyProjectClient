@@ -21,6 +21,7 @@ public partial class DashBoardPage
     private bool showEditModal = false;
     
     private DashBoardInfo dashBoardInfo = new DashBoardInfo();
+    private List<long> managerSuidList = new List<long>();
     private string enteredNickName = string.Empty;
 
     private List<RiotPlayer> divideTeamList = new List<RiotPlayer>();
@@ -35,6 +36,19 @@ public partial class DashBoardPage
 
     private bool isLoading = false;
     private bool dashBoardExist = false;
+    private bool isManager = false;
+    
+    private bool _initialized = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_initialized)
+        {
+            await PlayerService.InitializePlayerAsync();
+            _initialized = true;
+            StateHasChanged(); // Notify the component to re-render
+        }
+    }
 
     private void Reset()
     {
@@ -43,6 +57,7 @@ public partial class DashBoardPage
         showEditModal = false;
     
         dashBoardInfo = new DashBoardInfo();
+        managerSuidList = new List<long>();
         enteredNickName = string.Empty;
 
         divideTeamList = new List<RiotPlayer>();
@@ -57,14 +72,16 @@ public partial class DashBoardPage
 
         isLoading = false;
         dashBoardExist = false;
+        isManager = false;
     }
+
     protected override async Task OnParametersSetAsync()
     {
         try
         {
             Reset();
             isLoading = true;
-
+            
             var getDashBoardInfo = await GetDashBoardInfoAsync();
 
             if (getDashBoardInfo == null || getDashBoardInfo.DashBoardInfo == null)
@@ -75,6 +92,14 @@ public partial class DashBoardPage
             }
             
             dashBoardInfo =  getDashBoardInfo.DashBoardInfo;
+            managerSuidList = dashBoardInfo.ManagerPlayerList.Select(e => e.Suid).ToList();
+
+            await PlayerService.InitializePlayerAsync();
+            if (managerSuidList.Contains(PlayerService.Player.Suid))
+                isManager = true;
+
+            Console.WriteLine(isManager);
+            
             dashBoardExist = true;
             isLoading = false;
         }
@@ -87,8 +112,6 @@ public partial class DashBoardPage
 
     protected override void OnInitialized()
     {
-        Console.WriteLine("Initialized");
-        
         _showProgressBar = Toaster.Configuration.ShowProgressBar;
         _showCloseButton = Toaster.Configuration.ShowCloseButton;
         _maximumOpacity = Toaster.Configuration.MaximumOpacity.ToString();

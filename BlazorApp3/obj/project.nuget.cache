@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "oA7ceVx+MFGlHbSAl9AefAyqrbA7QettlvWW6IMcJVkXeJz6WjyW1VdIAZS8GXqTwM+0MrgC7/rMC+D5MI9E2w==",
+  "dgSpecHash": "3sH1uafyJMWrsNsMsp/jgRlvtS3yT+2ygKSKVe1lS67fi49Ls9mAYI3y6pW1h+Bvbx1k1o9iTWv7mdlcvXCGew==",
   "success": true,
-  "projectFilePath": "/Users/saeyoungryu/Projects/MyProjectClient/BlazorApp3/BlazorApp3.csproj",
+  "projectFilePath": "/Users/saeyoungryu/Project/MyProjectClient/BlazorApp3/BlazorApp3.csproj",
   "expectedPackageFiles": [
     "/Users/saeyoungryu/.nuget/packages/auralizeblazor/1.0.2/auralizeblazor.1.0.2.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/blazored.fluentvalidation/2.2.0/blazored.fluentvalidation.2.2.0.nupkg.sha512",
+    "/Users/saeyoungryu/.nuget/packages/blazored.localstorage/4.5.0/blazored.localstorage.4.5.0.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/blazorjs/2.1.6/blazorjs.2.1.6.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/blazorparametercastingmagic/1.2.23060811/blazorparametercastingmagic.1.2.23060811.nupkg.sha512",
     "/Users/saeyoungryu/.nuget/packages/buildbundlerminifier/3.2.449/buildbundlerminifier.3.2.449.nupkg.sha512",

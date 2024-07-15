@@ -2,7 +2,7 @@
 @using Protocol.Type
 @using Protocol.Enum
 @inject NavigationManager Navigation
-@inject Player Player
+@inject PlayerService PlayerService
 @inject IMatToaster Toaster
 
 <PageTitle>DashBoard</PageTitle>
@@ -177,7 +177,7 @@ else if (dashBoardExist)
             
     </MatTab>
 
-    @if (Player != null && Player.Suid > 0)
+    @if (isManager)
     {
         <MatTab Label="팀 나누기">
         <br>
@@ -302,7 +302,7 @@ else if (dashBoardExist)
             
     </MatTab>
 
-    <MatTab Label="전적">
+        <MatTab Label="전적">
         <br><br>
             
             

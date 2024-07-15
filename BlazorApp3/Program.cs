@@ -1,3 +1,4 @@
+using BlazorApp3.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MatBlazor;
@@ -5,6 +6,7 @@ using MudBlazor.Services;
 using Protocol.Type;
 using RiotSharp.Misc;
 using Syncfusion.Blazor;
+using Blazored.LocalStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,9 @@ builder.Services.AddMatToaster(config =>
     config.MaximumOpacity = 95;
     config.VisibleStateDuration = 3000;
 });
-builder.Services.AddScoped<Player>();
+
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<PlayerService>();
 
 var app = builder.Build();
 

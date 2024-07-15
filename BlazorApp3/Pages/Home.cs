@@ -13,6 +13,17 @@ public partial class Home
     
     private string searchedDashBoardName = String.Empty;
 
+    private bool _initialized = false;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_initialized)
+        {
+            await PlayerService.InitializePlayerAsync();
+            _initialized = true;
+            StateHasChanged(); // Notify the component to re-render
+        }
+    }
+    
     protected override Task OnInitializedAsync()
     {
         _showProgressBar = Toaster.Configuration.ShowProgressBar;
