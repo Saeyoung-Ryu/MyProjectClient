@@ -42,6 +42,14 @@
                         </button>
                     }
                 </li>
+                @if (PlayerService.Player.Suid > 0)
+                {
+                    <li class="nav-item">
+                        <button class="btn nav-link" @onclick="NavigateToSetting">
+                            <MudIcon Icon="@Icons.Material.Filled.Settings" Title="Setting" /> 설정
+                        </button>
+                    </li>
+                }
             </ul>
         </div>
     </div>
@@ -128,10 +136,10 @@
                     </div>
                     <br>
                     <div>
-                        <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Outlined"/>
+                        <MudTextField @bind-Value="Email" Label="이메일" Variant="Variant.Outlined"/>
                     </div>
                     <div>
-                        <MudTextField @bind-Value="Password" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                        <MudTextField @bind-Value="Password" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordBtn" AdornmentAriaLabel="Show Password"/>
                     </div>
                     @if (loginResult == LoginResult.NotExistAccount)
                     {
@@ -143,11 +151,12 @@
                     }
                     <br>
                     <div>
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="LoginBtnAsync" Style="height: 50px">LOGIN</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="LoginBtnAsync" Style="height: 50px">로그인</MudButton>
                     </div>
                     <br>
                     <div class="text-links">
-                        <span class="link" @onclick="SignInClicked">Sign In</span> | <span class="link" @onclick="FindPasswordClicked">Find Password</span>
+                        <span class="link" style="color: gray;" @onclick="SignInClicked">회원가입</span> |
+                        <span class="link" style="color: gray;" @onclick="FindPasswordClicked">비밀번호 찾기</span>
                     </div>
                 </div>
             </div>
@@ -189,7 +198,7 @@
                             }
                             </div>
                             <div>
-                                <MudTextField @bind-Value="Password" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                                <MudTextField @bind-Value="Password" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordBtn" AdornmentAriaLabel="Show Password"/>
                                 @if (Password != String.Empty && !DidPasswordMetRules())
                                 {
                                     <div style="color: red; font-size: 0.8em;">비밀번호 형식이 틀립니다.</div>
@@ -206,7 +215,7 @@
                                 </div>
                             </div>
                             <div>
-                                <MudTextField @bind-Value="CheckPassword" Label="비밀번호 확인" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                                <MudTextField @bind-Value="CheckPassword" Label="비밀번호 확인" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordBtn" AdornmentAriaLabel="Show Password"/>
                                 @if (!string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(CheckPassword) && Password != CheckPassword)
                                 {
                                     <div style="color: red; font-size: 0.8em;">비밀번호가 다릅니다.</div>
@@ -293,7 +302,8 @@
                             <img src="Logo.jpg" alt="Logo" class="logo"/>
                         </div>
                         <br>
-                        @if (!verificationMailSent && verificationResult == VerificationResult.None)
+                        
+                        @if (findPasswordStep == FindPasswordStep.None)
                         {
                             <div>
                                 <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Outlined"/>
@@ -302,10 +312,28 @@
                                     <div style="color: red; font-size: 0.8em;">존재하지 않는 이메일 입니다.</div>
                                 }
                                 <br>
-                                <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SignInBtnStep1Async_SendVerificationMail">인증 메일 보내기</MudButton>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(string.IsNullOrEmpty(Email))" FullWidth="true" OnClick="FindPasswordSendVerificationCodeBtnAsync" Style="height: 50px">인증메일 보내기</MudButton>
                             </div>
+                        }
+                        else if (findPasswordStep == FindPasswordStep.VerificationMailSent)
+                        {
                             <div>
-                                <MudTextField @bind-Value="Password" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(string.IsNullOrEmpty(Email))" FullWidth="true" OnClick="FindPasswordSendVerificationCodeBtnAsync" Style="height: 50px">인증메일 다시 보내기</MudButton>
+                                <br><br>
+                                <MudTextField @bind-Value="VerificationCodeToFindPassword" Label="인증 코드를 입력하세요." Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="@timerDisplay"/>
+                                @if (findPasswordResult == FindPasswordResult.WrongCode)
+                                {
+                                    <div style="color: red; font-size: 0.8em;">인증 코드가 틀렸습니다.</div>
+                                }
+                                <br>
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(string.IsNullOrEmpty(VerificationCodeToFindPassword))" FullWidth="true" OnClick="FindPasswordCheckVerificationCodeBtnAsync" Style="height: 50px">인증 확인</MudButton>
+                                <br>
+                            </div>
+                        }
+                        else if (findPasswordStep == FindPasswordStep.ChangePassword)
+                        {
+                            <div>
+                                <MudTextField @bind-Value="Password" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordBtn" AdornmentAriaLabel="Show Password"/>
                                 @if (Password != String.Empty && !DidPasswordMetRules())
                                 {
                                     <div style="color: red; font-size: 0.8em;">비밀번호 형식이 틀립니다.</div>
@@ -322,61 +350,15 @@
                                 </div>
                             </div>
                             <div>
-                                <MudTextField @bind-Value="CheckPassword" Label="비밀번호 확인" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"/>
+                                <MudTextField @bind-Value="CheckPassword" Label="비밀번호 확인" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordBtn" AdornmentAriaLabel="Show Password"/>
                                 @if (!string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(CheckPassword) && Password != CheckPassword)
                                 {
                                     <div style="color: red; font-size: 0.8em;">비밀번호가 다릅니다.</div>
                                 }
                             </div>
-                        }
-                        @if (verificationResult != VerificationResult.Success)
-                        {
+                            /*아래버튼은 비밀번호규칙이맞고, 비밀번호가 똑같으면 disable = false Disabled="@(!DidPasswordMetRules() || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(CheckPassword) || string.IsNullOrEmpty(Password) || Password != CheckPassword)"*/
                             <br>
-                            <div>
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!DidPasswordMetRules() || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(CheckPassword) || string.IsNullOrEmpty(Password) || Password != CheckPassword)" FullWidth="true" OnClick="SignInBtnStep1Async_SendVerificationMail" Style="height: 50px">@(verificationMailSent ? "인증메일 다시 보내기" : "인증메일 보내기")</MudButton>
-                            </div>
-                        }
-                        @if (verificationMailSent)
-                        {
-                            <br>
-                            <div>
-                                <MudTextField @bind-Value="VerificationCode" Label="인증 코드를 입력하세요." Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="@timerDisplay"/>
-                                @if (verificationResult == VerificationResult.Fail)
-                                {
-                                    <div style="color: red; font-size: 0.8em;">인증 코드가 틀렸습니다.</div>
-                                }
-                            </div>
-                            <br>
-                            <div>
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="SignInBtnStep2Async_CheckCode" Style="height: 50px">확인</MudButton>
-                            </div>
-                        }
-                        @if (verificationResult == VerificationResult.Success)
-                        {
-                            <br>
-                            <div>
-                                <div>
-                                    <MudTextField @bind-Value="nickname" Label="닉네임" Variant="Variant.Outlined"/>
-                                    @if (nickNameCreateResult == NickNameCreateResult.Duplicated)
-                                    {
-                                        <div style="color: red; font-size: 0.8em;">이미 사용중인 닉네임 입니다.</div>
-                                    }
-                                    else if (nickNameCreateResult == NickNameCreateResult.BadWord)
-                                    {
-                                        <div style="color: red; font-size: 0.8em;">사용 불가능한 단어가 포함되어 있습니다.</div>
-                                    }
-                                    else if (nickNameCreateResult == NickNameCreateResult.Success)
-                                    {
-                                        <div style="color: blue; font-size: 0.8em;">사용 가능한 닉네임 입니다.</div>
-                                    }
-                                    <br>
-                                    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="CheckDuplicatedNickNameBtnAsync">중복 확인</MudButton>
-                                </div>
-                            </div>
-                            <br>
-                            <div>
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Disabled="@(nickNameCreateResult != NickNameCreateResult.Success)" OnClick="SignInBtnStep3Async_Final" Style="height: 50px">확인</MudButton>
-                            </div>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!DidPasswordMetRules() || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(CheckPassword) || string.IsNullOrEmpty(Password) || Password != CheckPassword)" FullWidth="true" OnClick="FindPasswordChangePasswordBtnAsync" Style="height: 50px">비밀번호 변경</MudButton>
                         }
                     }
                 </div>
@@ -390,7 +372,19 @@
     public enum FindPasswordResult
     {
         None = 0,
-        NotExistEmail = 1,
+        Success = 1,
+        NotExistEmail = 2,
+        WrongCode = 3,
+        PasswordCheckDifferent = 4,
+        PasswordRuleNotMet = 5,
+    }
+
+    public enum FindPasswordStep
+    {
+        None = 0,
+        VerificationMailSent = 1,
+        CheckCode = 2,
+        ChangePassword = 3
     }
     
     public enum NickNameCreateResult
@@ -454,6 +448,7 @@
 
     public string Email { get; set; } = "";
     public string VerificationCode { get; set; } = "";
+    public string VerificationCodeToFindPassword { get; set; } = "";
     public string Password { get; set;} = "";
     public string CheckPassword { get; set; } = "";
 
@@ -471,6 +466,7 @@
     SignInResult signInResult = SignInResult.None;
     VerificationResult verificationResult = VerificationResult.None;
     FindPasswordResult findPasswordResult = FindPasswordResult.None;
+    FindPasswordStep findPasswordStep = FindPasswordStep.None;
     NickNameCreateResult nickNameCreateResult = NickNameCreateResult.None;
     LoginResult loginResult = LoginResult.None;
     
@@ -492,6 +488,7 @@
     {
         Email = "";
         VerificationCode = "";
+        VerificationCodeToFindPassword = "";
         Password = "";
         CheckPassword = "";
 
@@ -514,9 +511,10 @@
         nickNameCreateResult = NickNameCreateResult.None;
         findPasswordResult = FindPasswordResult.None;
         loginResult = LoginResult.None;
+        findPasswordStep = FindPasswordStep.None;
     }
     
-    void ButtonTestclick()
+    void ShowPasswordBtn()
     {
         @if (isShow)
         {
@@ -601,6 +599,11 @@
     private void CloseDashboardCreatePopup()
     {
         openDashBoardCreatePopUp = false;
+    }
+    
+    private void NavigateToSetting()
+    {
+        Navigation.NavigateTo("/Setting");
     }
 
     private async Task LogOut()
@@ -885,6 +888,98 @@
         {
             isDuplicatedDashBoardName = true;
         }
+    }
+
+    private async Task FindPasswordChangePasswordBtnAsync()
+    {
+        try
+        {
+            var findPasswordChangePasswordReq = new FindPasswordChangePasswordReq()
+            {
+                ProtocolId = ProtocolId.FindPasswordChangePassword,
+                Email = Email,
+                NewPassword = Password
+            };
+            
+            var res = await HttpManager.SendHttpServerRequestAsync(findPasswordChangePasswordReq);
+            var findPasswordChangePasswordRes = (FindPasswordChangePasswordRes) res;
+            
+            if (findPasswordChangePasswordRes.Success)
+                CloseLoginPopup();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+    
+    private async Task FindPasswordCheckVerificationCodeBtnAsync()
+    {
+        try
+        {
+            var findPasswordVerificationCodeCheckReq = new FindPasswordVerificationCodeCheckReq()
+            {
+                ProtocolId = ProtocolId.FindPasswordVerificationCodeCheck,
+                Code = VerificationCodeToFindPassword,
+                Email = Email,
+            };
+            
+            var res = await HttpManager.SendHttpServerRequestAsync(findPasswordVerificationCodeCheckReq);
+            var findPasswordVerificationCodeCheckRes = (FindPasswordVerificationCodeCheckRes) res;
+            
+            if (findPasswordVerificationCodeCheckRes.SuccessVerify)
+                findPasswordStep = FindPasswordStep.ChangePassword;
+            else
+                findPasswordResult = FindPasswordResult.WrongCode;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    private async Task FindPasswordSendVerificationCodeBtnAsync()
+    {
+        try
+        {
+            isLoadingSendingVerificationMail = true;
+
+            var findPasswordEmailCheckReq = new FindPasswordEmailCheckReq()
+            {
+                ProtocolId = ProtocolId.FindPasswordEmailCheck,
+                Email = Email
+            };
+
+            var res = await HttpManager.SendHttpServerRequestAsync(findPasswordEmailCheckReq);
+            var findPasswordEmailCheckRes = (FindPasswordEmailCheckRes) res;
+
+            if (findPasswordEmailCheckRes.Exist)
+                findPasswordStep = FindPasswordStep.VerificationMailSent;
+            else
+                findPasswordResult = FindPasswordResult.NotExistEmail;
+
+            // 로딩 끝나고 타이머시작
+            if (timer != null)
+            {
+                timerDisplay = "";
+                timeRemaining = TimeSpan.FromMinutes(5);
+                timer.Stop();
+            }
+
+            timerDisplay = timeRemaining.ToString(@"mm\:ss");
+            timer = new System.Timers.Timer(1000); // Set up the timer for 1 second intervals
+            timer.Elapsed += UpdateTimer;
+            timer.Start();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        finally
+        {
+            isLoadingSendingVerificationMail = false;
+        }
+        
     }
 }
 

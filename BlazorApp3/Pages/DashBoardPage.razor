@@ -10,6 +10,12 @@
 <br>
 <div class="text-center">
 <h1 class="bold-shadow">@DashBoardName</h1>
+@if (PlayerService.Player.Suid > 0)
+{
+    <MudToggleIconButton Toggled="@AlarmOn" ToggledChanged="HandleToggle"
+                         Icon="@Icons.Material.Filled.FavoriteBorder" Color="@Color.Error" title=@(AlarmOn ? "On" : "Off")
+                         ToggledIcon="@Icons.Material.Filled.Favorite" ToggledColor="@Color.Error" />
+}
 <br>
 
 @if (isLoading)

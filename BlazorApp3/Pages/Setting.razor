@@ -1,78 +1,64 @@
-﻿@page "/"
-@using Protocol.Type
+﻿@page "/Setting"
 
 @inject NavigationManager Navigation
 @inject IMatToaster Toaster
 @inject PlayerService PlayerService
 
-<PageTitle>롤 팀짜기</PageTitle>
+@if (PlayerService.Player.Suid > 0)
+{
+    <div class="custom-container">
+        <MudPaper Width="250px" Class="py-3 custom-mudpaper" Elevation="0">
+            <MudNavMenu>
+                <MudText Typo="Typo.h3" Class="px-2">Setting</MudText>
 
-<br><br><br>
-<div class="text-center">
-    <img src="Logo.jpg" alt="Logo" />
-    
-    <div class="input-group mt-3 justify-content-center">
-        <input type="text" class="form-control" style="max-width: 500px;" placeholder="대시보드 검색" @bind="searchedDashBoardName" @onkeydown="HandleKeyPress">
-        <button class="btn btn-secondary" @onclick="MoveToDashBoardPage">검색</button>
+                <MudDivider Class="my-2"/>
+                <MudNavLink Href="/dashboard">Dashboard</MudNavLink>
+                <MudNavLink Href="/servers">Servers</MudNavLink>
+                <MudNavLink Href="/billing" Disabled="true">Billing</MudNavLink>
+                <MudNavGroup Title="Settings" Expanded="true">
+                    <MudNavLink Href="/users">Users</MudNavLink>
+                    <MudNavLink Href="/security">Security</MudNavLink>
+                </MudNavGroup>
+                <MudNavLink Href="/about">About</MudNavLink>
+            </MudNavMenu>
+        </MudPaper>
     </div>
+}
+
+@code
+{
+    private bool _initialized = false;
     
-    <br><br><br>
-    <div class="input-group mt-3 justify-content-center">
-        <MatTabGroup @bind-ActiceIndex="@tabIndex" Style="width: 500px; color: #198754">
-            <MatTab Label="인기 랭킹">
-                <br><br>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">대시보드</th>
-                        <th scope="col">방장</th>
-                        <th scope="col">점수</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @for (int i = 1; i <= dashBoardInfos.Count; i++)
-                    {
-                        <tr>
-                            <td>@i</td>
-                            <td>@dashBoardInfos[i - 1].Name</td>
-                            <td>@dashBoardInfos[i - 1].MasterName</td>
-                            <td>@dashBoardInfos[i - 1].Point</td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-            </MatTab>
+    protected override Task OnInitializedAsync()
+    {
+        _showProgressBar = Toaster.Configuration.ShowProgressBar;
+        _showCloseButton = Toaster.Configuration.ShowCloseButton;
+        _maximumOpacity = Toaster.Configuration.MaximumOpacity.ToString();
+ 
+        _showTransitionDuration = Toaster.Configuration.ShowTransitionDuration.ToString();
+        _visibleStateDuration = Toaster.Configuration.VisibleStateDuration.ToString();
+        _hideTransitionDuration = Toaster.Configuration.HideTransitionDuration.ToString();
+ 
+        _requireInteraction = Toaster.Configuration.RequireInteraction;
+        
+        return base.OnInitializedAsync();
+    }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_initialized)
+        {
+            await PlayerService.InitializePlayerAsync();
+            _initialized = true;
+            StateHasChanged(); // Notify the component to re-render
 
-            <MatTab Label="점수 랭킹">
-                
-            </MatTab>
-
-            <MatTab Label="내 대시보드">
-                @if (PlayerService.Player.Suid > 0)
-                {
-                    
-                }
-                else
-                {
-                    <br>
-                    <p>로그인 후 이용 가능합니다</p>
-                }
-            </MatTab>
-            <MatTab Label="즐겨찾기">
-                @if (PlayerService.Player.Suid > 0)
-                {
-
-                }
-                else
-                {
-                    <br>
-                    <p>로그인 후 이용 가능합니다</p>
-                }
-            </MatTab>
-        </MatTabGroup>
-    </div>
-</div>
+            if (PlayerService.Player.Suid == 0)
+            {
+                ShowError(MatToastType.Warning, "로그인 후 이용 가능합니다");
+            }
+        }
+    }
+}
 
 @code 
 {
@@ -128,7 +114,6 @@
     
     private void ShowError(MatToastType type, string message, string icon = "")
     {
-        Console.WriteLine("ShowError");
         Toaster.Add(message, type, _title, icon, config =>
         {
             config.ShowCloseButton = _showCloseButton;

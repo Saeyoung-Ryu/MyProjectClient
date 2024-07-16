@@ -39,6 +39,7 @@ public partial class DashBoardPage
     private bool isManager = false;
     
     private bool _initialized = false;
+    public bool AlarmOn { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -138,6 +139,18 @@ public partial class DashBoardPage
             
             // dashBoardName 존재하는지 찾기
         }
+    }
+    
+    private void HandleToggle(bool toggled)
+    {
+        AlarmOn = toggled;
+        Console.WriteLine(toggled);
+        Print();
+    }
+    
+    void Print()
+    {
+        Console.WriteLine("Hello");
     }
     
     private async Task HandleKeyPress(KeyboardEventArgs e)

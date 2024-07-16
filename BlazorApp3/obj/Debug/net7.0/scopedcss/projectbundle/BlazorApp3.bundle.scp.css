@@ -44579,6 +44579,16 @@ html[b-i5ov1uz8as], body[b-i5ov1uz8as] {
     min-height: 900px;
 }
 
+/* _content/BlazorApp3/Pages/Setting.razor.rz.scp.css */
+.custom-mudpaper[b-7fyf8q5ik2] {
+    margin-top: 0; /* Remove margin at the top */
+    padding-top: 0; /* Remove padding at the top */
+}
+
+.custom-container[b-7fyf8q5ik2] {
+    padding: 0; /* Remove padding from the container */
+    margin: 0; /* Remove margin from the container */
+}
 /* _content/BlazorApp3/Pages/SoloRankBattle.razor.rz.scp.css */
 #Border-Dotted[b-8nfo0tw6cx]{border: 2px dotted}
 #Border-Solid[b-8nfo0tw6cx]{border: 1px solid}
