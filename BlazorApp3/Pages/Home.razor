@@ -27,7 +27,8 @@
                         <th scope="col"></th>
                         <th scope="col">대시보드</th>
                         <th scope="col">방장</th>
-                        <th scope="col">점수</th>
+                        <th scope="col">포인트</th>
+                        <th scope="col">좋아요</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,7 @@
                             <td>@dashBoardInfos[i - 1].Name</td>
                             <td>@dashBoardInfos[i - 1].MasterName</td>
                             <td>@dashBoardInfos[i - 1].Point</td>
+                            <td>@dashBoardInfos[i - 1].FavoriteCount</td>
                         </tr>
                     }
                     </tbody>
@@ -51,7 +53,33 @@
             <MatTab Label="내 대시보드">
                 @if (PlayerService.Player.Suid > 0)
                 {
-                    
+                    <br><br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">대시보드</th>
+                                <th scope="col">방장</th>
+                                <th scope="col">포인트</th>
+                                <th scope="col">좋아요</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 1; i <= loadData.ManagingDashBoardInfos.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="/DashBoardPage/@loadData.ManagingDashBoardInfos[i - 1].Name">
+                                            @loadData.ManagingDashBoardInfos[i - 1].Name
+                                        </a>
+                                    </td>
+                                    <td>@loadData.ManagingDashBoardInfos[i - 1].MasterName</td>
+                                    <td>@loadData.ManagingDashBoardInfos[i - 1].Point</td>
+                                    <td>@loadData.ManagingDashBoardInfos[i - 1].FavoriteCount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
                 }
                 else
                 {

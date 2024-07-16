@@ -7,6 +7,7 @@ using Protocol.Type;
 using RiotSharp.Misc;
 using Syncfusion.Blazor;
 using Blazored.LocalStorage;
+using Microsoft.JSInterop;
 
 var builder = WebApplication.CreateBuilder(args);
 

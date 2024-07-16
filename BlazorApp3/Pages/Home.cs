@@ -1,6 +1,7 @@
 using MatBlazor;
 using Microsoft.AspNetCore.Components.Web;
 using Protocol;
+using Protocol.Enum;
 using Protocol.Type;
 
 
@@ -9,7 +10,8 @@ namespace BlazorApp3.Pages;
 public partial class Home
 {
     private int tabIndex = 0;
-    private List<DashBoardInfo> dashBoardInfos = new List<DashBoardInfo>();
+    private List<DashBoardInfoLobby> dashBoardInfos = new List<DashBoardInfoLobby>();
+    private LoadDataRes loadData = new LoadDataRes();
     
     private string searchedDashBoardName = String.Empty;
 
@@ -21,6 +23,21 @@ public partial class Home
             await PlayerService.InitializePlayerAsync();
             _initialized = true;
             StateHasChanged(); // Notify the component to re-render
+            
+            if (PlayerService.Player.Suid > 0)
+            {
+                var loadDataReq = new LoadDataReq()
+                {
+                    ProtocolId = ProtocolId.LoadData,
+                    Suid = PlayerService.Player.Suid
+                };
+                
+                var res = await HttpManager.SendHttpServerRequestAsync(loadDataReq);
+                var loadDataRes = (LoadDataRes) res;
+
+                if (loadDataRes.Result == Result.None)
+                    loadData = loadDataRes;
+            }
         }
     }
     
@@ -36,41 +53,6 @@ public partial class Home
  
         _requireInteraction = Toaster.Configuration.RequireInteraction;
         
-        dashBoardInfos.Add(new DashBoardInfo()
-        {
-            Name = "aaaa",
-            MasterName = "Master1",
-            Point = 100,
-        });
-        
-        dashBoardInfos.Add(new DashBoardInfo()
-        {
-            Name = "bbbb",
-            MasterName = "Master2",
-            Point = 100,
-        });
-        
-        dashBoardInfos.Add(new DashBoardInfo()
-        {
-            Name = "cccc",
-            MasterName = "Master3",
-            Point = 100,
-        });
-        
-        dashBoardInfos.Add(new DashBoardInfo()
-        {
-            Name = "dddd",
-            MasterName = "Master4",
-            Point = 100,
-        });
-        
-        dashBoardInfos.Add(new DashBoardInfo()
-        {
-            Name = "eeee",
-            MasterName = "Master5",
-            Point = 100,
-        });
-        
         return base.OnInitializedAsync();
     }
     
@@ -79,33 +61,19 @@ public partial class Home
         if (e.Key == "Enter")
         {
             await Task.Delay(100); // 빈값을 검색해버리는 이슈 수정
-            await PerformSearch();
+            PerformSearch();
         }
     }
 
-    private async Task PerformSearch()
+    private void PerformSearch()
     {
-        await MoveToDashBoardPage();
+        MoveToDashBoardPage();
     }
 
-    private async Task MoveToDashBoardPage()
+    private void MoveToDashBoardPage()
     {
         try
         {
-            // var findDashBoardReq = new FindDashBoardReq
-            // {
-            //     ProtocolId = ProtocolId.FindDashBoard,
-            //     DashBoardName = searchedDashBoardName
-            // };
-            // var res = await HttpManager.SendHttpServerRequestAsync(findDashBoardReq);
-            // var findDashBoardRes = (FindDashBoardRes) res;
-            //
-            // if (findDashBoardRes.Exist == false)
-            // {
-            //     ShowError(MatToastType.Warning, "대시보드가 존재하지 않습니다.");
-            //     return;
-            // }
-            
             Navigation.NavigateTo($"/DashBoardPage/{searchedDashBoardName}");
         }
         catch (Exception e)

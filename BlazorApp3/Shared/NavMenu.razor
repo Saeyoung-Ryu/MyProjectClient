@@ -435,7 +435,7 @@
     private bool successCreateDashBoard = false;
     private string loginEmailAddress = "";
 
-    private int createableDashBoardCount = 1;
+    private int createableDashBoardCount = 3;
     
     private string searchedDashBoardName = "";
 
@@ -648,7 +648,7 @@
         openPremiumShopPopUp = false;
     }
     
-    private async Task MoveToDashBoardPage()
+    private void MoveToDashBoardPage()
     {
         try
         {
@@ -870,7 +870,8 @@
                 ProtocolId = ProtocolId.CreateDashBoard,
                 DashBoardName = createDashBoardName,
                 Notification = createDashBoardNotification,
-                Suid = PlayerService.Player.Suid
+                Suid = PlayerService.Player.Suid,
+                MasterName = PlayerService.Player.Nickname
             };
             var res = await HttpManager.SendHttpServerRequestAsync(createDashBoardReq);
             var createDashBoardRes = (CreateDashBoardRes) res;
@@ -882,6 +883,10 @@
                 createableDashBoardCount--;
                 isDuplicatedDashBoardName = false;
                 successCreateDashBoard = true;
+                
+                Navigation.NavigateTo("/temp");
+                await Task.Delay(100);
+                Navigation.NavigateTo("/");
             }
         }
         catch (Exception e)
