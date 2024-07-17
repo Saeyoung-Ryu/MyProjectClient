@@ -139,7 +139,7 @@
                         <MudTextField @bind-Value="Email" Label="이메일" Variant="Variant.Outlined"/>
                     </div>
                     <div>
-                        <MudTextField @bind-Value="Password" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordBtn" AdornmentAriaLabel="Show Password"/>
+                        <MudTextField @bind-Value="Password" @onkeydown="HandleKeyPress" Label="비밀번호" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ShowPasswordBtn" AdornmentAriaLabel="Show Password"/>
                     </div>
                     @if (loginResult == LoginResult.NotExistAccount)
                     {
@@ -531,6 +531,8 @@
     
     private void SignInClicked()
     {
+        ResetLoginInfos();
+        
         openLoginPopUp = false;
         DoSignIn = true;
         // You can add additional logic here
@@ -538,6 +540,8 @@
 
     private void FindPasswordClicked()
     {
+        ResetLoginInfos();
+        
         openLoginPopUp = false;
         DoFindPassword = true;
         // You can add additional logic here
@@ -685,6 +689,19 @@
         bool hasSpecialCharacter = Password.Any(ch => !char.IsLetterOrDigit(ch));
 
         return hasMinimum8Chars && hasUpperCaseLetter && hasLowerCaseLetter && hasDecimalDigit && hasSpecialCharacter;
+    }
+    
+    private async Task HandleKeyPress(KeyboardEventArgs e)
+    {
+        if (openLoginPopUp)
+        {
+            if (e.Key == "Enter")
+            {
+                await Task.Delay(100); // 빈값을 검색해버리는 이슈 수정
+
+                await LoginBtnAsync();
+            }
+        }
     }
 
     private async Task SignInBtnStep1Async_SendVerificationMail()
